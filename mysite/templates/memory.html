@@ -1,0 +1,86 @@
+{% load static %}
+<html>
+
+  <head>
+    <link href="{% static '/css/memory.css' %}" type="text/css" rel="stylesheet">
+    <script type='text/javascript' src="{% static '/js/memoryUI.js' %}" async></script>
+    <script type='text/javascript' src="{% static '/js/drawShapes.js' %}" async></script>
+    <script type='text/javascript' src="{% static '/js/memory.js' %}" async></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bob's Memory Game</title>
+  </head>
+
+  <body onload=pageLoad()>
+
+    <div class="gameboard">
+
+      <a href="/" class='return'>Return</a><h1>Bob's Memory Game</h1>
+
+      <h2 id="please_submit" class="hidden"></h2>
+
+      <div class="buttons">
+        <input type=button onclick="setup()" value="Start" />
+        <input type=button onclick="stop()" value="Stop" />
+      </div>
+
+      <canvas id="0" onclick="cardClick(0)" width="100px" height="100px"></canvas>
+      <canvas id="1" onclick="cardClick(1)" width="100px" height="100px"></canvas>
+      <canvas id="2" onclick="cardClick(2)" width="100px" height="100px"></canvas>
+      <canvas id="3" onclick="cardClick(3)" width="100px" height="100px"></canvas>
+      <canvas id="4" onclick="cardClick(4)" width="100px" height="100px"></canvas>
+      <canvas id="5" onclick="cardClick(5)" width="100px" height="100px"></canvas>
+      <canvas id="6" onclick="cardClick(6)" width="100px" height="100px"></canvas>
+      <canvas id="7" onclick="cardClick(7)" width="100px" height="100px"></canvas>
+      <canvas id="8" onclick="cardClick(8)" width="100px" height="100px"></canvas>
+      <canvas id="9" onclick="cardClick(9)" width="100px" height="100px"></canvas>
+      <canvas id="10" onclick="cardClick(10)" width="100px" height="100px"></canvas>
+      <canvas id="11" onclick="cardClick(11)" width="100px" height="100px"></canvas>
+      <canvas id="12" onclick="cardClick(12)" width="100px" height="100px"></canvas>
+      <canvas id="13" onclick="cardClick(13)" width="100px" height="100px"></canvas>
+      <canvas id="14" onclick="cardClick(14)" width="100px" height="100px"></canvas>
+      <canvas id="15" onclick="cardClick(15)" width="100px" height="100px"></canvas>
+      <canvas id="16" onclick="cardClick(16)" width="100px" height="100px"></canvas>
+      <canvas id="17" onclick="cardClick(17)" width="100px" height="100px"></canvas>
+      <canvas id="18" onclick="cardClick(18)" width="100px" height="100px"></canvas>
+      <canvas id="19" onclick="cardClick(19)" width="100px" height="100px"></canvas>
+
+      <h2 class='timeText'>Time taken: </h2><h2 id="time" class="timeText">0</h2><h2 class="timeText">seconds</h2></br>
+      <h2 class='turnText'>Turns: </h2><h2 id="turns" class="turnText">0</h2>
+
+      <form method="POST" class="submit-form hidden" id='formpje' action="/memory/">{% csrf_token %}
+        <h2>Submit score</h2>
+        {{ form.as_p }}
+        <button type="submit">Submit Score</button>
+      </form>
+
+      </br><h1>Top 30</h1>
+      <table>
+          <tr>
+              <th>Name</th>
+              <th>Score</th>
+              <th>Turns</th>
+              <th>Time</th>
+              <th>Date</th>
+          </tr>
+          {% for score in top_scores %}
+            <tr>
+                <td>{{ score.name }}</td>
+                <td>{{ score.score }}</td>
+                <td class="highscore-small">{{ score.turns }}</td>
+                <td class="highscore-small">{{ score.time }}</td>
+                <td class="highscore-small">{{ score.date }}</td>
+            </tr>
+          {% endfor %}
+      </table>
+
+    </div>
+
+    <div id='countdown' class='countdown-container'>
+        <div class='countdown invisible' id="three">3</div>
+        <div class='countdown invisible' id="two">2</div>
+        <div class='countdown invisible' id="one">1</div>
+    </div>
+
+  </body>
+
+</html>

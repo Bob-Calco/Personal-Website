@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{{ block.super }}{% endblock title %}
+
+{% block content %}
+
+	<img src="{% static 'img/front-picture.jpg' %}" width="100%"/>
+
+    <h1 class="home-heading">Hi, I am Bob</h1>
+
+    <h3 class="home-sub-heading">and this is my website, which is always under reconstruction because I like developing more then posting content. Have a look around and keep an eye out for malfunctions.</h3>
+
+    <div class='featured-link'>
+        <h2>Featured link</h2>
+        <p>I've build a game recently, go play it!</p>
+        <a href='/memory'>Play!</a>
+    </div>
+
+{% endblock content %}

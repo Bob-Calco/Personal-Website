@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Projects{{ block.super }}{% endblock title %}
+
+{% block content %}
+
+<img src="{% static 'img/projects-picture.jpg' %}" width="100%">
+
+      <div class="projects-container">
+        <img src="{% static 'img/ddicon.jpg' %}" width="30px" onClick="projectDropDownToggle('website', this)">
+        <h2>This Website</h2>
+        <div id="website" class="projects-dd">
+          <p>I enjoy building websites. After messing around for a bit with Wordpress I decided to reconstruct my website using Django, a webframe work in Python. For the front end I have not used any libraries of HTML, CSS or Javascript. I decided to go vanilla to get a better understanding of the languages.</p>
+        </div>
+      </div>
+
+      <div class="projects-container">
+        <img src="{% static 'img/ddicon.jpg' %}" width="30px" onClick="projectDropDownToggle('games', this)">
+        <h2>Games</h2>
+        <div id="games" class="projects-dd">
+          <p>To practice my Javascript skills I build a memory game, click <a href="{% url 'memory' %}">here</a> to check it out. The plan is to keep adding stuff and make it more and more fancier.</p>
+        </div>
+      </div>
+
+      <div class="projects-container">
+        <img src="{% static 'img/ddicon.jpg' %}" width="30px" onClick="projectDropDownToggle('finances', this)">
+        <h2>VBA Automated Finances</h2>
+        <div id="finances" class="projects-dd">
+          <p>More automation means more time for fun/useful things. So after years of keeping track of finances by hand in Excel I have now spend time automating a couple of things to be able to do it faster. Excel VBA can now import the csv file from my bank, tries to categorize transactions based on information in the file and calculate the difference between my balance and my income statement.</p>
+        </div>
+      </div>
+
+      <div class="projects-container">
+        <img src="{% static 'img/ddicon.jpg' %}" width="30px" onClick="projectDropDownToggle('calco', this)">
+        <h2>Calco Projects</h2>
+        <div id="calco" class="projects-dd">
+          <p>Currently I work at Calco and I have been building various things to learn more skills.</p>
+          <h3>Java Calculator</h3>
+          <p>To make a start in Java I built a calculator with all the functions that I could think of that a basic calculator has.</p>
+          <h3>Java Library App</h3>
+          <p>The next more complex project was to build an application that can keep track of books, it uses an SQL database backend.
+          <h3>C# ScrumApp</h3>
+          <p>With the entire Masterclass we are working as Scrum teams to build an app for Scrum teams #scrumception. After two sprints I became one of the Product Owners and one of the people that gets asked technical questions.</p>
+        </div>
+      </div>
+
+      <div class="projects-container">
+        <img src="{% static 'img/ddicon.jpg' %}" width="30px" onClick="projectDropDownToggle('schedulemaker', this)">
+        <h2>Various</h2>
+        <div id="schedulemaker" class="projects-dd">
+          <h3>Cash Register</h3>
+          <p>One of the first programs I build was a cash register so that I could learn jQuery, if I can find time to make it fully functional I will post a link here to it.</p>
+          <h3>Schedule Maker</h3>
+          <p>To better learn Python I started building an application with which you can make schedules. It uses a CSV file as input for the staff members and while building the schedule the application will check for various errors that can occur.</p>
+          <h3>Groceries App</h3>
+          <p>I am currently also building an Android app for groceries. Like most people I do not specifically enjoy choosing what to eat for dinner, so if an application can do that for me and tell me what I need to buy, that would be great.</p>
+        </div>
+      </div>
+
+{% endblock content %}

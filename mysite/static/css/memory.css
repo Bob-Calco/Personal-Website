@@ -1,0 +1,153 @@
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.return {
+    display: inline-block;
+    background-color: white;
+    border: 5px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 2em;
+    text-decoration: none;
+    color: black;
+}
+
+.return:hover {
+    background-color: lightgreen;
+}
+
+h2 {
+  font-family: sans-serif;
+}
+
+.gameboard {
+  max-width: 600px;
+  text-align: center;
+  margin: auto;
+}
+
+canvas {
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.countdown {
+    font-family: sans-serif;
+    font-size: 7em;
+    display: inline-block;
+    margin: auto;
+}
+
+.countdown-container {
+    position: fixed;
+    top: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+@media only screen and (min-width: 400px) {
+  canvas {
+      width: 80px;
+      height: 80px;
+      border: 4px solid black;
+      border-radius 15px;
+  }
+
+  .countdown {
+      font-size: 12em;
+  }
+}
+
+@media only screen and (min-width: 550px){
+  canvas {
+      width: 100px;
+      height: 100px;
+      border: 5px solid black;
+      border-radius:; 20px;
+  }
+
+  .countdown {
+      font-size: 15em;
+  }
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.buttons > input {
+  width: 100px;
+  height: 50px;
+  font-family: sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.timeText {
+  display: inline-block;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+.turnText {
+  display: inline-block;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.submit-form {
+    text-align: left;
+}
+
+.submit-form > h2 {
+    display: block;
+}
+
+.submit-form * {
+    display: inline-block;
+    margin-right: 10px;
+    font-family: sans-serif;
+    font-size: 1.5em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+table {
+    border: 2px solid black;
+    font-family: sans-serif;
+    background-color: white;
+    margin: auto;
+}
+
+th {
+    border-bottom: 2px solid black;
+}
+
+#please_submit {
+    color: black;
+    font-size: 2em;
+}
+
+.highscore-small {
+    font-size: 0.7em;
+}
