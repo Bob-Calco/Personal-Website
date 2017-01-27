@@ -27,7 +27,7 @@ def memory(request):
         form = MemoryScoreForm(request.POST)
         if form.is_valid():
             if form.cleaned_data['totalTime'] > 10 or form.cleaned_data['turns'] > 10:
-                if form.time1 < form.time2 < form.time3 < form.time4 < form.time5 < form.time6 < form.time7 < form.time8 < form.time9 < form.totalTime:
+                if form.cleaned_data['time1'] < form.cleaned_data['time2'] < form.cleaned_data['time3'] < form.cleaned_data['time4'] < form.cleaned_data['time5'] < form.cleaned_data['time6'] < form.cleaned_data['time7'] < form.cleaned_data['time8'] < form.cleaned_data['time9'] < form.cleaned_data['totalTime']:
                     form.save()
         return redirect('PW:memory')
     else:
