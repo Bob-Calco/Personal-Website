@@ -47,10 +47,10 @@
       <h2 class='timeText'>Time taken: </h2><h2 id="time" class="timeText">0</h2><h2 class="timeText">seconds</h2></br>
       <h2 class='turnText'>Turns: </h2><h2 id="turns" class="turnText">0</h2>
 
-      <form method="POST" class="submit-form hidden" id='formpje' action="{% url 'PW:memory' %}">{% csrf_token %}
+      <form method="POST" onsubmit="button.disabled = true; return true;" class="submit-form hidden" id='formpje' action="{% url 'PW:memory' %}">{% csrf_token %}
         <h2>Submit score</h2>
         {{ form.as_p }}
-        <button type="submit">Submit Score</button>
+        <button type="submit" name="button">Submit Score</button>
       </form>
 
       </br><h1>Top 30</h1>
