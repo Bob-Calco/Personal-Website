@@ -46,7 +46,7 @@ coverage.xml
 *.log
 *.pot
 settings.py
-mysite/settings.py
+mysite\settings.py
 
 # Sphinx documentation
 docs/_build/
