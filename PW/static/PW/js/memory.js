@@ -61,6 +61,7 @@ function checkIfMatch(){
     cards_correct[card_2] = true;
     waitingMove = true;
     window.setTimeout(moveCards, 1000);
+    addTimestamp();
 
     // check if victory is achieved
     for(card in cards_correct){

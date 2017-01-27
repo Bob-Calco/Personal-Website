@@ -1,0 +1,124 @@
+/* -------- Carousel -------- */
+.slideshow-container {
+    position: relative;
+}
+
+.prev, .next {
+    font-size: 1em;
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    padding: 2px;
+    border-radius: 0 4px 4px 0;
+    transition: background-color 0.6s, color 0.6s, padding 0.4s;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.next {
+    right: 0%;
+    border-radius: 4px 0 0 4px;
+}
+
+.next:hover, .prev:hover {
+    padding: 4px;
+    color: black;
+    background-color: rgba(255,255,255,0.7)
+}
+
+.slide {
+    width: 100%;
+    display: inline-block;
+}
+
+.slide > p {
+    position: absolute;
+    text-align: center;
+    bottom: 0px;
+    width: 100%;
+    color: white;
+    font-size: 0.7em;
+    background-color: rgba(0,0,0,0.7);
+    padding: 3px;
+    border-radius: 4px;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media only screen and (min-width: 420px) {
+    .prev, .next{
+        font-size: 1.5em;
+        padding: 4px;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .next {
+        border-radius: 5px 0 0 5px;
+    }
+
+    .next:hover, .prev:hover {
+        padding: 6px;
+    }
+
+    .slide > p {
+        font-size: 0.9em;
+        padding: 4px;
+        border-radius:; 5px;
+    }
+}
+
+@media only screen and (min-width: 510px) {
+    .prev, .next{
+        font-size: 1.7em;
+        padding: 8px;
+        border-radius: 0 7px 7px 0;
+    }
+
+    .next {
+        border-radius: 7px 0 0 7px;
+    }
+
+    .next:hover, .prev:hover {
+        padding: 10px;
+    }
+
+    .slide > p {
+        font-size: 1.1em;
+        padding: 4px;
+        border-radius:; 7px;
+    }
+}
+
+@media only screen and (min-width: 630px) {
+    .prev, .next{
+        font-size: 2em;
+        padding: 12px;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .next {
+        border-radius: 10px 0 0 10px;
+    }
+
+    .next:hover, .prev:hover {
+        padding: 15px;
+    }
+
+    .slide > p {
+        font-size: 1.3em;
+        padding: 5px;
+        border-radius:; 10px;
+    }
+}

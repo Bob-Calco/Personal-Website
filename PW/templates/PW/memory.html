@@ -2,10 +2,10 @@
 <html>
 
   <head>
-    <link href="{% static '/css/memory.css' %}" type="text/css" rel="stylesheet">
-    <script type='text/javascript' src="{% static '/js/memoryUI.js' %}" async></script>
-    <script type='text/javascript' src="{% static '/js/drawShapes.js' %}" async></script>
-    <script type='text/javascript' src="{% static '/js/memory.js' %}" async></script>
+    <link href="{% static 'PW//css/memory.css' %}" type="text/css" rel="stylesheet">
+    <script type='text/javascript' src="{% static 'PW//js/memoryUI.js' %}" async></script>
+    <script type='text/javascript' src="{% static 'PW//js/drawShapes.js' %}" async></script>
+    <script type='text/javascript' src="{% static 'PW//js/memory.js' %}" async></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bob's Memory Game</title>
   </head>
@@ -47,7 +47,7 @@
       <h2 class='timeText'>Time taken: </h2><h2 id="time" class="timeText">0</h2><h2 class="timeText">seconds</h2></br>
       <h2 class='turnText'>Turns: </h2><h2 id="turns" class="turnText">0</h2>
 
-      <form method="POST" class="submit-form hidden" id='formpje' action="/memory/">{% csrf_token %}
+      <form method="POST" class="submit-form hidden" id='formpje' action="{% url 'PW:memory' %}">{% csrf_token %}
         <h2>Submit score</h2>
         {{ form.as_p }}
         <button type="submit">Submit Score</button>

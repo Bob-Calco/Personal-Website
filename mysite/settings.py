@@ -25,7 +25,7 @@ SECRET_KEY = 'lv$h+gll%7htxv1n5m(#jl2+4^l4d#kween$a4ve7fnhia#ko!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['BobBard.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'PW',
+    'groceries',
 ]
 
 MIDDLEWARE = [
@@ -120,4 +121,8 @@ USE_TZ = True
 
 # STATIC_URL = 'https://f001.backblazeb2.com/file/PersonalWebsite/'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static root')
+STATIC_ROOT = (os.path.join(BASE_DIR, 'static/'),)
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]

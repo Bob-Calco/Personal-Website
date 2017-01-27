@@ -1,0 +1,219 @@
+.about-infographic {
+  width: 95%;
+  margin: auto;
+  background-color: #1d3030;
+  border-radius: 20px;
+  color: white;
+}
+
+
+/* ------- INTRODUCTION PART ------- */
+
+
+.introduction {
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 100px;
+}
+
+.introduction > h1 {
+  padding-top: 60px;
+  font-size: 5em;
+  font-family: "Droid Serif";
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.introduction > h4 {
+  font-family: "Raleway";
+  margin-top: 5px;
+  font-size: 2em;
+  margin-bottom: 100px;
+}
+
+.about-image {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.about-image > img {
+  width: 50%;
+  border-radius: 80px;
+}
+
+.intro-left {
+  width: 48%;
+  font-family: "Roboto Slab";
+  text-align: left;
+  display: inline-block;
+  margin-right: 10px
+}
+
+.intro-right {
+  width: 48%;
+  font-family: "Roboto Slab";
+  text-align: left;
+  float: right;
+  display: inline-block;
+}
+
+.intro-left > img, .intro-right > img {
+  display: inline-block;
+  width: 30px;
+  border-radius: 0;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.intro-left > p, .intro-right > p {
+  display: inline;
+}
+
+
+/* ------- WORK PART ------- */
+.inf-work {
+  margin-bottom: 100px;
+}
+
+.inf-work > h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0;
+  font-family: "Bree Serif";
+  font-weight: lighter;
+}
+
+.inf-work > h4 {
+  text-align: center;
+  font-size: 1em;
+  font-weight: normal;
+  font-family: "Raleway";
+  margin-top: 0;
+}
+
+.work-div {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.work-div > h3 {
+  font-family: "Comfortaa";
+  letter-spacing: 2px;
+  display: inline-block;
+}
+
+.work-div > p {
+  font-family: "Roboto";
+  display: inline-block;
+  float: right;
+}
+
+.work-image > img {
+  height: 100px;
+  border-radius: 0;
+  float: right;
+}
+
+.work-image > p {
+  overflow: hidden;
+  margin-top: 0;
+}
+
+
+/* ------- STUDIES PART ------- */
+
+
+.inf-studies {
+  margin-bottom: 100px;
+}
+
+.inf-studies > h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0;
+  font-family: "Bree Serif";
+  font-weight: lighter;
+}
+
+.inf-studies > h4 {
+  text-align: center;
+  font-size: 1em;
+  font-weight: normal;
+  font-family: "Raleway";
+  margin-top: 0;
+}
+
+.studies-div {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.studies-row1 > h3 {
+  font-family: "Comfortaa";
+  letter-spacing: 2px;
+  overflow: hidden;
+}
+
+.studies-row1 > p {
+  font-family: "Roboto";
+  margin-top: 0;
+  float: right;
+  display: inline-block;
+}
+
+.studies-row2 > img {
+  height: 70px;
+  border-radius: 0;
+  float: right;
+}
+
+.studies-row2 > p {
+  margin-bottom: 20px;
+  font-family: "Roboto";
+  overflow: hidden;
+  margin-top: 0;
+}
+
+
+/* ------- HOBBIES PART ------- */
+
+.inf-hobbies {
+  padding-bottom: 100px;
+}
+
+.inf-hobbies > h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0;
+  font-family: "Bree Serif";
+  font-weight: lighter;
+}
+
+.inf-hobbies > h4 {
+  text-align: center;
+  font-size: 1em;
+  font-weight: normal;
+  font-family: "Raleway";
+  margin-top: 0;
+}
+
+.hobbies-div {
+  width: 49%;
+  text-align: center;
+  display: inline-block;
+  padding: 5px;
+}
+
+.hobbies-div > img {
+  width: 100px;
+  border-radius: 0;
+}
+
+.hobbies-div > p {
+  font-family: "Roboto";
+}

@@ -2,11 +2,32 @@ var time;
 var totalTime = 0;
 var turns = 0
 var started = false;
+var timestamps = [];
 
 function pageLoad(){
     document.getElementById('id_name').disabled = true;
-    document.getElementById('id_time').disabled = true;
-    document.getElementById('id_turns').disabled = true;
+    document.getElementById('id_totalTime').readOnly = true;
+    document.getElementById('id_time1').readOnly = true;
+    document.getElementById('id_time2').readOnly = true;
+    document.getElementById('id_time3').readOnly = true;
+    document.getElementById('id_time4').readOnly = true;
+    document.getElementById('id_time5').readOnly = true;
+    document.getElementById('id_time6').readOnly = true;
+    document.getElementById('id_time7').readOnly = true;
+    document.getElementById('id_time8').readOnly = true;
+    document.getElementById('id_time9').readOnly = true;
+    document.getElementById('id_turns').readOnly = true;
+    document.getElementById('id_totalTime').parentElement.className += "hidden";
+    document.getElementById('id_time1').parentElement.className += "hidden";
+    document.getElementById('id_time3').parentElement.className += "hidden";
+    document.getElementById('id_time2').parentElement.className += "hidden";
+    document.getElementById('id_time4').parentElement.className += "hidden";
+    document.getElementById('id_time5').parentElement.className += "hidden";
+    document.getElementById('id_time6').parentElement.className += "hidden";
+    document.getElementById('id_time7').parentElement.className += "hidden";
+    document.getElementById('id_time8').parentElement.className += "hidden";
+    document.getElementById('id_time9').parentElement.className += "hidden";
+    document.getElementById('id_turns').parentElement.className += "hidden";
 }
 
 function moveCardsUI(card1, card2){
@@ -32,12 +53,19 @@ function victory(){
 
   // Now show the submit form for the highscores
   document.getElementById('id_name').disabled = false;
-  document.getElementById('id_time').disabled = false;
-  document.getElementById('id_time').readOnly = true;
-  document.getElementById('id_time').value = totalTime.toFixed(1);
-  document.getElementById('id_turns').disabled = false;
-  document.getElementById('id_turns').readOnly = true;
+
+  document.getElementById('id_totalTime').value = totalTime.toFixed(1);
   document.getElementById('id_turns').value = turns;
+  document.getElementById('id_time1').value = timestamps[0].toFixed(1);
+  document.getElementById('id_time2').value = timestamps[1].toFixed(1);
+  document.getElementById('id_time3').value = timestamps[2].toFixed(1);
+  document.getElementById('id_time4').value = timestamps[3].toFixed(1);
+  document.getElementById('id_time5').value = timestamps[4].toFixed(1);
+  document.getElementById('id_time6').value = timestamps[5].toFixed(1);
+  document.getElementById('id_time7').value = timestamps[6].toFixed(1);
+  document.getElementById('id_time8').value = timestamps[7].toFixed(1);
+  document.getElementById('id_time9').value = timestamps[8].toFixed(1);
+
   document.getElementById('formpje').className = 'submit-form';
   document.getElementById('please_submit').textContent = "Good job! your score is: " + (100-(totalTime - 10)-(2*(turns-10))).toFixed(1)
   document.getElementById('please_submit').className = '';
@@ -64,14 +92,13 @@ function start(){
   if(started === false){
     // Hide the form
     document.getElementById('id_name').disabled = true;
-    document.getElementById('id_time').disabled = true;
-    document.getElementById('id_turns').disabled = true;
     document.getElementById('formpje').className = 'submit-form hidden';
     document.getElementById('please_submit').className = 'hidden';
 
     // Clear the data
     totalTime = 0;
     turns = 0;
+    timestamps = [];
     document.getElementById('time').textContent = totalTime;
     document.getElementById('turns').textContent = turns;
 
@@ -129,6 +156,10 @@ function setTime(){
 function setTurns(){
     turns += 1;
     document.getElementById('turns').textContent = turns;
+}
+
+function addTimestamp(){
+  timestamps.push(totalTime);
 }
 
 function stopTime(){

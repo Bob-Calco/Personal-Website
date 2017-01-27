@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 95%;
+  margin: auto;
+  text-align: center
+}
+
+header {
+  background-color: green;
+}
+
+h1 {
+  color: white;
+  padding: 20px;
+}
+
+.home-button {
+  width: 40%;
+  height: 30%;
+  margin: 30px;
+  background-color: blue;
+  color: white;
+  display: inline-block;
+  font-size: 2em;
+  box-shadow: 0 5px 25px 0 black;
+}
+
+form {
+  text-align: left;
+  margin-left: 20px;
+}
+
+form > h2 {
+  font-size: 2em;
+}
+
+form > input {
+  font-size: 2em;
+}
+
+form > button {
+  font-size: 2em;
+  padding: 2px 12px;
+  background-color: green;
+  color: white;
+}

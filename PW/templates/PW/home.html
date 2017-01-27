@@ -1,0 +1,53 @@
+{% extends "PW/base.html" %}
+{% load static %}
+
+{% block title %}Home{{ block.super }}{% endblock title %}
+
+{% block head %}<link href="{% static 'PW/css/carousel.css' %}" type="text/css" rel="stylesheet">{% endblock head %}
+
+{% block content %}
+
+<div class='slideshow-container'>
+
+		<div class='slide'>
+				<img src="{% static 'PW/img/front-picture.jpg' %}" width="100%"/>
+				<p>Improvised office on a balcony</p>
+		</div>
+
+    <div class='slide hidden'>
+        <img src="{% static 'PW/img/about-slides/shelter-friends.jpg' %}" width="100%"/>
+        <p>Having a reunion with friends from all over the earth</p>
+    </div>
+
+    <div class='slide hidden'>
+        <img src="{% static 'PW/img/about-slides/3d-modelling.jpg' %}" width="100%"/>
+        <p>Trying new things is fun, like 3d modelling</p>
+    </div>
+
+    <div class='slide hidden'>
+        <img src="{% static 'PW/img/about-slides/piano-playing.jpg' %}" width="100%"/>
+        <p>I see a piano, I play a piano</p>
+    </div>
+
+    <div class='slide hidden'>
+        <img src="{% static 'PW/img/about-slides/statistics.jpg' %}" width="100%"/>
+        <p>A bit of statistics is always fun</p>
+    </div>
+
+    <a class="prev" onclick="showSlide(-1)">&#10094;</a>
+    <a class="next" onclick="showSlide(1)">&#10095;</a>
+
+</div>
+
+
+    <h1 class="home-heading">Hi, I am Bob</h1>
+
+    <h3 class="home-sub-heading">and this is my website, which is always under reconstruction because I like developing more then posting content. Have a look around and keep an eye out for malfunctions.</h3>
+
+    <div class='featured-link'>
+        <h2>Featured link</h2>
+        <p>I've build a game recently, go play it!</p>
+        <a href='{% url "PW:memory" %}'>Play!</a>
+    </div>
+
+{% endblock content %}

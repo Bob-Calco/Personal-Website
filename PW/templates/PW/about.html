@@ -1,0 +1,162 @@
+{% extends "PW/base.html" %}
+
+{% load static %}
+
+{% block title %}About{{ block.super }}{% endblock title %}
+
+{% block head %}<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Droid+Serif|Raleway|Bree+Serif|Roboto+Slab|Roboto|Comfortaa">
+                <link rel="stylesheet" type="text/css" href="{% static 'PW/css/about-infographic.css' %}">{% endblock head %}
+
+{% block content %}
+
+<div class="about-infographic">
+
+  <div class="introduction">
+
+    <h1>About Bob</h1>
+    <h4>An infographic in construction</h4>
+
+    <div class="about-image">
+      <img src="{% static 'PW/img/infographic/profile-picture.jpg' %}">
+    </div>
+
+    <div class="intro-left">
+      <img src="{% static 'PW/img/infographic/name.png' %}"></br><p>Bob Luursema</p></br>
+      <img src="{% static 'PW/img/infographic/tag.png' %}"></br><p>Calm, eager to learn, analytical, helpful</p></br>
+      <img src="{% static 'PW/img/infographic/baby-stroller.png' %}"></br><p>April 17th, 1993</br>Elst, The Netherlands</p></br>
+    </div>
+    <div class="intro-right">
+      <img src="{% static 'PW/img/infographic/envelope.png' %}"></br><p>bob.luursema@outlook.com</p></br>
+      <img src="{% static 'PW/img/infographic/home.png' %}"></br><p>Rotterdam, The Netherlands</p></br>
+      <img src="{% static 'PW/img/infographic/website.png' %}"></br><p>www.bob-luursema.nl</p></br>
+    </div>
+
+  </div>
+
+  <div class="inf-work">
+
+    <h2>Work</h2>
+    <h4>Doing useful things</h4>
+
+    <div class="work-div">
+      <h3>Masterclass Professional</h3><p>2016 - present</p>
+      <div class="work-image">
+        <img src="{% static 'PW/img/infographic/calco-logo.svg' %}">
+        <p>Learning IT, building applications, following courses</p>
+      </div>
+    </div>
+
+    <div class="work-div">
+      <h3>Receptionist</h3><p>2012 - 2016</p>
+      <div class="work-image">
+        <img src="{% static 'PW/img/infographic/shelter-logo.jpg' %}">
+        <p>Learning hospitality, leading cleaning team, live in a community</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="inf-studies">
+
+    <h2>Studies</h2>
+    <h4>Which thoughts did I have?</h4>
+
+    <div class="studies-div">
+      <div class="studies-row1">
+        <p>2012-2016</p>
+        <h3>Bachelor of Public Administration</h3>
+      </div>
+      <div class="studies-row2">
+        <img src="{% static 'PW/img/infographic/eur-logo.png' %}">
+        <p>Answering questions is fun, people are complicated, what is my passion?</p>
+      </div>
+    </div>
+
+    <div class="studies-div">
+      <div class="studies-row1">
+        <p>2011-2012</p>
+        <h3>Christian Gap Year</h3>
+      </div>
+      <div class="studies-row2">
+        <img src="{% static 'PW/img/infographic/eh-logo.png' %}">
+        <p>Who am I? Who are you? How do you make decisions?</p>
+      </div>
+    </div>
+
+    <div class="studies-div">
+      <div class="studies-row1">
+        <p>2010-2011</p>
+        <h3>One Year of Laboratory Research</h3>
+      </div>
+      <div class="studies-row2">
+        <img src="{% static 'PW/img/infographic/han-logo.png' %}">
+        <p>Science is cool, but what do I want to do?</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="inf-hobbies">
+    <h2>Hobbies</h2>
+    <h4>When time needs killing</h4>
+
+    <div class="hobbies-div">
+      <img src="{% static 'PW/img/infographic/music.png' %}">
+      <p>Playing music, either on guitar or on piano</p>
+    </div>
+
+    <div class="hobbies-div">
+      <img src="{% static 'PW/img/infographic/gamepad.png' %}">
+      <p>Experiencing stories or executing a strategy in games</p>
+    </div>
+
+    <div class="hobbies-div">
+      <img src="{% static 'PW/img/infographic/person.png' %}">
+      <p>Having many books left to read, and little time to do so</p>
+    </div>
+
+    <div class="hobbies-div">
+      <img src="{% static 'PW/img/infographic/monitor-keyboard-and-mouse.png' %}">
+      <p>Technology. From  learning tricks in Excel to discussing electric cars</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+<div class="about-div hidden">
+  <h2 class="about-heading">Career path</h2>
+  <ul class="about-list">
+    <li><b>Laboratory Research:</b> science is cool.</li>
+    <li><b>EH Christian Gap Year:</b> getting to know myself.</li>
+    <li><b>Public Administration:</b> helping society analyze complex problems.</li>
+    <li><b>Shelter Christian Hostels:</b> most awesome place on earth to work.</li>
+    <li><b>IT traineeship:</b> people were too complex, computers are more consistent.</li>
+  </ul>
+</div>
+
+<div class="about-div hidden">
+  <h2 class="about-heading">Hobbies</h2>
+  <ul class="about-list">
+    <li><b>Music:</b> playing guitar, piano and cajon.</li>
+    <li><b>Learning new things:</b> solving Rubik's cubes and juggling.</li>
+    <li><b>Killing time:</b> gaming, reading random Wikipedia articles, more making of music.</li>
+  </ul>
+</div>
+
+<div class="about-div hidden">
+  <h2 class="about-heading">Media consumption</h2>
+  <ul class="about-list">
+    <li><b>Spotify:</b> from Frozen soundtrack to Theocracy</li>
+    <li><b>Netflix:</b> from Inside Out to Black Mirror</li>
+    <li><b>Podcasts:</b> from Freakonomics to Hello Internet</li>
+    <li><b>YouTube:</b> from LinusTechTips to Vsauce</li>
+  </ul>
+</div>
+
+{% endblock content %}

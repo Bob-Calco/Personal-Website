@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{% static 'groceries/css/groceries.css' %}">
+	</head>
+
+	<body>
+
+		<header>
+			<h1>Groceries</h1>
+		</header>
+
+		<div class="container">
+
+			<button class='home-button'>Recipes</button>
+
+			<button class='home-button'>Grocery List</button>
+
+			<form method="POST">{% csrf_token %}
+				<h2>Add item to grocery list</h2>
+				{{ form.description }} <button type="submit">+</button>
+			</form>
+
+		</div>
+
+	</body>
+
+</html>
