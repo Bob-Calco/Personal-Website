@@ -8,6 +8,7 @@ urlpatterns = [
   url(r'^recipes/$', views.recipes, name="recipes"),
   url(r'^recipe/(?P<number>[0-9]+)/$', views.recipe, name="recipe"),
   url(r'^recipe/(?P<number>[0-9]+)/edit/$', views.recipeEdit, name="recipeEdit"),
+  url(r'^recipe/new/$', views.newRecipe, name="newRecipe"),
   url(r'^makeList/$', views.makeList, name="makeList"),
   url(r'^groceryList/$', views.groceryList, name="groceryList"),
 ]

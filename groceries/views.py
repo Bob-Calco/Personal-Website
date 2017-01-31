@@ -37,6 +37,17 @@ def recipe(request, number):
     return render(request, "groceries/recipe.html", context)
 
 def recipeEdit(request, number):
+    recipeForm = f.RecipeForm(prefix="recipe")
+    ingredientFormSet = f.IngredientFormSet(prefix="ingredient")
+    tagFormSet = f.TagFormSet(prefix="tag")
+    context = {
+        "recipeForm": recipeForm,
+        "ingredientFormSet": ingredientFormSet,
+        "tagFormSet": tagFormSet,
+    }
+    return render(request, "groceries/recipe-edit.html", context)
+
+def newRecipe(request):
     form = f.RecipeForm
     context = {
         "form": form,

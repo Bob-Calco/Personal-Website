@@ -12,9 +12,42 @@ header {
   background-color: green;
 }
 
-h1 {
+header > h1 {
   color: white;
   padding: 15px;
+  display: inline-block;
+  margin: 0;
+}
+
+.dropdown {
+  color: white;
+  display: inline-block;
+  margin: 0;
+  font-size: 2em;
+  float: right;
+  padding: 15px;
+  font-weight: 600;
+  width: 30px;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+}
+
+.dd-content {
+  background-color: white;
+  display: inline-block;
+  position: absolute;
+  right: 15px;
+  top: 40px;
+  padding: 15px;
+  box-shadow: 0 5px 25px 0 black;
+}
+
+.dd-content > a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  margin-bottom: 15px;
 }
 
 .center-container {
@@ -73,6 +106,7 @@ h1 {
 .recipe-filter {
   background-color: darkorange;
   text-align: left;
+  box-shadow: 0 2px 15px 0 black;
 }
 
 .recipe-filter > h2 {
@@ -131,4 +165,8 @@ h1 {
   padding: 15px;
   box-shadow: 0 5px 25px 0 black;
   color: white;
+}
+
+.emtpy-form {
+  display: none;
 }

@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="{% static 'groceries/css/groceries.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="{% static 'groceries/js/groceries.js' %}"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block head %}{% endblock head %}
     <title>{% block title %} | Groceries{% endblock title%}</title>
 	</head>
@@ -10,12 +11,17 @@
 	<body>
 
 		<header>
-			<h1>Groceries</h1>
+			<h1>{% block header %}Groceries{% endblock header %}</h1>
+			<div class="dropdown" onclick=dropdown()>&#8285</div>
+			<nav id="dropdown-menu" class="dd-content" style="display: none">
+				{% block dropdown-menu %}{% endblock dropdown-menu %}
+				<a href="#">Settings</a>
+			</nav>
 		</header>
 
 		<div class="container">
-      {% block content %}{% endblock content %}
-
+      {% block content %}
+			{% endblock content %}
     </div>
 
   </body>

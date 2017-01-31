@@ -1,5 +1,11 @@
 {% extends "groceries/base.html" %}
 
+{% block title %}Recipes {{ block.super }}{% endblock %}
+
+{% block header %}Recipes{% endblock %}
+
+{% block dropdown-menu %}<a href={% url 'groceries:newRecipe' %}>New Recipe</a>{% endblock %}
+
 {% block content %}
 
 <div class="center-container">
@@ -16,4 +22,4 @@
 
 </div>
 
-{% endblock content %}
+{% endblock %}

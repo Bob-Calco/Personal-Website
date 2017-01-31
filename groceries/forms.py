@@ -11,13 +11,21 @@ class AddedForm(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = m.Recipes
-        fields =  ['name' , 'howto', 'ingredients', 'tags']
+        fields =  ['name' , 'howto']
 
-    def __init__(self, *args, **kwargs):
-        super(RecipeForm, self).__init__(*args, **kwargs)
-        self.fields["ingredients"].widget = forms.widgets.CheckboxSelectMultiple()
-        self.fields["ingredients"].help_text = ""
-        self.fields["ingredients"].queryset = m.Ingredients.objects.all()
-        self.fields["tags"].widget = forms.widgets.CheckboxSelectMultiple()
-        self.fields["tags"].help_text = ""
-        self.fields["tags"].queryset = m.Tags.objects.all()
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = m.Ingredients
+        fields = ['name', 'unit']
+IngredientFormSet = forms.formset_factory(IngredientForm)
+
+class RecipeIngredientsForm(forms.ModelForm):
+    class meta:
+        model = m.RecipeIngredients
+        fields = ['amount']
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = m.Tags
+        fields = ['name']
+TagFormSet = forms.formset_factory(TagForm)
