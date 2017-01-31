@@ -1,17 +1,18 @@
 from django.shortcuts import render
-from .forms import AddedForm
+import groceries.forms as f
+import groceries.models as m
 
 # Create your views here.
 from django.http import HttpResponse
 
 def home(request):
     if request.method == "POST":
-        form = AddedForm(request.POST)
+        form = f.AddedForm(request.POST)
         if form.is_valid():
             form.save()
         return redirect('groceries:home.html')
     else:
-        form = AddedForm
+        form = f.AddedForm
         context = {
             "title": "Home",
             "form": form,
@@ -19,10 +20,28 @@ def home(request):
         return render(request, "groceries/home.html", context)
 
 def recipes(request):
-    return HttpResponse("Here there will be a list of recipes")
+    recipes = m.Recipes.objects.all()
+    context = {
+        "title": "Recipes",
+        "recipes": recipes,
+    }
+    return render(request, "groceries/recipes.html", context)
 
-def recipe(request):
-    return HttpResponse("Here you will find a single recipe")
+def recipe(request, number):
+    recipe = m.Recipes.objects.filter(id=number)[0]
+    ingredients = m.RecipeIngredients.objects.filter(recipe=recipe)
+    context = {
+        "recipe": recipe,
+        "ingredients": ingredients
+    }
+    return render(request, "groceries/recipe.html", context)
+
+def recipeEdit(request, number):
+    form = f.RecipeForm
+    context = {
+        "form": form,
+    }
+    return render(request, "groceries/recipe-edit.html", context)
 
 def makeList(request):
     return HttpResponse("Here you'll be able to make a new grocery list")

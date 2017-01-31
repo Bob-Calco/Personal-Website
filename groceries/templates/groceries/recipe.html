@@ -1,0 +1,26 @@
+{% extends "groceries/base.html" %}
+
+{% block content %}
+
+<div class="recipe">
+
+  <h2 id="name">{{ recipe.name }}</h2>
+
+  <ul>
+    {% for i in ingredients %}
+    <li>{{ i.amount }} {{ i.ingredient.unit }} {{ i.ingredient.name }}</li>
+    {% endfor %}
+  </ul>
+
+  <p class="howto">{{ recipe.howto }}</p>
+
+  <div class="recipe-bottom">
+    <button name="edit" type="button" class='edit-recipe' onclick=startEdit()>Edit</button>
+    <p class="tags"><b>Tags: </b>{% for t in recipe.tags.all %}{{ t.name }} {% endfor %}</p>
+  </div>
+
+</div>
+
+
+
+{% endblock content %}

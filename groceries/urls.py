@@ -5,8 +5,9 @@ from . import views
 app_name = 'groceries'
 urlpatterns = [
   url(r'^$', views.home, name="home"),
-  url(r'^recipes/', views.recipes, name="recipes"),
-  url(r'^recipe/adf', views.recipe, name="recipe"),
-  url(r'^makeList/', views.makeList, name="makeList"),
-  url(r'^groceryList/', views.groceryList, name="groceryList"),
+  url(r'^recipes/$', views.recipes, name="recipes"),
+  url(r'^recipe/(?P<number>[0-9]+)/$', views.recipe, name="recipe"),
+  url(r'^recipe/(?P<number>[0-9]+)/edit/$', views.recipeEdit, name="recipeEdit"),
+  url(r'^makeList/$', views.makeList, name="makeList"),
+  url(r'^groceryList/$', views.groceryList, name="groceryList"),
 ]

@@ -1,0 +1,19 @@
+{% extends "groceries/base.html" %}
+
+{% block content %}
+
+<div class="center-container">
+
+<div class="recipe-filter">
+  <h2>Filter</h2>
+</div>
+
+{% for recipe in recipes %}
+  <div class="recipe-block">
+    <a href="#">{{ recipe.name }}</a>
+  </div>
+{% endfor %}
+
+</div>
+
+{% endblock content %}

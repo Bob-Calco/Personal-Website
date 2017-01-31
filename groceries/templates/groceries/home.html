@@ -1,28 +1,22 @@
-{% load static %}
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="{% static 'groceries/css/groceries.css' %}">
-	</head>
+{% extends "groceries/base.html" %}
 
-	<body>
+{% block content %}
 
-		<header>
-			<h1>Groceries</h1>
-		</header>
+<div class="center-container">
 
-		<div class="container">
+	<div class="home-button">
+		<a href="{% url 'groceries:recipes' %}">Recipes</a>
+	</div>
 
-			<button class='home-button'>Recipes</button>
+	<div class="home-button">
+		<a href="#">Grocery List</a>
+	</div>
 
-			<button class='home-button'>Grocery List</button>
+	<form class='home-form' method="POST">{% csrf_token %}
+		<h2>Add item to grocery list</h2>
+		{{ form.description }} <button type="submit">+</button>
+	</form>
 
-			<form method="POST">{% csrf_token %}
-				<h2>Add item to grocery list</h2>
-				{{ form.description }} <button type="submit">+</button>
-			</form>
+</div>
 
-		</div>
-
-	</body>
-
-</html>
+{% endblock content %}

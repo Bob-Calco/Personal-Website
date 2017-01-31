@@ -6,7 +6,6 @@ body {
 .container {
   width: 95%;
   margin: auto;
-  text-align: center
 }
 
 header {
@@ -15,36 +14,121 @@ header {
 
 h1 {
   color: white;
-  padding: 20px;
+  padding: 15px;
 }
+
+.center-container {
+  text-align: center
+}
+
+
+/* ------- HOME PAGE ------- */
+
 
 .home-button {
-  width: 40%;
-  height: 30%;
-  margin: 30px;
+  width: 140px;
+  height: 140px;
+  margin: 10px;
   background-color: blue;
-  color: white;
   display: inline-block;
-  font-size: 2em;
   box-shadow: 0 5px 25px 0 black;
+  vertical-align: top;
+  position: relative;
 }
 
-form {
+.home-button > a {
+  color: white;
+  font-size: 1.7em;
+  text-decoration: none;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  left: 0;
+}
+
+.home-form {
   text-align: left;
   margin-left: 20px;
 }
 
-form > h2 {
-  font-size: 2em;
+.home-form > h2 {
+  font-size: 1.5em;
 }
 
-form > input {
+.home-form > input {
   font-size: 2em;
+  width: 270px;
 }
 
-form > button {
+.home-form > button {
   font-size: 2em;
   padding: 2px 12px;
   background-color: green;
+  color: white;
+}
+
+
+/* ------- RECIPES PAGE ------- */
+
+.recipe-filter {
+  background-color: darkorange;
+  text-align: left;
+}
+
+.recipe-filter > h2 {
+  color: white;
+  padding: 10px;
+}
+
+.recipe-block {
+  background-color: blue;
+  width: 140px;
+  height: 140px;
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+  box-shadow: 0 5px 25px 0 black;
+}
+
+.recipe-block > a {
+  color: white;
+  text-decoration: none;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  left: 0;
+}
+
+
+/* ------- RECIPE PAGE ------- */
+
+
+.recipe > ul {
+  list-style: none;
+  padding: 5px;
+  border: 3px solid darkorange;
+}
+
+.howto {
+  padding: 5px;
+  border: 3px solid darkorange;
+}
+
+.recipe-bottom {
+  overflow:hidden;
+}
+
+.tags {
+  display: inline-block;
+  overflow: hidden;
+  margin: 0;
+}
+
+.edit-recipe {
+  display: inline-block;
+  float: right;
+  background-color: blue;
+  padding: 15px;
+  box-shadow: 0 5px 25px 0 black;
   color: white;
 }

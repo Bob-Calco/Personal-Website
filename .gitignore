@@ -47,6 +47,7 @@ coverage.xml
 *.pot
 settings.py
 mysite\settings.py
+migrations/
 
 # Sphinx documentation
 docs/_build/
