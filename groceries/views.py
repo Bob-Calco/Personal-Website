@@ -48,10 +48,21 @@ def recipeEdit(request, number):
     return render(request, "groceries/recipe-edit.html", context)
 
 def newRecipe(request):
-    form = f.RecipeForm
-    context = {
-        "form": form,
-    }
+    if request.method = "POST":
+        recipeForm_valid = recipeForm.is_valid()
+        ingredientFormSet_valid = ingredientFormSet.is_valid()
+        tagFormSet_valid = tagFormSet.is_valid()
+        if recipeForm_valid and ingredientFormSet_valid and tagFormSet_valid:
+
+    else:
+        recipeForm = f.RecipeForm(prefix="recipe")
+        ingredientFormSet = f.IngredientFormSet(prefix="ingredient")
+        tagFormSet = f.TagFormSet(prefix="tag")
+        context = {
+            "recipeForm": recipeForm,
+            "ingredientFormSet": ingredientFormSet,
+            "tagFormSet": tagFormSet,
+        }
     return render(request, "groceries/recipe-edit.html", context)
 
 def makeList(request):

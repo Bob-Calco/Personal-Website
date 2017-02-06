@@ -59,8 +59,8 @@ header > h1 {
 
 
 .home-button {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   margin: 10px;
   background-color: blue;
   display: inline-block;
@@ -166,6 +166,12 @@ header > h1 {
   box-shadow: 0 5px 25px 0 black;
   color: white;
 }
+
+
+/* ------- RECIPE EDIT PAGE ------- */
+
+
+
 
 .emtpy-form {
   display: none;

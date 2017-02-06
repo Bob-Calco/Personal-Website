@@ -4,30 +4,41 @@
 
 <div class="recipe">
 
-  <form>
+  <form method="post">{% csrf_token %}
 
     <div class="recipeForm">
+      <h2>Recipe</h2>
       {{ recipeForm.as_p }}
     </div>
 
     <div id="ingredientForm">
       {{ ingredientFormSet.management_form }}
+      <h2>Ingredients</h2>
+      <table class="ingredientForm">
+        <tr>
+          <th>Ingredient</th>
+          <th>Unit</th>
+        </tr>
       {% for form in ingredientFormSet %}
-      <div class="ingredientForm">
-        {{ form.as_p }}
-      </div>
+        <tr>
+          <td>{{ form.name }}</td>
+          <td>{{ form.unit }}</td>
+        </tr>
       {% endfor %}
+      </table>
     </div>
       <input type="button" value="Add More" id="add_more_ingredients" onclick=addForm("ingredient")>
 
-
     <div id="tagForm">
       {{ tagFormSet.management_form }}
+      <h2>Tags</h2>
+      <table class="tagForm" >
       {% for form in tagFormSet %}
-      <div class="tagForm" >
-        {{ form.as_p }}
-      </div>
+        <tr>
+          <td>{{ form.name }}</td>
+        </tr>
       {% endfor %}
+      </table>
     </div>
       <input type="button" value="Add More" id="add_more_tags" onclick=addForm("tag")>
 
@@ -35,11 +46,17 @@
 
 </div>
 
-<div id="empty_ingredientform" class="emtpy-form">
-  {{ ingredientFormSet.empty_form.as_p }}
-</div>
+<table>
+  <tr id="empty_ingredientform" class="emtpy-form">
+    <td>{{ ingredientFormSet.empty_form.name }}</td>
+    <td>{{ ingredientFormSet.empty_form.unit }}</td>
+  </tr>
+  <tr id="empty_tagform" class="emtpy-form">
+    <td>{{ tagFormSet.empty_form.name }}</td>
+  </tr>
+</table>
 
-<div id="emtpy_tagform" class="emtpy-form">
+<div id="empty_tagform" class="emtpy-form">
   {{ tagFormSet.empty_form.as_p }}
 </div>
 
