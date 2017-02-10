@@ -21,8 +21,8 @@ class Decrypt:
 
             else:
                 shift = self.caesarian_shift(26-keys)
-                answer[self.analyze_frequencies(shift)] = (shift, keys)
-                return answer
+                answers[self.analyze_frequencies(shift)] = (shift, keys)
+                return answers
 
         elif method == "affine":
             answers = {}
