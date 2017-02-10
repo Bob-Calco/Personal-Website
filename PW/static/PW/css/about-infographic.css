@@ -8,18 +8,16 @@
 
 
 /* ------- INTRODUCTION PART ------- */
-
-
 .introduction {
   text-align: center;
   width: 80%;
   margin: auto;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 
 .introduction > h1 {
-  padding-top: 60px;
-  font-size: 5em;
+  padding-top: 40px;
+  font-size: 2.5em;
   font-family: "Droid Serif";
   margin-bottom: 0;
   margin-top: 0;
@@ -28,22 +26,22 @@
 .introduction > h4 {
   font-family: "Raleway";
   margin-top: 5px;
-  font-size: 2em;
-  margin-bottom: 100px;
+  font-size: 1.3em;
+  margin-bottom: 50px;
 }
 
 .about-image {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .about-image > img {
-  width: 50%;
+  width: 80%;
   border-radius: 80px;
 }
 
 .intro-left {
-  width: 48%;
+  width: 45%;
   font-family: "Roboto Slab";
   text-align: left;
   display: inline-block;
@@ -51,7 +49,7 @@
 }
 
 .intro-right {
-  width: 48%;
+  width: 45%;
   font-family: "Roboto Slab";
   text-align: left;
   float: right;
@@ -60,7 +58,7 @@
 
 .intro-left > img, .intro-right > img {
   display: inline-block;
-  width: 30px;
+  width: 40px;
   border-radius: 0;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -68,12 +66,13 @@
 
 .intro-left > p, .intro-right > p {
   display: inline;
+  font-size: 0.7em;
 }
 
 
 /* ------- WORK PART ------- */
 .inf-work {
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 
 .inf-work > h2 {
@@ -102,7 +101,7 @@
 .work-div > h3 {
   font-family: "Comfortaa";
   letter-spacing: 2px;
-  display: inline-block;
+  font-size: 0.8em;
 }
 
 .work-div > p {
@@ -112,7 +111,7 @@
 }
 
 .work-image > img {
-  height: 100px;
+  height: 20px;
   border-radius: 0;
   float: right;
 }
