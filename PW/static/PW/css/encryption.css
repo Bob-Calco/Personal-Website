@@ -85,3 +85,17 @@ h2 {
   margin-top: 10px;
   font-size: 1.5em;
 }
+
+a {
+  margin-left: 20px;
+  font-size: 1.5em;
+  background-color: lightgrey;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+  border: 1px solid grey;
+}
+
+a:hover {
+  background-color: Gainsboro;
+}
