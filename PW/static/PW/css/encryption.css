@@ -1,0 +1,87 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+header {
+  background-color: blue;
+}
+
+h1 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  color: white;
+}
+
+.encrypt-output {
+
+}
+
+.decrypt-output, .encrypt-output {
+  margin-left: 20px;
+  border: 2px solid black;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.decrypt-output h2 {
+  margin-bottom: 20px;
+}
+
+.decrypt-output table {
+  border-collapse: collapse;
+}
+
+.decrypt-output td {
+  padding: 5px 10px;
+  border-bottom: 1px solid black;
+}
+
+.decrypt-output th {
+  padding: 0 10px;
+  border-bottom: 2px solid black;
+}
+
+form {
+  margin-left: 20px;
+  border: 2px solid black;
+  padding: 10px;
+  max-width: 400px;
+}
+
+h2 {
+  margin: 0;
+}
+
+#id_crypt {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+#id_method {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.cipher-explanation {
+  margin: 20px
+}
+
+#decrypt-keys {
+  font-size: 0.7em;
+}
+
+#key1 {
+  margin-bottom: 10px;
+}
+
+.button {
+  margin-top: 10px;
+  font-size: 1.5em;
+}

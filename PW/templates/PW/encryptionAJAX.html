@@ -1,0 +1,51 @@
+{% if crypt == "encrypt" %}
+<div class="encrypt-output">
+  <h2>Encryption Output</h2>
+  <p>{{ output }}</p>
+</div>
+{% endif %}
+
+{% if crypt == "decrypt" %}
+<div class="decrypt-output">
+  <h2>Decryption Output</h2>
+  {% if method == "caesar" %}
+  <table>
+    <tr>
+      <th>Score</th>
+      <th>Text</th>
+      <th>Keys</th>
+    </tr>
+    {% for k, v in output %}
+    <tr>
+      <td>{{ k }}</td>
+      <td>{{ v.0 }}</td>
+      <td>{{ v.1 }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  {% if method == "affine" %}
+  <table>
+    <tr>
+      <th>Score</th>
+      <th>Text</th>
+      <th>Keys</th>
+    </tr>
+    {% for k, v in output %}
+    <tr>
+      <td>{{ k }}</td>
+      <td>{{ v.0 }}</td>
+      <td>{{ v.1 }}</td>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  {% if method == "atbash" %}
+    {% for k, v in output %}
+    <p>{{ v }}</p>
+    {% endfor %}
+  {% endif %}
+
+</div>
+{% endif %}

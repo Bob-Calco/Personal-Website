@@ -1,0 +1,51 @@
+{% load static %}
+<html>
+
+  <head>
+    <link href="{% static 'PW/css/encryption.css' %}" type="text/css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'PW/js/encryption.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bob's Encryption and Decryption</title>
+  </head>
+
+  <body onload="pageLoad()">
+
+    <header>
+      <h1>Bob's Encryption and Decryption Tools</h1>
+    </header>
+
+    <div id='response'></div>
+
+    <form method="POST" onsubmit="hello()" id="form">{% csrf_token %}
+      <h2>Tool</h2>
+      <p>In this section you can encrypt and decrypt any text (in the Latin alphabet).</p>
+      <div id="crypt">
+        {{ form.crypt }}
+      </div>
+      <div id="text">
+        {{ form.text }}
+      </div>
+      <div id="method">
+        {{ form.method }}
+        <p class="cipher-explanation" id="caesar">In the Caesar cipher every letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.</p>
+        <p class="cipher-explanation" id="affine">In the Affine cipher every letter is mapped to another letter according to the function (ax+b) mod 26. Where 'a' and 'b' are keys and 'x' is the original numerical position.</p>
+        <p class="cipher-explanation" id="atbash">The Atbash cipher works by substituting the first letter of an alphabet for the last letter, the second letter for the second to last and so on, effectively reversing the alphabet.</p>
+      </div>
+      <div id='keys'>
+        <p id="decrypt-keys">When decrypting keys are optional, if you give keys those will be used otherwise I will try all options.</p>
+        <div id="key1">
+          <span>Key 1</span>
+          {{ form.int_key1 }}
+        </div>
+        <div id="key2">
+          <span>Key 2</span>
+          {{ form.int_key2 }}
+        </div>
+      </div>
+      <button class="button" type="submit" name="button">Submit</button>
+    </form>
+
+  </body>
+
+</html>

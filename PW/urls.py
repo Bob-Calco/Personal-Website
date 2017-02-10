@@ -8,4 +8,6 @@ urlpatterns = [
     url(r'^about/', views.about, name='about'),
     url(r'^projects/', views.projects, name='projects'),
     url(r'^memory/', views.memory, name='memory'),
+    url(r'^battleship/', views.battleship, name='battleship'),
+    url(r'^encryption/', views.encryption, name='encryption'),
 ]
