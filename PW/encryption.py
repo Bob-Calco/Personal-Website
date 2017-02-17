@@ -139,6 +139,23 @@ class Decrypt:
 
         return round(score, 2)
 
+    def analyze_pronouncable(self, s):
+        vowels = ('a', 'e', 'o', 'u', 'i',)
+        consonants = ('q', 'w', 'r', 't', 'y','p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm')
+
+        c = 0
+        score = 0
+        while c < len(s):
+            if s[c] in vowels:
+                if s[c+1] in consonants:
+                    score += 1
+            elif s[c] in consonants:
+                if s[c+1] in vowels:
+                    score += 1
+
+        return score
+
+
 class Encrypt:
 
     def __init__(self, s):

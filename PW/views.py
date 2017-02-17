@@ -37,9 +37,6 @@ def memory(request):
         top_scores = memoryScore.objects.order_by('-score')[:30]
         return render(request, "PW/memory.html", {'form': form, 'top_scores': top_scores})
 
-def battleship(request):
-    return render(request, "PW/battleship.html", {})
-
 def encryption(request):
     if request.method == "POST":
         form = EncryptForm(request.POST)

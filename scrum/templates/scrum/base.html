@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'scrum/css/scrum.css' %}">
+    <script src="{% static 'scrum/js/scrum.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}{% endblock head %}
+    <title>{% block title %}{% endblock title%}</title>
+  </head>
+
+  <body>
+    <header><h1>ScrumApp</h1></header>
+    {% block content %}
+
+		{% endblock content %}
+  </body>
+
+</html>

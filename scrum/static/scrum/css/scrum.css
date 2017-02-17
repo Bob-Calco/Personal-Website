@@ -1,0 +1,64 @@
+/* <<<<< STANDARD THINGIES >>>>> */
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+.hidden {
+  display: none;
+}
+.container {
+  margin: 0 10px;
+}
+
+/* <<<<< HEADER THINGIES >>>>>*/
+header {
+  padding: 20px;
+  padding-left: 20px;
+  background-color: blue;
+}
+header > h1 {
+  color: white;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+/* <<<<< PRODUCT BACKLOG THINGIES >>>>>*/
+.active-tab {
+  background-color: blue !important;
+  color: white !important;
+}
+
+.tab {
+  border: 3px solid blue;
+}
+
+.pb-nav {
+  margin-top: 16px;
+}
+.pb-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 9px 0;
+}
+.pb-nav li {
+  display: inline;
+  margin-right: 10px;
+  background-color: white;
+  color: blue;
+  border: 3px solid blue;
+  padding: 10px 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.prio-table tr:first-child {
+  background-color: lightblue;
+}
+.prio-table th {
+  text-align: left;
+  padding: 5px 0;
+  padding-left: 5px;
+}
+.prio-table td {
+  padding: 5px 10px 5px 5px;
+  font-size: 0.9em;
+}
