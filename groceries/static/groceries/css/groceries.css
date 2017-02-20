@@ -59,24 +59,18 @@ header > h1 {
 
 
 .home-button {
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   margin: 10px;
+  padding: 10px;
   background-color: blue;
   display: inline-block;
   box-shadow: 0 5px 25px 0 black;
   vertical-align: top;
   position: relative;
-}
-
-.home-button > a {
   color: white;
-  font-size: 1.7em;
+  font-size: 1.5em;
   text-decoration: none;
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  left: 0;
 }
 
 .home-form {
@@ -86,15 +80,16 @@ header > h1 {
 
 .home-form > h2 {
   font-size: 1.5em;
+  margin-bottom: 5px;
 }
 
 .home-form > input {
-  font-size: 2em;
-  width: 270px;
+  font-size: 1.3em;
+  width: 230px;
 }
 
 .home-form > button {
-  font-size: 2em;
+  font-size: 1.3em;
   padding: 2px 12px;
   background-color: green;
   color: white;
@@ -103,34 +98,23 @@ header > h1 {
 
 /* ------- RECIPES PAGE ------- */
 
-.recipe-filter {
-  background-color: darkorange;
-  text-align: left;
-  box-shadow: 0 2px 15px 0 black;
+.recipes-list {
+  list-style: none;
+  padding: 0;
 }
 
-.recipe-filter > h2 {
-  color: white;
-  padding: 10px;
-}
-
-.recipe-block {
+.recipes-list li {
   background-color: blue;
-  width: 140px;
-  height: 140px;
-  display: inline-block;
-  margin: 10px;
-  position: relative;
+  margin-bottom: 30px;
   box-shadow: 0 5px 25px 0 black;
 }
 
-.recipe-block > a {
-  color: white;
+.recipes-list a {
   text-decoration: none;
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  left: 0;
+  font-size: 1.3em;
+  color: white;
+  padding: 20px;
+  display: block;
 }
 
 
@@ -150,12 +134,6 @@ header > h1 {
 
 .recipe-bottom {
   overflow:hidden;
-}
-
-.tags {
-  display: inline-block;
-  overflow: hidden;
-  margin: 0;
 }
 
 .edit-recipe {

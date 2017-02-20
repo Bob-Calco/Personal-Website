@@ -4,22 +4,13 @@
 
 {% block header %}Recipes{% endblock %}
 
-{% block dropdown-menu %}<a href={% url 'groceries:newRecipe' %}>New Recipe</a>{% endblock %}
+{% block dropdown-menu %}<a href="#" %}>New Recipe</a>{% endblock %}
 
 {% block content %}
 
-<div class="center-container">
-
-<div class="recipe-filter">
-  <h2>Filter</h2>
-</div>
-
+<ul class="recipes-list">
 {% for recipe in recipes %}
-  <div class="recipe-block">
-    <a href="#">{{ recipe.name }}</a>
-  </div>
+  <li><a href="{% url 'groceries:recipe' recipe.id %}">{{ recipe.name }}</a></li>
 {% endfor %}
-
-</div>
 
 {% endblock %}

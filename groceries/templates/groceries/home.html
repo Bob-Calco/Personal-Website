@@ -4,13 +4,9 @@
 
 <div class="center-container">
 
-	<div class="home-button">
-		<a href="{% url 'groceries:recipes' %}">Recipes</a>
-	</div>
+  <a class="home-button" href="{% url 'groceries:recipes' %}">Recipes</a>
 
-	<div class="home-button">
-		<a href="#">Grocery List</a>
-	</div>
+  <a class="home-button" href="#">Grocery List</a>
 
 	<form class='home-form' method="POST">{% csrf_token %}
 		<h2>Add item to grocery list</h2>

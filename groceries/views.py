@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import groceries.forms as f
 import groceries.models as m
 
@@ -7,12 +7,12 @@ from django.http import HttpResponse
 
 def home(request):
     if request.method == "POST":
-        form = f.AddedForm(request.POST)
+        form = f.ItemForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('groceries:home.html')
+        return redirect('groceries:home')
     else:
-        form = f.AddedForm
+        form = f.ItemForm
         context = {
             "title": "Home",
             "form": form,
@@ -29,42 +29,33 @@ def recipes(request):
 
 def recipe(request, number):
     recipe = m.Recipes.objects.filter(id=number)[0]
-    ingredients = m.RecipeIngredients.objects.filter(recipe=recipe)
+    items = m.Items.objects.filter(recipe=number)
     context = {
         "recipe": recipe,
-        "ingredients": ingredients
+        "items": items,
     }
     return render(request, "groceries/recipe.html", context)
 
 def recipeEdit(request, number):
-    recipeForm = f.RecipeForm(prefix="recipe")
-    ingredientFormSet = f.IngredientFormSet(prefix="ingredient")
-    tagFormSet = f.TagFormSet(prefix="tag")
-    context = {
-        "recipeForm": recipeForm,
-        "ingredientFormSet": ingredientFormSet,
-        "tagFormSet": tagFormSet,
-    }
-    return render(request, "groceries/recipe-edit.html", context)
-
-def newRecipe(request):
     if request.method == "POST":
-        recipeForm_valid = recipeForm.is_valid()
-        ingredientFormSet_valid = ingredientFormSet.is_valid()
-        tagFormSet_valid = tagFormSet.is_valid()
-        if recipeForm_valid and ingredientFormSet_valid and tagFormSet_valid:
-            tagFormSet.save()
-            ingredientFormSet.save()
+        recipeForm = f.RecipeForm(request.POST, prefix="recipe")
+        itemFormSet = f.ItemFormSet(request.POST, prefix="item")
+        if recipeForm.is_valid() and itemFormSet.is_valid():
+            r = recipeForm.save()
+            for form in itemFormSet:
+                a = form.save(commit=False)
+                a.recipe = r
+                a.save()
+            return redirect('groceries:recipes')
+        return redirect('groceries:home')
     else:
         recipeForm = f.RecipeForm(prefix="recipe")
-        ingredientFormSet = f.IngredientFormSet(prefix="ingredient")
-        tagFormSet = f.TagFormSet(prefix="tag")
+        itemFormSet = f.ItemFormSet(prefix="item")
         context = {
             "recipeForm": recipeForm,
-            "ingredientFormSet": ingredientFormSet,
-            "tagFormSet": tagFormSet,
+            "itemFormSet": itemFormSet,
         }
-    return render(request, "groceries/recipe-edit.html", context)
+        return render(request, "groceries/recipe-edit.html", context)
 
 def makeList(request):
     return HttpResponse("Here you'll be able to make a new grocery list")
