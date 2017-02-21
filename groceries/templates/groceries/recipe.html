@@ -15,7 +15,7 @@
   <p class="howto">{{ recipe.howto }}</p>
 
   <div class="recipe-bottom">
-    <button name="edit" type="button" class='edit-recipe' onclick=startEdit()>Edit</button>
+    <a href="{% url 'groceries:recipeEdit' recipe.id %}" class='edit-recipe'>Edit</a>
   </div>
 
 </div>

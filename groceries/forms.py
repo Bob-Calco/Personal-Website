@@ -11,4 +11,5 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = m.Items
         fields = ['description']
-ItemFormSet = forms.formset_factory(ItemForm)
+
+ItemFormSet = forms.modelformset_factory(m.Items, form=ItemForm, fields=('description',))

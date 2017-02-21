@@ -37,9 +37,14 @@ def recipe(request, number):
     return render(request, "groceries/recipe.html", context)
 
 def recipeEdit(request, number):
+    recipe = m.Recipes.objects.filter(id=number)[0]
+    items = m.Items.objects.filter(recipe=number)
+
     if request.method == "POST":
-        recipeForm = f.RecipeForm(request.POST, prefix="recipe")
-        itemFormSet = f.ItemFormSet(request.POST, prefix="item")
+        recipeForm = f.RecipeForm(instance=recipe, data=request.POST, prefix="recipe")
+        itemFormSet = f.ItemFormSet(queryset=items, data=request.POST, prefix="item")
+        print(recipeForm.is_valid())
+        print(itemFormSet.is_valid())
         if recipeForm.is_valid() and itemFormSet.is_valid():
             r = recipeForm.save()
             for form in itemFormSet:
@@ -49,8 +54,8 @@ def recipeEdit(request, number):
             return redirect('groceries:recipes')
         return redirect('groceries:home')
     else:
-        recipeForm = f.RecipeForm(prefix="recipe")
-        itemFormSet = f.ItemFormSet(prefix="item")
+        recipeForm = f.RecipeForm(prefix="recipe", instance=recipe)
+        itemFormSet = f.ItemFormSet(prefix="item", queryset=items)
         context = {
             "recipeForm": recipeForm,
             "itemFormSet": itemFormSet,
