@@ -42,28 +42,49 @@ def recipeEdit(request, number):
 
     if request.method == "POST":
         recipeForm = f.RecipeForm(instance=recipe, data=request.POST, prefix="recipe")
-        itemFormSet = f.ItemFormSet(queryset=items, data=request.POST, prefix="item")
-        print(recipeForm.is_valid())
-        print(itemFormSet.is_valid())
+        itemFormSet = f.ItemFormSet(instance=recipe, data=request.POST, prefix="item")
         if recipeForm.is_valid() and itemFormSet.is_valid():
-            r = recipeForm.save()
-            for form in itemFormSet:
-                a = form.save(commit=False)
-                a.recipe = r
-                a.save()
+            recipeForm.save()
+            itemFormSet.save()
             return redirect('groceries:recipes')
         return redirect('groceries:home')
     else:
         recipeForm = f.RecipeForm(prefix="recipe", instance=recipe)
-        itemFormSet = f.ItemFormSet(prefix="item", queryset=items)
+        itemFormSet = f.ItemFormSet(prefix="item", instance=recipe)
         context = {
             "recipeForm": recipeForm,
             "itemFormSet": itemFormSet,
         }
         return render(request, "groceries/recipe-edit.html", context)
 
-def makeList(request):
-    return HttpResponse("Here you'll be able to make a new grocery list")
+def recipeNew(request):
+    if request.method == "POST":
+        recipeForm = f.RecipeForm(request.POST, prefix="recipe")
+        if recipeForm.is_valid():
+            r = recipeForm.save(commit=False)
+            itemFormSet = f.ItemFormSet(request.POST, instance=r, prefix="item")
+            if itemFormSet.is_valid():
+                recipeForm.save()
+                itemFormSet.save()
+                return redirect('groceries:recipes')
+        return redirect('groceries:home')
+    else:
+        recipeForm = f.RecipeForm(prefix="recipe")
+        itemFormSet = f.ItemFormSet(queryset=m.Items.objects.none(), prefix="item")
+        context = {
+            "recipeForm": recipeForm,
+            "itemFormSet": itemFormSet,
+        }
+        return render(request, "groceries/recipe-edit.html", context)
 
 def groceryList(request):
-    return HttpResponse("Here you can check off the items on the list")
+    recipes = m.Recipes.objects.order_by('dateLastUsed')[:2]
+    recipe1 = m.Items.objects.filter(recipe=recipes[0])
+    recipe2 = m.Items.objects.filter(recipe=recipes[1])
+    extra_items = m.Items.objects.filter(recipe=None)
+    context = {
+        "recipe1": recipe1,
+        "recipe2": recipe2,
+        "extra_items": extra_items,
+    }
+    return render(request, "groceries/grocery-list.html", context)

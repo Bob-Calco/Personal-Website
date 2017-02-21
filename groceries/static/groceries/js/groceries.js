@@ -1,3 +1,4 @@
+/* Navigation thingie */
 function dropdown(){
   if (document.getElementById("dropdown-menu").style.display === "none"){
     document.getElementById("dropdown-menu").style.display = "inline-block";
@@ -7,6 +8,7 @@ function dropdown(){
   }
 }
 
+/* New and Edit recipe page */
 function addForm(form){
   var clone = document.getElementById("empty_"+form+"form").cloneNode(true);
   var formid = document.getElementById("id_"+form+"-TOTAL_FORMS").value;
@@ -17,4 +19,9 @@ function addForm(form){
   document.getElementById(form+"Form").children[5].children[0].appendChild(clone);
 
   document.getElementById("id_"+form+"-TOTAL_FORMS").value = Number(formid) + 1;
+}
+
+/* Grocery list checkmarks */
+function check(item){
+  document.getElementById(item).style.display = "None";
 }

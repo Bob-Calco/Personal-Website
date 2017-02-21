@@ -98,6 +98,7 @@ header > h1 {
 
 /* ------- RECIPES PAGE ------- */
 
+
 .recipes-list {
   list-style: none;
   padding: 0;
@@ -149,8 +150,35 @@ header > h1 {
 /* ------- RECIPE EDIT PAGE ------- */
 
 
-
-
 .emtpy-form {
   display: none;
+}
+
+
+/* ------- GROCERY LIST PAGE -------*/
+
+
+.grocery-list {
+  list-style: none;
+  padding: 0;
+}
+
+.grocery-list > li {
+  padding: 10px;
+  background-color: blue;
+  margin: 10px;
+  border-radius: 15px;
+}
+
+.gl-checkbox {
+  float: right;
+  height: 1.2em;
+  width: 1.2em;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.gl-item {
+    color: white;
+    font-size: 1.2em;
 }

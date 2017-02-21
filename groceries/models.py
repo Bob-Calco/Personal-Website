@@ -7,7 +7,7 @@ class Items(models.Model):
     recipe = models.ForeignKey('Recipes', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.name
+        return self.description
 
 class Recipes(models.Model):
     name = models.CharField(max_length=30)

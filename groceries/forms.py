@@ -12,4 +12,4 @@ class ItemForm(forms.ModelForm):
         model = m.Items
         fields = ['description']
 
-ItemFormSet = forms.modelformset_factory(m.Items, form=ItemForm, fields=('description',))
+ItemFormSet = forms.inlineformset_factory(m.Recipes, m.Items, can_delete=True, form=ItemForm, fields=('description',))

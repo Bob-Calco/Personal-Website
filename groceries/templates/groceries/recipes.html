@@ -4,7 +4,7 @@
 
 {% block header %}Recipes{% endblock %}
 
-{% block dropdown-menu %}<a href="#" %}>New Recipe</a>{% endblock %}
+{% block dropdown-menu %}<a href="{% url 'groceries:recipeNew' %}" %}>New Recipe</a>{% endblock %}
 
 {% block content %}
 

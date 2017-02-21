@@ -1,0 +1,20 @@
+{% extends "groceries/base.html" %}
+
+{% block content %}
+
+<ul class="grocery-list">
+  {% for item in recipe1 %}
+  <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
+  {% endfor %}
+
+  {% for item in recipe2 %}
+  <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
+  {% endfor %}
+
+  {% for item in extra_items %}
+  <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
+  {% endfor %}
+
+</ul>
+
+{% endblock content %}
