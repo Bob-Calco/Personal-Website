@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 import groceries.forms as f
 import groceries.models as m
+from django.db.models import Q
 
 # Create your views here.
 from django.http import HttpResponse
@@ -77,14 +78,32 @@ def recipeNew(request):
         }
         return render(request, "groceries/recipe-edit.html", context)
 
+def makeGroceryList(request):
+    if request.method == "POST":
+        recipes = m.Recipes.objects.order_by('dateLastUsed')[:2]
+        items = m.Items.objects.filter(recipe=None).filter(status=0)
+        groceryList = m.GroceryLists()
+        groceryList.save()
+        for item in items:
+            groceryList.items.add(item)
+        for recipe in recipes:
+            groceryList.recipes.add(recipe)
+        return redirect('groceries:groceryList')
+    else:
+        extra_items = m.Items.objects.filter(recipe=None).filter(status=0)
+        recipes = m.Recipes.objects.all()
+        context = {
+            "extra_items": extra_items,
+            "recipes": recipes,
+        }
+        return render(request, "groceries/make-grocery-list.html", context)
+
 def groceryList(request):
-    recipes = m.Recipes.objects.order_by('dateLastUsed')[:2]
-    recipe1 = m.Items.objects.filter(recipe=recipes[0])
-    recipe2 = m.Items.objects.filter(recipe=recipes[1])
-    extra_items = m.Items.objects.filter(recipe=None)
+    extra_items = m.GroceryLists.objects.latest('date').items.all()
+    recipes = m.GroceryLists.objects.latest('date').recipes.all()
+    recipe_items = m.Items.objects.filter( Q(recipe=recipes[0]) | Q(recipe=recipes[1]) )
     context = {
-        "recipe1": recipe1,
-        "recipe2": recipe2,
         "extra_items": extra_items,
+        "recipe_items": recipe_items,
     }
     return render(request, "groceries/grocery-list.html", context)

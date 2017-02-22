@@ -1,0 +1,11 @@
+{% extends "groceries/base.html" %}
+
+{% block content %}
+
+<ul class="extra_items">
+  {% for item in extra_items %}
+  <li>{{ item.description }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

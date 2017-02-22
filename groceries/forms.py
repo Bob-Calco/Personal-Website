@@ -13,3 +13,7 @@ class ItemForm(forms.ModelForm):
         fields = ['description']
 
 ItemFormSet = forms.inlineformset_factory(m.Recipes, m.Items, can_delete=True, form=ItemForm, fields=('description',))
+
+class GroceryListForm(forms.Form):
+    class Meta:
+        
