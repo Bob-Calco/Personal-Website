@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 import groceries.forms as f
 import groceries.models as m
 from django.db.models import Q
@@ -45,14 +45,18 @@ def recipeEdit(request, number):
         recipeForm = f.RecipeForm(instance=recipe, data=request.POST, prefix="recipe")
         itemFormSet = f.ItemFormSet(instance=recipe, data=request.POST, prefix="item")
         if recipeForm.is_valid() and itemFormSet.is_valid():
-            recipeForm.save()
-            itemFormSet.save()
-            return redirect('groceries:recipes')
+            if request.POST.get("save"):
+                recipeForm.save()
+                itemFormSet.save()
+            if request.POST.get("delete"):
+                recipe.delete()
+            return redirect('groceries:recipe', number)
         return redirect('groceries:home')
     else:
         recipeForm = f.RecipeForm(prefix="recipe", instance=recipe)
         itemFormSet = f.ItemFormSet(prefix="item", instance=recipe)
         context = {
+            "title": "Edit",
             "recipeForm": recipeForm,
             "itemFormSet": itemFormSet,
         }
@@ -67,12 +71,15 @@ def recipeNew(request):
             if itemFormSet.is_valid():
                 recipeForm.save()
                 itemFormSet.save()
-                return redirect('groceries:recipes')
+                return redirect('groceries:recipe', r.id)
+        print(recipeForm.errors)
+        print(itemFormSet.errors)
         return redirect('groceries:home')
     else:
         recipeForm = f.RecipeForm(prefix="recipe")
         itemFormSet = f.ItemFormSet(queryset=m.Items.objects.none(), prefix="item")
         context = {
+            "title": "New",
             "recipeForm": recipeForm,
             "itemFormSet": itemFormSet,
         }
@@ -80,7 +87,8 @@ def recipeNew(request):
 
 def makeGroceryList(request):
     if request.method == "POST":
-        recipes = m.Recipes.objects.order_by('dateLastUsed')[:2]
+        recipe_ids = request.POST['recipes'].split(',')[1:]
+        recipes = m.Recipes.objects.filter(id__in=recipe_ids)
         items = m.Items.objects.filter(recipe=None).filter(status=0)
         groceryList = m.GroceryLists()
         groceryList.save()
@@ -91,12 +99,24 @@ def makeGroceryList(request):
         return redirect('groceries:groceryList')
     else:
         extra_items = m.Items.objects.filter(recipe=None).filter(status=0)
-        recipes = m.Recipes.objects.all()
+        preselected_recipes = m.Recipes.objects.order_by('dateLastUsed')[:2]
+        all_recipes = m.Recipes.objects.exclude(id__in=[preselected_recipes[0].id, preselected_recipes[1].id])
+        added_form = f.ItemForm
         context = {
             "extra_items": extra_items,
-            "recipes": recipes,
+            "all_recipes": all_recipes,
+            "added_form": added_form,
+            "preselected_recipes": preselected_recipes,
         }
         return render(request, "groceries/make-grocery-list.html", context)
+
+def addItem(request):
+    if request.method == "POST":
+        form = f.ItemForm(request.POST)
+        if form.is_valid():
+            item = form.save()
+            html = item.description
+            return HttpResponse(html)
 
 def groceryList(request):
     extra_items = m.GroceryLists.objects.latest('date').items.all()

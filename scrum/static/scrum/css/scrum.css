@@ -62,3 +62,26 @@ header > h1 {
   padding: 5px 10px 5px 5px;
   font-size: 0.9em;
 }
+
+.epic-table tr:first-child {
+  background-color: lightblue;
+}
+.epic-th {
+  text-align: center !important;
+  font-weight: bold !important;
+  font-size: 1em !important;
+  font-style: normal !important;
+}
+.epic-table th {
+  text-align: left;
+  padding: 5px 0;
+  padding-left: 5px;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 0.8em;
+}
+.epic-table td {
+  text-align: left;
+  padding: 5px 10px 5px 5px;
+  font-size: 0.9em;
+}

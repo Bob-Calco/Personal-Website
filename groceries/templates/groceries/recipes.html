@@ -2,7 +2,7 @@
 
 {% block title %}Recipes {{ block.super }}{% endblock %}
 
-{% block header %}Recipes{% endblock %}
+{% block header %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a>  Recipes{% endblock %}
 
 {% block dropdown-menu %}<a href="{% url 'groceries:recipeNew' %}" %}>New Recipe</a>{% endblock %}
 

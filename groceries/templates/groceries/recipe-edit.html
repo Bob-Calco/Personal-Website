@@ -1,31 +1,34 @@
 {% extends "groceries/base.html" %}
 
+{% block header %}<a class="prev" href="{% url 'groceries:recipes' %}">&#10094;</a> {{ title }} Recipe{% endblock %}
+
 {% block content %}
 
-<div class="recipe">
+<div class="recipe-edit">
 
-  <form method="POST">{% csrf_token %}
+  <form method="POST" onsubmit=recipeItemDelete()>{% csrf_token %}
 
+    <h2>Recipe</h2>
     <div class="recipeForm">
-      <h2>Recipe</h2>
       {{ recipeForm.as_p }}
     </div>
 
+    <h2>Ingredients</h2>
     <div id="itemForm">
       {{ itemFormSet.management_form }}
-      <h2>Ingredients</h2>
       <table class="itemForm">
       {% for form in itemFormSet %}
-        <tr>
+        <tr class="deletionMarker">
           <td>{{ form.description }}</td>
-          <td>{{ form.id }}</td>
-          <td>{{ form.DELETE }}</td>
+          <td class="hidden">{{ form.id }}</td>
+          <td class="hidden">{{ form.DELETE }}</td>
         </tr>
       {% endfor %}
       </table>
-      <input type="button" value="Add More" id="add_more_ingredients" onclick=addForm("item")>
+      <input class="item-add-button" type="button" value="Add More" id="add_more_ingredients" onclick=addForm("item")>
     </div>
-    <input type="submit" value="Save recipe">
+    <input class="recipe-save-button" type="submit" name="save" value="Save recipe">
+    <input class="recipe-delete-button" type="submit" name="delete" value="Delete recipe">
   </form>
 
 </div>
@@ -33,7 +36,8 @@
 <table>
   <tr id="empty_itemform" class="emtpy-form">
     <td>{{ itemFormSet.empty_form.description }}</td>
-    <td>{{ itemFormSet.empty_form.form.id }}</td>
+    <td class="hidden">{{ itemFormSet.empty_form.form.id }}</td>
+    <td class="hidden">{{ itemFormSet.empty_form.DELETE }}</td>
   </tr>
 </table>
 

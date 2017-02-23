@@ -1,11 +1,49 @@
 {% extends "groceries/base.html" %}
 
+{% load static %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="{% static 'groceries/js/make-list.js' %}"></script>
+{% endblock %}
+
+{% block header %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Make List{% endblock %}
+
 {% block content %}
 
-<ul class="extra_items">
-  {% for item in extra_items %}
-  <li>{{ item.description }}</li>
-  {% endfor %}
-</ul>
+<div class="mgl-cont">
+  <h2>Recipes</h2>
+  <form method="POST" onsubmit=makeList()>{% csrf_token %}
+    <ul id="list-recipes" class="list-recipes">
+      {% for recipe in preselected_recipes %}
+        <li id="recipe{{ recipe.id }}" onclick=toggleRecipe("{{ recipe.id }}")>{{ recipe.name }}</li>
+      {% endfor %}
+    </ul>
+    <input id="recipes_data" class="hidden" name="recipes" type="text">
+    <input class="list-save-button" type="submit" value="Save list">
+  </form>
 
-{% endblock content %}
+  <h3>All Recipes</h3>
+  <form class="list-recipes-form" method="POST">{% csrf_token %}
+    <ul id="list-recipes-form">
+      {% for recipe in all_recipes %}
+        <li id="recipe{{ recipe.id }}" onclick=toggleRecipe("{{ recipe.id }}")>{{ recipe.name }}</li>
+      {% endfor %}
+    </ul>
+  </form>
+
+  <h2>Extra items</h2>
+  <ul id="extra-items" class="extra-items">
+    {% for item in extra_items %}
+    <li id="item{{ item.id }}">{{ item.description }}</li>
+    {% endfor %}
+  </ul>
+
+  <form id="item-form" class='extra-items-form' method="POST" onsubmit=submitExtraItem()>{% csrf_token %}
+    <h3>Add item to grocery list</h3>
+    {{ added_form.description }} <button type="submit">+</button>
+  </form>
+
+</div>
+
+{% endblock %}
