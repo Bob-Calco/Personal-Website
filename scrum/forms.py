@@ -2,8 +2,12 @@ from django import forms
 
 import scrum.models as m
 
-class UserstoriesForm(forms.ModelForm):
+class EpicForm(forms.ModelForm):
+    class Meta:
+        model = m.Epics
+        fields = ('name', 'goal')
 
+class UserstoriesForm(forms.ModelForm):
     class Meta:
         model = m.Userstories
-        fields = ('name', 'description', 'epic')
+        fields = ('name', 'goal', 'epic')

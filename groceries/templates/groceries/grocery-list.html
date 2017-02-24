@@ -5,12 +5,17 @@
 {% block content %}
 
 <ul class="grocery-list">
-  {% for item in extra_items %}
-  <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
-  {% endfor %}
   {% for item in recipe_items %}
-  <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
+    <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
+  {% endfor %}
+  {% for item in extra_items %}
+    <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
   {% endfor %}
 </ul>
+
+<form method="POST">{% csrf_token %}
+  <input id="gl-finished" class="hidden" name="finished" type="text" value="1">
+  <input class="finished-button" type="submit" value="Done">
+</form>
 
 {% endblock content %}

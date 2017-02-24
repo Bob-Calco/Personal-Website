@@ -34,8 +34,8 @@ function toggleRecipe(recipe){
 
 function makeList(){
   var data = "";
-  list = document.getElementById('list-recipes').childNodes;
-  for(var i = 1; i < list.length; i+=2){
+  list = document.getElementById('list-recipes').children;
+  for(var i = 0; i < list.length; i++){
     data += "," + list[i].id.substring(6);
   }
   document.getElementById('recipes-data').value = data;

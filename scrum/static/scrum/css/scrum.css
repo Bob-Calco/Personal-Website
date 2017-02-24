@@ -27,7 +27,6 @@ header > h1 {
   background-color: blue !important;
   color: white !important;
 }
-
 .tab {
   border: 3px solid blue;
 }
@@ -50,6 +49,9 @@ header > h1 {
   border-radius: 10px 10px 0 0;
 }
 
+.prio-table {
+  width: 100%;
+}
 .prio-table tr:first-child {
   background-color: lightblue;
 }
@@ -63,6 +65,9 @@ header > h1 {
   font-size: 0.9em;
 }
 
+.epic-table {
+  width: 100%;
+}
 .epic-table tr:first-child {
   background-color: lightblue;
 }
@@ -84,4 +89,27 @@ header > h1 {
   text-align: left;
   padding: 5px 10px 5px 5px;
   font-size: 0.9em;
+}
+
+.userstoryForm, .epicForm {
+  border: 3px solid blue;
+  padding: 5px;
+  margin-top: 10px;
+}
+.userstoryForm h3, .epicForm h3 {
+  margin: 5px 0;
+  font-size: 1em;
+}
+.userstoryForm p, .epicForm p {
+  margin: 5px 0;
+}
+.userstoryForm label, .epicForm label {
+  font-size: 0.8em;
+  display: inline-block;
+  width: 15%;
+}
+.us-submit, .epic-submit {
+  position: relative;
+  left: 68%;
+  font-size: 0.8em;
 }

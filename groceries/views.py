@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 import groceries.forms as f
 import groceries.models as m
 from django.db.models import Q
+from django.utils import timezone
+from django.db.models.base import ObjectDoesNotExist
 
-# Create your views here.
 from django.http import HttpResponse
 
 def home(request):
@@ -119,11 +120,25 @@ def addItem(request):
             return HttpResponse(html)
 
 def groceryList(request):
-    extra_items = m.GroceryLists.objects.latest('date').items.all()
-    recipes = m.GroceryLists.objects.latest('date').recipes.all()
-    recipe_items = m.Items.objects.filter( Q(recipe=recipes[0]) | Q(recipe=recipes[1]) )
-    context = {
-        "extra_items": extra_items,
-        "recipe_items": recipe_items,
-    }
-    return render(request, "groceries/grocery-list.html", context)
+    try:
+        recent_list = m.GroceryLists.objects.latest('date')
+    except ObjectDoesNotExist:
+        return redirect('groceries:makeGroceryList')
+    if recent_list.finished == False:
+        if request.method == "POST":
+            recent_list.finished = True
+            recent_list.items.all().status = 1
+            recent_list.recipes.all().dateLastUsed = timezone.now()
+            recent_list.save()
+            return redirect("groceries:home")
+        else:
+            extra_items = recent_list.items.all()
+            recipes = recent_list.recipes.all()
+            recipe_items = m.Items.objects.filter( Q(recipe=recipes[0]) | Q(recipe=recipes[1]) )
+            context = {
+                "extra_items": extra_items,
+                "recipe_items": recipe_items,
+            }
+            return render(request, "groceries/grocery-list.html", context)
+    else:
+        return redirect('groceries:makeGroceryList')

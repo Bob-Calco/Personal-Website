@@ -2,7 +2,7 @@
 {% load static %}
 
   {% block head %}
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   {% endblock head %}
 
   {% block title %}{{ title }}{% endblock title%}
@@ -18,42 +18,53 @@
       </nav>
 
       <div class="tab" id="tab1">
-
         <table class="prio-table">
           <tr>
             <th>Name</th>
             <th>Epic</th>
+            <th>Knop</th>
           </tr>
         {% for us in userstories %}
           <tr>
             <td>{{ us.name }}</td>
-            <td>{{ us.epic.name }}</td>
+            <td colspan="2">{{ us.goal }}</td>
           </tr>
         {% endfor %}
         </table>
-
       </div>
 
       <div class="tab hidden" id="tab2">
-
         {% for epic, uss in us_epic.items %}
         <table class="epic-table">
           <tr>
-            <th class="epic-th" colspan="3">{{ epic.name }}</th>
+            <th>Knop</th>
+            <th class="epic-th" colspan="2">{{ epic.name }}</th>
           </tr>
           <tr>
             <th>Name</th>
-            <th>Description</th>
+            <th colspan="2">Goal</th>
           </tr>
           {% for us in uss %}
           <tr>
             <td>{{ us.name }}</td>
-            <td>{{ us.description }}</td>
+            <td colspan="2">{{ us.goal }}</td>
           </tr>
           {% endfor %}
         {% endfor %}
-
+        </table>
       </div>
+
+      <form id="userstoryForm" class="userstoryForm" method=="POST" onsubmit=submitUserstory()>{% csrf_token %}
+        <h3>Add Userstory</h3>
+        {{ us_form.as_p }}
+        <button class="us-submit" type="submit">Add Userstory</button>
+      </form>
+
+      <form id="epicForm" class="epicForm" method="POST" onsubmit=submitEpic()>{% csrf_token %}
+        <h3>Add Epic</h3>
+        {{ epic_form.as_p }}
+        <button class="epic-submit" type="submit">Add Epic</button>
+      </form>
 
     </div>
 
