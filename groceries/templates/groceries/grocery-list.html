@@ -1,5 +1,7 @@
 {% extends "groceries/base.html" %}
 
+{% block title %}Grocery List | {{ block.super }}{% endblock %}
+
 {% block header %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Grocery List{% endblock %}
 
 {% block content %}

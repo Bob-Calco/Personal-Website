@@ -2,15 +2,26 @@
 
 {% block title %}Recipes {{ block.super }}{% endblock %}
 
-{% block header %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a>  Recipes{% endblock %}
+{% block header %}
+  <a class="prev" href="{% url 'groceries:home' %}">&#10094;</a>  Recipes
+{% endblock %}
 
-{% block dropdown-menu %}<a href="{% url 'groceries:recipeNew' %}" %}>New Recipe</a>{% endblock %}
+{% block dropdown-menu %}
+  <a href="{% url 'groceries:recipeNew' %}">New Recipe</a>
+  <a href="{% url 'groceries:exportRecipes' %}">Export recipes</a>
+  <a onclick=toggleImportForm()>Import recipes</a>
+{% endblock %}
 
 {% block content %}
+  <ul class="recipes-list">
+    {% for recipe in recipes %}
+      <li><a href="{% url 'groceries:recipe' recipe.id %}">{{ recipe.name }}</a></li>
+    {% endfor %}
+  </ul>
 
-<ul class="recipes-list">
-{% for recipe in recipes %}
-  <li><a href="{% url 'groceries:recipe' recipe.id %}">{{ recipe.name }}</a></li>
-{% endfor %}
-
+  <form action="{% url 'groceries:importRecipes' %}" id="importForm" class="import-form hidden" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <h2>Import XML file</h2>
+    <input type="file" name="xml">
+    <button type="submit">Upload</button>
+  </form>
 {% endblock %}

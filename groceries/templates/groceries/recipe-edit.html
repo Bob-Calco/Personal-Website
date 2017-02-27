@@ -1,9 +1,18 @@
 {% extends "groceries/base.html" %}
 
-{% block header %}<a class="prev" href="{% url 'groceries:recipes' %}">&#10094;</a> {{ title }} Recipe{% endblock %}
+{% load static %}
+
+{% block title %}Edit Recipe | {{ block.super }}{% endblock %}
+
+{% block head %}
+<script src="{% static 'groceries/js/edit-recipe.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'groceries:recipes' %}">&#10094;</a> {{ title }} Recipe
+{% endblock %}
 
 {% block content %}
-
 <div class="recipe-edit">
 
   <form method="POST" onsubmit=recipeItemDelete()>{% csrf_token %}
@@ -25,7 +34,6 @@
         </tr>
       {% endfor %}
       </table>
-      <input class="item-add-button" type="button" value="Add More" id="add_more_ingredients" onclick=addForm("item")>
     </div>
     <input class="recipe-save-button" type="submit" name="save" value="Save recipe">
     <input class="recipe-delete-button" type="submit" name="delete" value="Delete recipe">
@@ -40,5 +48,4 @@
     <td class="hidden">{{ itemFormSet.empty_form.DELETE }}</td>
   </tr>
 </table>
-
 {% endblock content %}

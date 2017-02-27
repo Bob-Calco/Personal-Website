@@ -1,9 +1,14 @@
 {% extends "groceries/base.html" %}
 
+{% block title %}Recipe | {{ block.super }}{% endblock %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{% endblock %}
+
 {% block header %}<a class="prev" href="{% url 'groceries:recipes' %}">&#10094;</a> Recipe{% endblock %}
 
 {% block content %}
-
 <div class="recipe">
 
   <h2 id="name">{{ recipe.name }}</h2>
@@ -21,5 +26,4 @@
   </div>
 
 </div>
-
 {% endblock content %}

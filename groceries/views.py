@@ -4,8 +4,8 @@ import groceries.models as m
 from django.db.models import Q
 from django.utils import timezone
 from django.db.models.base import ObjectDoesNotExist
-
-from django.http import HttpResponse
+import xml.etree.ElementTree as ET
+from wsgiref.util import FileWrapper
 
 def home(request):
     if request.method == "POST":
@@ -28,6 +28,43 @@ def recipes(request):
         "recipes": recipes,
     }
     return render(request, "groceries/recipes.html", context)
+
+def exportRecipes(request):
+    recipes = m.Recipes.objects.all()
+    root = ET.Element("recipes")
+
+    for recipe in recipes:
+        ele = ET.SubElement(root, "recipe")
+        ET.SubElement(ele, "name").text = recipe.name
+        ET.SubElement(ele, "howto").text = recipe.howto
+        items = ET.SubElement(ele, "items")
+        for item in recipe.items_set.all():
+            ET.SubElement(items, "item").text = item.description
+
+    tree = ET.ElementTree(root)
+    response = HttpResponse(ET.tostring(root, encoding='utf8', method ='xml'), content_type='application/xml')
+    response['Content-Disposition'] = 'attachment; filename=recipe-export.xml'
+    return response
+
+def importRecipes(request):
+    if request.method == "POST" and request.FILES['xml']:
+        xml = ET.parse(request.FILES['xml'])
+        root = xml.getroot()
+        m.Recipes.objects.all().delete()
+        for recipe in root:
+            r = m.Recipes()
+            r.name = recipe[0].text
+            r.howto = recipe[1].text
+            r.save()
+            for item in recipe[2]:
+                i = m.Items()
+                i.description = item.text
+                i.recipe = r
+                i.save()
+        return redirect('groceries:recipes')
+    else:
+        return redirect('groceries:home')
+
 
 def recipe(request, number):
     recipe = m.Recipes.objects.filter(id=number)[0]
@@ -134,7 +171,7 @@ def groceryList(request):
         else:
             extra_items = recent_list.items.all()
             recipes = recent_list.recipes.all()
-            recipe_items = m.Items.objects.filter( Q(recipe=recipes[0]) | Q(recipe=recipes[1]) )
+            recipe_items = m.Items.objects.filter(recipe__in=recipes)
             context = {
                 "extra_items": extra_items,
                 "recipe_items": recipe_items,
