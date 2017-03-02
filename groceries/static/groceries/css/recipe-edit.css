@@ -1,0 +1,56 @@
+/* ------- RECIPE EDIT PAGE ------- */
+
+.recipe-edit h2 {
+  margin-bottom: 5px;
+}
+
+.recipeForm, #itemForm {
+  border: 3px solid darkorange;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+.recipeForm > p {
+  margin: 5px 0;
+}
+label[for="id_recipe-name"] {
+  font-size: 0.9em;
+}
+#id_recipe-name {
+  width: 100%;
+  font-size: 1.2em;
+}
+label[for="id_recipe-howto"] {
+  font-size: 0.9em;
+}
+#id_recipe-howto {
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.itemForm {
+  width: 100%;
+}
+.itemForm input {
+  width: 100%;
+}
+.item-add-button {
+  position: relative;
+  left: 75%;
+  padding: 5px 10px;
+}
+
+.recipe-save-button {
+  padding: 5px 10px;
+}
+.recipe-delete-button {
+  color: red;
+  font-weight: bold;
+  background:none;
+  border:none;
+  float: right;
+  padding: 5px;
+}
+
+.emtpy-form {
+  display: none;
+}

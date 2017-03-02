@@ -1,0 +1,79 @@
+/* ------- MAKE GROCERY LIST PAGE -------*/
+
+
+.mgl-cont h2 {
+  margin: 20px 0 0 0;
+}
+.mgl-cont h3 {
+  margin: 10px 0;
+}
+
+.list-recipes {
+  margin: 5px 0;
+  padding: 0;
+  list-style: none;
+}
+.list-recipes li {
+  background-color: blue;
+  border-radius: 5px;
+  display: block;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+}
+.list-recipes-form {
+  margin: 5px 0;
+}
+.list-recipes-form ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.list-recipes-form li {
+  background-color: darkorange;
+  border-radius: 5px;
+  display: block;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+}
+
+.extra-items {
+  margin: 5px 0;
+  list-style: none;
+  padding: 0;
+}
+.extra-items li {
+  background-color: blue;
+  border-radius: 5px;
+  display: block;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+}
+.extra-items-form {
+  margin: 5px 0;
+}
+.extra-items-form button {
+  background-color: darkgreen;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  border: none;
+}
+.extra-items-form input {
+  margin-left: 5px;
+}
+
+.list-save-button {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 10px;
+  border: none;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.2em;
+  border: 3px solid darkorange;
+}

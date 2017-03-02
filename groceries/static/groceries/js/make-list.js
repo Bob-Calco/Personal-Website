@@ -1,8 +1,5 @@
 function submitExtraItem(){
   event.preventDefault();
-  if(document.getElementById('id_description').value === ""){
-    return;
-  }
   $.ajax({
     url : "add-item/",
     type : "POST",
@@ -10,9 +7,9 @@ function submitExtraItem(){
 
     success : function(data){
       var li = document.createElement('li');
-      li.innerHTML = data;
-      document.getElementById('extra-items').appendChild(li);
-      console.log("check")},
+      json = data[0];
+      li.innerHTML = json['fields']['description'];
+      document.getElementById('extra-items').appendChild(li)},
     error : function(xhr,errmsg,err){
       console.log(xhr.status + ": " + xhr.responseText);
     }

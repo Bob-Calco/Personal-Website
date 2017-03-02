@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.db.models.base import ObjectDoesNotExist
 import xml.etree.ElementTree as ET
 from wsgiref.util import FileWrapper
+from django.core import serializers
 
 def home(request):
     if request.method == "POST":
@@ -139,7 +140,7 @@ def makeGroceryList(request):
         extra_items = m.Items.objects.filter(recipe=None).filter(status=0)
         preselected_recipes = m.Recipes.objects.order_by('dateLastUsed')[:2]
         all_recipes = m.Recipes.objects.exclude(id__in=[preselected_recipes[0].id, preselected_recipes[1].id])
-        added_form = f.ItemForm
+        added_form = f.ItemForm()
         context = {
             "extra_items": extra_items,
             "all_recipes": all_recipes,
@@ -153,8 +154,8 @@ def addItem(request):
         form = f.ItemForm(request.POST)
         if form.is_valid():
             item = form.save()
-            html = item.description
-            return HttpResponse(html)
+            data = serializers.serialize("json", [item,])
+            return HttpResponse(data, content_type='application/json')
 
 def groceryList(request):
     try:
@@ -172,9 +173,11 @@ def groceryList(request):
             extra_items = recent_list.items.all()
             recipes = recent_list.recipes.all()
             recipe_items = m.Items.objects.filter(recipe__in=recipes)
+            added_form = f.ItemForm()
             context = {
                 "extra_items": extra_items,
                 "recipe_items": recipe_items,
+                "added_form": added_form,
             }
             return render(request, "groceries/grocery-list.html", context)
     else:

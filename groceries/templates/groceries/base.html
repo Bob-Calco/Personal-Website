@@ -1,18 +1,20 @@
 {% load static %}
+
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="{% static 'groceries/css/groceries.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'groceries/css/base.css' %}">
 		<script src="{% static 'groceries/js/groceries.js' %}"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block head %}{% endblock head %}
     <title>{% block title %}Groceries{% endblock title%}</title>
 	</head>
 
-	<body>
+	<body id="body">
 
 		<header>
 			<h1>{% block header %}Groceries{% endblock header %}</h1>
-			<div class="dropdown" onclick=dropdown()>&#8285</div>
+			<div id="dropdown-button" class="dropdown" onclick=dropdown()>&#8285</div>
 			<nav id="dropdown-menu" class="dd-content" style="display: none">
 				{% block dropdown-menu %}{% endblock dropdown-menu %}
 				<a href="#">Settings</a>
@@ -25,5 +27,4 @@
     </div>
 
   </body>
-
 </html>

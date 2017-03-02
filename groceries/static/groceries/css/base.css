@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+.hidden {
+  display: none;
+}
+
+.container {
+  width: 95%;
+  margin: auto;
+  max-width: 400px;
+}
+
+header {
+  background-color: green;
+}
+
+header > h1 {
+  color: white;
+  padding: 15px;
+  display: inline-block;
+  margin: 0;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+}
+
+.dropdown {
+  color: white;
+  display: inline-block;
+  margin: 0;
+  font-size: 2em;
+  float: right;
+  padding: 15px;
+  font-weight: 600;
+  width: 30px;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+}
+
+.dd-content {
+  background-color: white;
+  display: inline-block;
+  position: absolute;
+  right: 15px;
+  top: 40px;
+  padding: 15px;
+  box-shadow: 0 5px 25px 0 black;
+}
+
+.dd-content > a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.center-container {
+  text-align: center
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}

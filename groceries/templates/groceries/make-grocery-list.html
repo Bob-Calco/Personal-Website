@@ -5,8 +5,8 @@
 {% load static %}
 
 {% block head %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="{% static 'groceries/js/make-list.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'groceries/css/make-grocery-list.css' %}">
 {% endblock %}
 
 {% block header %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Make List{% endblock %}

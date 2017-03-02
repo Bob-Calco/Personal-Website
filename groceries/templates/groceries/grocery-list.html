@@ -1,23 +1,41 @@
 {% extends "groceries/base.html" %}
 
-{% block title %}Grocery List | {{ block.super }}{% endblock %}
+{% load static %}
 
-{% block header %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Grocery List{% endblock %}
+{% block title %}
+  Grocery List | {{ block.super }}
+{% endblock %}
+
+{% block head %}
+  <script src="{% static 'groceries/js/grocery-list.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'groceries/css/grocery-list.css' %}">
+{% endblock %}
+
+{% block header %}
+  <a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Grocery List
+{% endblock %}
+
+{% block dropdown-menu %}
+  <a onclick=toggleExtraForm()>Add item</a>
+{% endblock %}
 
 {% block content %}
+  <ul id="list" class="grocery-list">
+    {% for item in recipe_items %}
+      <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
+    {% endfor %}
+    {% for item in extra_items %}
+      <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
+    {% endfor %}
+  </ul>
 
-<ul class="grocery-list">
-  {% for item in recipe_items %}
-    <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
-  {% endfor %}
-  {% for item in extra_items %}
-    <li id="{{ item.id }}"><span class="gl-checkbox" onclick=check({{ item.id }})></span><span class="gl-item">{{ item.description }}</span></li>
-  {% endfor %}
-</ul>
+  <form method="POST">{% csrf_token %}
+    <input id="gl-finished" class="hidden" name="finished" type="text" value="1">
+    <input class="finished-button" type="submit" value="Done">
+  </form>
 
-<form method="POST">{% csrf_token %}
-  <input id="gl-finished" class="hidden" name="finished" type="text" value="1">
-  <input class="finished-button" type="submit" value="Done">
-</form>
-
+  <form id="extraItemForm" class="extra-item-form hidden" onsubmit=submitExtraItem() method="POST">{% csrf_token %}
+    <h2>Add item</h2><span class="close-button" onclick=closePopup()>[x]</span>
+    {{ added_form.description }} <button type="submit">+</button>
+  </form>
 {% endblock content %}

@@ -3,7 +3,7 @@
 {% block title %}Recipe | {{ block.super }}{% endblock %}
 
 {% block head %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'groceries/css/recipe.css' %}">
 {% endblock %}
 
 {% block header %}<a class="prev" href="{% url 'groceries:recipes' %}">&#10094;</a> Recipe{% endblock %}

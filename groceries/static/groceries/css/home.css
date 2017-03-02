@@ -1,0 +1,39 @@
+/* ------- HOME PAGE ------- */
+
+
+.home-button {
+  width: 90px;
+  height: 90px;
+  margin: 10px;
+  padding: 10px;
+  background-color: blue;
+  display: inline-block;
+  box-shadow: 0 5px 25px 0 black;
+  vertical-align: top;
+  position: relative;
+  color: white;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.home-form {
+  text-align: left;
+  margin-left: 20px;
+}
+
+.home-form > h2 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.home-form > input {
+  font-size: 1.3em;
+  width: 230px;
+}
+
+.home-form > button {
+  font-size: 1.3em;
+  padding: 2px 12px;
+  background-color: green;
+  color: white;
+}
