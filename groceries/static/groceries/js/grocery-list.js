@@ -31,7 +31,8 @@ function submitExtraItem(){
       li.appendChild(name);
 
       document.getElementById('list').appendChild(li);
-      console.log("check")},
+      document.getElementById('extraitemForm').className = "extra-item-form hidden";
+    },
     error : function(xhr,errmsg,err){
       console.log(xhr.status + ": " + xhr.responseText);
     }

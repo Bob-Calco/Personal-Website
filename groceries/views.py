@@ -1,20 +1,22 @@
-from django.shortcuts import render, redirect, HttpResponse
 import groceries.forms as f
 import groceries.models as m
-from django.db.models import Q
-from django.utils import timezone
-from django.db.models.base import ObjectDoesNotExist
 import xml.etree.ElementTree as ET
+from django.db.models import Q
+from django.db.models.base import ObjectDoesNotExist
+from django.utils import timezone
+from django.shortcuts import render, redirect, HttpResponse
 from wsgiref.util import FileWrapper
 from django.core import serializers
 
 def home(request):
+    # A post to this page is an extra item, so add that thing
     if request.method == "POST":
         form = f.ItemForm(request.POST)
         if form.is_valid():
             form.save()
         return redirect('groceries:home')
     else:
+    # GET request context
         form = f.ItemForm
         context = {
             "title": "Home",
@@ -23,6 +25,7 @@ def home(request):
         return render(request, "groceries/home.html", context)
 
 def recipes(request):
+    # GET request, load all the recipes
     recipes = m.Recipes.objects.all()
     context = {
         "title": "Recipes",
@@ -31,9 +34,11 @@ def recipes(request):
     return render(request, "groceries/recipes.html", context)
 
 def exportRecipes(request):
+    # load all the recipes and create the XML tree root
     recipes = m.Recipes.objects.all()
     root = ET.Element("recipes")
 
+    # add information for every recipe
     for recipe in recipes:
         ele = ET.SubElement(root, "recipe")
         ET.SubElement(ele, "name").text = recipe.name
@@ -42,16 +47,22 @@ def exportRecipes(request):
         for item in recipe.items_set.all():
             ET.SubElement(items, "item").text = item.description
 
+    # send it back as a download
     tree = ET.ElementTree(root)
     response = HttpResponse(ET.tostring(root, encoding='utf8', method ='xml'), content_type='application/xml')
     response['Content-Disposition'] = 'attachment; filename=recipe-export.xml'
     return response
 
 def importRecipes(request):
+    # We need a post request with an XML file
     if request.method == "POST" and request.FILES['xml']:
         xml = ET.parse(request.FILES['xml'])
         root = xml.getroot()
+
+        # Empty the current list of recipes
         m.Recipes.objects.all().delete()
+
+        # Save all the new recipes
         for recipe in root:
             r = m.Recipes()
             r.name = recipe[0].text
@@ -68,6 +79,7 @@ def importRecipes(request):
 
 
 def recipe(request, number):
+    # GET request, get the context
     recipe = m.Recipes.objects.filter(id=number)[0]
     items = m.Items.objects.filter(recipe=number)
     context = {
@@ -77,20 +89,26 @@ def recipe(request, number):
     return render(request, "groceries/recipe.html", context)
 
 def recipeEdit(request, number):
+    # Load the recipe and its items
     recipe = m.Recipes.objects.filter(id=number)[0]
     items = m.Items.objects.filter(recipe=number)
 
+    # do something if it is a POST
     if request.method == "POST":
         recipeForm = f.RecipeForm(instance=recipe, data=request.POST, prefix="recipe")
         itemFormSet = f.ItemFormSet(instance=recipe, data=request.POST, prefix="item")
         if recipeForm.is_valid() and itemFormSet.is_valid():
+            # Update recipe
             if request.POST.get("save"):
                 recipeForm.save()
                 itemFormSet.save()
+                return redirect('groceries:recipe', number)
+            # Delete recipe
             if request.POST.get("delete"):
                 recipe.delete()
-            return redirect('groceries:recipe', number)
+                return redirect('groceries:recipes')
         return redirect('groceries:home')
+    # GET request, load context
     else:
         recipeForm = f.RecipeForm(prefix="recipe", instance=recipe)
         itemFormSet = f.ItemFormSet(prefix="item", instance=recipe)
@@ -102,18 +120,20 @@ def recipeEdit(request, number):
         return render(request, "groceries/recipe-edit.html", context)
 
 def recipeNew(request):
+    # POST request, save the new recipe
     if request.method == "POST":
         recipeForm = f.RecipeForm(request.POST, prefix="recipe")
         if recipeForm.is_valid():
+            # Don't yet go to the database, first we need to check the itemformset
             r = recipeForm.save(commit=False)
             itemFormSet = f.ItemFormSet(request.POST, instance=r, prefix="item")
             if itemFormSet.is_valid():
+                # now we can save
                 recipeForm.save()
                 itemFormSet.save()
                 return redirect('groceries:recipe', r.id)
-        print(recipeForm.errors)
-        print(itemFormSet.errors)
         return redirect('groceries:home')
+    # GET request, load the context
     else:
         recipeForm = f.RecipeForm(prefix="recipe")
         itemFormSet = f.ItemFormSet(queryset=m.Items.objects.none(), prefix="item")
@@ -125,6 +145,7 @@ def recipeNew(request):
         return render(request, "groceries/recipe-edit.html", context)
 
 def makeGroceryList(request):
+    # POST request, create grocery list
     if request.method == "POST":
         recipe_ids = request.POST['recipes'].split(',')[1:]
         recipes = m.Recipes.objects.filter(id__in=recipe_ids)
@@ -136,6 +157,7 @@ def makeGroceryList(request):
         for recipe in recipes:
             groceryList.recipes.add(recipe)
         return redirect('groceries:groceryList')
+    # GET request, load things, select the two longest not used recipes
     else:
         extra_items = m.Items.objects.filter(recipe=None).filter(status=0)
         preselected_recipes = m.Recipes.objects.order_by('dateLastUsed')[:2]
@@ -150,25 +172,39 @@ def makeGroceryList(request):
         return render(request, "groceries/make-grocery-list.html", context)
 
 def addItem(request):
+    # POST request, add item
     if request.method == "POST":
         form = f.ItemForm(request.POST)
         if form.is_valid():
             item = form.save()
             data = serializers.serialize("json", [item,])
+
+            # add item to the current grocery list if it exists
+            try:
+                recent_list = m.GroceryLists.objects.latest('date')
+            except ObjectDoesNotExist:
+                return HttpResponse(data, content_type='application/json')
+            if recent_list.finished == False:
+                recent_list.items.add(item)
+
             return HttpResponse(data, content_type='application/json')
 
 def groceryList(request):
+    # check if there is a current grocery list
     try:
         recent_list = m.GroceryLists.objects.latest('date')
     except ObjectDoesNotExist:
         return redirect('groceries:makeGroceryList')
     if recent_list.finished == False:
+
+        # If it is a post to this page we need to close off the current list
         if request.method == "POST":
             recent_list.finished = True
             recent_list.items.all().status = 1
             recent_list.recipes.all().dateLastUsed = timezone.now()
             recent_list.save()
             return redirect("groceries:home")
+        # Otherwise we will show the current list
         else:
             extra_items = recent_list.items.all()
             recipes = recent_list.recipes.all()
@@ -180,5 +216,6 @@ def groceryList(request):
                 "added_form": added_form,
             }
             return render(request, "groceries/grocery-list.html", context)
+    # If there is no current list we need to go to the page to make one
     else:
         return redirect('groceries:makeGroceryList')

@@ -15,7 +15,7 @@
 {% block dropdown-menu %}
   <a href="{% url 'groceries:recipeNew' %}">New Recipe</a>
   <a href="{% url 'groceries:exportRecipes' %}">Export recipes</a>
-  <a onclick=toggleImportForm()>Import recipes</a>
+  <a class="dd-item" onclick=toggleImportForm()>Import recipes</a>
 {% endblock %}
 
 {% block content %}

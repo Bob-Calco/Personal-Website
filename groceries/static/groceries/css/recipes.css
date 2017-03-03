@@ -1,6 +1,10 @@
 /* ------- RECIPES PAGE ------- */
 
 
+.dd-item {
+  cursor: pointer;
+}
+
 .recipes-list {
   list-style: none;
   padding: 0;
