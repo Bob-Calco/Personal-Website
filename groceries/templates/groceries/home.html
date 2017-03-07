@@ -13,6 +13,10 @@
 
   <a class="home-button" href="{% url 'groceries:groceryList' %}">Grocery List</a>
 
+  <a class="home-button" href="{% url 'groceries:cooking' %}">Cooking</a>
+
+  <a class="home-button" href="{% url 'groceries:extraItems' %}">Extra Items</a>
+
 	<form class='home-form' method="POST">{% csrf_token %}
 		<h2>Add item to grocery list</h2>
 		{{ form.description }} <button type="submit">+</button>

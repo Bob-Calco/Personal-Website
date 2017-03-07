@@ -1,0 +1,23 @@
+{% extends "groceries/base.html" %}
+
+{% load static %}
+
+{% block head %}
+{% endblock head %}
+
+{% block title %}Extra items | {{ block.super }}{% endblock title%}
+
+{% block header %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Extra items{% endblock header %}
+
+{% block dropdown-menu %}
+{% endblock dropdown-menu %}
+
+{% block content %}
+
+<ul>
+{% for item in extra_items %}
+  <li>{{ item.description }}</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

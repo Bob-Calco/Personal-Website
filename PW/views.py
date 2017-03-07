@@ -12,6 +12,9 @@ def home(request):
         }
     return render(request, "PW/home.html", context)
 
+def app_overview(request):
+    return render(request, "PW/app-overview.html", {})
+
 def about(request):
     context = {
         "title": "About"

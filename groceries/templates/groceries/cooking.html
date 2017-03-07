@@ -1,0 +1,34 @@
+{% extends "groceries/base.html" %}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'groceries/css/cooking.css' %}">
+{% endblock head %}
+
+{% block title %}Cooking | {{ block.super }}{% endblock title%}
+
+{% block header %}
+  <a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Cooking
+{% endblock header %}
+
+{% block dropdown-menu %}
+{% endblock dropdown-menu %}
+
+{% block content %}
+
+  {% for recipe in recent_list.recipes.all %}
+  <div class="recipe">
+    <h2>{{ recipe.name }}</h2>
+    <p>{{ recipe.howto }}</p>
+    <h3>Ingredients</h3>
+    <ul>
+      {% for item in recipe.items_set.all %}
+      <li>{{ item.description }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% endfor %}
+
+{% endblock content %}

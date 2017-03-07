@@ -14,4 +14,6 @@ urlpatterns = [
   url(r'^grocery-list/$', views.groceryList, name="groceryList"),
   url(r'^grocery-list/make/$', views.makeGroceryList, name="makeGroceryList"),
   url(r'^grocery-list/make/add-item/$', views.addItem, name="addItemAjax"),
+  url(r'^cooking/$', views.cooking, name="cooking"),
+  url(r'^extra-items/$', views.extraItems, name="extraItems"),
 ]
