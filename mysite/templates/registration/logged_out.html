@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+      header {
+        background-color: blue;
+      }
+      h1 {
+        color: white;
+        padding: 10px;
+      }
+      div {
+        width: 90%;
+        margin: auto;
+      }
+      p {
+        margin-bottom: 30px;
+        font-size: 1.2em;
+        margin-left: 10px;
+      }
+      a {
+        background-color: blue;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 1.3em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+			<h1>Logout</h1>
+		</header>
+
+    <div>
+
+      <p>Logged out!</p>
+
+      <a href="{% url 'login'%}">Click here to login again</a>
+
+    </div>
+  </body>
+</html>

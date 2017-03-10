@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  background-color: green;
+  background-color: blue;
 }
 
 header > h1 {
@@ -41,9 +41,6 @@ header a {
   user-select: none;
   cursor: default;
 }
-.notification-sign {
-  color: darkred;
-}
 
 .dd-content {
   background-color: white;
@@ -61,15 +58,4 @@ header a {
   color: black;
   display: block;
   margin-bottom: 15px;
-}
-
-.center-container {
-  text-align: center
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
 }

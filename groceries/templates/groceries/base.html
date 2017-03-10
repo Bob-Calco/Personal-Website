@@ -14,10 +14,13 @@
 
 		<header>
 			<h1>{% block header %}Groceries{% endblock header %}</h1>
-			<div id="dropdown-button" class="dropdown" onclick=dropdown()>&#8285</div>
+			<div id="dropdown-button" class="dropdown" onclick=dropdown()>&#8285{% if message_notification %}<sup class="notification-sign">&#8226</sup>{% endif %}</div>
 			<nav id="dropdown-menu" class="dd-content" style="display: none">
 				{% block dropdown-menu %}{% endblock dropdown-menu %}
-				<a href="#">Settings</a>
+				{% if request.user.is_superuser %}<a href="{% url 'support:user_overview' %}">Support</a>
+				{% else %}<a href="{% url 'support:inbox' %}">Support {% if message_notification %} <span class="notification-sign">&#8226</span>{% endif %}</a>
+				{% endif %}
+				<a href="{% url 'logout' %}">Logout</a>
 			</nav>
 		</header>
 

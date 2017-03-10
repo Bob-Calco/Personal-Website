@@ -1,6 +1,57 @@
-<h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+      header {
+        background-color: blue;
+      }
+      h1 {
+        color: white;
+        padding: 10px;
+      }
+      div {
+        width: 90%;
+        margin: auto;
+      }
+      label {
+        display: inline-block;
+        width: 30%;
+      }
+      input {
+        font-size: 1.2em;
+        display: block;
+      }
+      .button {
+        position: relative;
+        float: right;
+        background-color: blue;
+        color: white;
+        font-size: 1.4em;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+			<h1>Login</h1>
+		</header>
+
+    <div>
+      {% if form.errors %}
+      <p>Your username and password didn't match. Please try again.</p>
+      {% endif %}
+
+      <form method="POST" action="{% url 'login' %}">{% csrf_token %}
+        {{ form.as_p }}
+        <input class="button" type="submit" value="login" />
+        <input type="hidden" name="next" value="" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+.users {
+  padding: 0;
+  background-color: blue;
+  border-radius: 10px;
+  list-style: none;
+}
+
+.users > li {
+  margin-bottom: 20px;
+}
+
+.users a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  font-size: 1.2em;
+}
+
+.users span {
+  float: right;
+}

@@ -1,0 +1,36 @@
+{% extends "support/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'support/css/support.css' %}">
+<script src="{% static 'support/js/inbox.js' %}"></script>
+{% endblock head %}
+
+{% block header %}
+{% if request.user.is_superuser %}<a class="prev" href="{% url 'support:user_overview' %}">&#10094;</a> {{ user.username }}
+{% else %}<a class="prev" href="{% url 'groceries:home' %}">&#10094;</a> Support
+{% endif %}
+{% endblock %}
+
+{% block dropdown-menu %}
+{% endblock dropdown-menu %}
+
+{% block content %}
+<div>
+  <ul id="messages" class="messages">
+    {% for message in messages %}
+      <li class="message {% if message.reply %}reply{% endif %}">
+        <p class="content">{{ message.content }}</p>
+        <p class="date">{{ message.date }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <form id="message" onsubmit=sendMessage() method="POST">{% csrf_token %}
+    <hr />
+    {{ form.content }}
+    <button type="sumbit">Send</button>
+  </form>
+<div>
+{% endblock content %}

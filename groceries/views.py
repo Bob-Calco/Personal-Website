@@ -16,7 +16,7 @@ def home(request):
         form = f.ItemForm(request.POST)
         if form.is_valid():
             model = form.save(commit=False)
-            model.user = request.USER
+            model.user = request.user
             model.save()
         return redirect('groceries:home')
     else:
@@ -31,7 +31,7 @@ def home(request):
 @login_required
 def recipes(request):
     # GET request, load all the recipes
-    recipes = m.Recipes.objects.filter(user=request.USER)
+    recipes = m.Recipes.objects.filter(user=request.user)
     context = {
         "title": "Recipes",
         "recipes": recipes,
@@ -41,7 +41,7 @@ def recipes(request):
 @login_required
 def exportRecipes(request):
     # load all the recipes and create the XML tree root
-    recipes = m.Recipes.objects.filter(user=request.USER)
+    recipes = m.Recipes.objects.filter(user=request.user)
     root = ET.Element("recipes")
 
     # add information for every recipe
@@ -67,7 +67,7 @@ def importRecipes(request):
         root = xml.getroot()
 
         # Empty the current list of recipes
-        m.Recipes.objects.filter(user=request.USER).delete()
+        m.Recipes.objects.filter(user=request.user).delete()
 
         # Save all the new recipes
         for recipe in root:
@@ -75,14 +75,14 @@ def importRecipes(request):
             r.name = recipe[0].text
             r.howto = recipe[1].text
             r_model = r.save(commit=False)
-            r_model.user = request.USER
+            r_model.user = request.user
             r_model.save()
             for item in recipe[2]:
                 i = m.Items()
                 i.description = item.text
                 i.recipe = r
                 i_model = i.save(commit=False)
-                i_model.user = request.USER
+                i_model.user = request.user
                 i_model.save()
         return redirect('groceries:recipes')
     else:
@@ -91,8 +91,8 @@ def importRecipes(request):
 @login_required
 def recipe(request, number):
     # GET request, get the context
-    recipe = m.Recipes.objects.filter(user=request.USER).filter(id=number)[0]
-    items = m.Items.objects.filter(user=request.USER).filter(recipe=number)
+    recipe = m.Recipes.objects.filter(user=request.user).filter(id=number)[0]
+    items = m.Items.objects.filter(user=request.user).filter(recipe=number)
     context = {
         "recipe": recipe,
         "items": items,
@@ -102,8 +102,8 @@ def recipe(request, number):
 @login_required
 def recipeEdit(request, number):
     # Load the recipe and its items
-    recipe = m.Recipes.objects.filter(user=request.USER).filter(id=number)[0]
-    items = m.Items.objects.filter(user=request.USER).filter(recipe=number)
+    recipe = m.Recipes.objects.filter(user=request.user).filter(id=number)[0]
+    items = m.Items.objects.filter(user=request.user).filter(recipe=number)
 
     # do something if it is a POST
     if request.method == "POST":
@@ -113,11 +113,12 @@ def recipeEdit(request, number):
             # Update recipe
             if request.POST.get("save"):
                 r_model = recipeForm.save(commit=False)
-                r_model.user = request.USER
+                r_model.user = request.user
                 r_model.save()
-                i_model = itemFormSet.save(commit=False)
-                i_model.user = request.USER
-                i_model.save()
+                i_models = itemFormSet.save(commit=False)
+                for i_model in i_models:
+                    i_model.user = request.user
+                    i_model.save()
                 return redirect('groceries:recipe', number)
             # Delete recipe
             if request.POST.get("delete"):
@@ -146,11 +147,12 @@ def recipeNew(request):
             itemFormSet = f.ItemFormSet(request.POST, instance=r, prefix="item")
             if itemFormSet.is_valid():
                 # now we can save
-                r.user = request.USER
+                r.user = request.user
                 r.save()
                 i = itemFormSet.save(commit=False)
-                i.user = request.USER
-                i.save()
+                for i_i in i:
+                    i_i.user = request.user
+                    i_i.save()
                 return redirect('groceries:recipe', r.id)
         return redirect('groceries:home')
     # GET request, load the context
@@ -169,12 +171,10 @@ def makeGroceryList(request):
     # POST request, create grocery list
     if request.method == "POST":
         recipe_ids = request.POST['recipes'].split(',')[1:]
-        recipes = m.Recipes.objects.filter(user=request.USER).filter(id__in=recipe_ids)
-        items = m.Items.objects.filter(user=request.USER).filter(recipe=None).filter(status=0)
-        groceryList = m.GroceryLists()
-        g = groceryList.save(commit=False)
-        g.user = request.USER
-        g.save()
+        recipes = m.Recipes.objects.filter(user=request.user).filter(id__in=recipe_ids)
+        items = m.Items.objects.filter(user=request.user).filter(recipe=None).filter(status=False)
+        groceryList = m.GroceryLists(user=request.user)
+        groceryList.save()
         for item in items:
             groceryList.items.add(item)
         for recipe in recipes:
@@ -182,9 +182,9 @@ def makeGroceryList(request):
         return redirect('groceries:groceryList')
     # GET request, load things, select the two longest not used recipes
     else:
-        extra_items = m.Items.objects.filter(user=request.USER).filter(recipe=None).filter(status=0)
-        preselected_recipes = m.Recipes.objects.filter(user=request.USER).order_by('dateLastUsed')[:2]
-        all_recipes = m.Recipes.objects.filter(user=request.USER).exclude(id__in=[preselected_recipes[0].id, preselected_recipes[1].id])
+        extra_items = m.Items.objects.filter(user=request.user).filter(recipe=None).filter(status=0)
+        preselected_recipes = m.Recipes.objects.filter(user=request.user).order_by('dateLastUsed')[:2]
+        all_recipes = m.Recipes.objects.filter(user=request.user).exclude(id__in=[preselected_recipes[0].id, preselected_recipes[1].id])
         added_form = f.ItemForm()
         context = {
             "extra_items": extra_items,
@@ -201,13 +201,13 @@ def addItem(request):
         form = f.ItemForm(request.POST)
         if form.is_valid():
             item = form.save(commit=False)
-            item.user = request.USER
+            item.user = request.user
             item.save()
             data = serializers.serialize("json", [item,])
 
             # add item to the current grocery list if it exists
             try:
-                recent_list = m.GroceryLists.objects.filter(user=request.USER).latest('date')
+                recent_list = m.GroceryLists.objects.filter(user=request.user).latest('date')
             except ObjectDoesNotExist:
                 return HttpResponse(data, content_type='application/json')
             if recent_list.finished == False:
@@ -219,15 +219,21 @@ def addItem(request):
 def groceryList(request):
     # check if there is a current grocery list
     try:
-        recent_list = m.GroceryLists.objects.filter(user=request.USER).latest('date')
+        recent_list = m.GroceryLists.objects.filter(user=request.user).latest('date')
     except ObjectDoesNotExist:
         return redirect('groceries:makeGroceryList')
     if recent_list.finished == False:
         # If it is a post to this page we need to close off the current list
         if request.method == "POST":
             recent_list.finished = True
-            recent_list.items.all().status = 1
-            recent_list.recipes.all().dateLastUsed = timezone.now()
+            items = recent_list.items.all()
+            for item in items:
+                item.status = True
+                item.save()
+            recipes = recent_list.recipes.all()
+            for recipe in recipes:
+                recipe.dateLastUsed = timezone.now()
+                recipe.save()
             recent_list.save()
             return redirect("groceries:home")
         # Otherwise we will show the current list
@@ -249,7 +255,7 @@ def groceryList(request):
 @login_required
 def cooking(request):
     try:
-        recent_list = m.GroceryLists.objects.filter(user=request.USER).latest('date')
+        recent_list = m.GroceryLists.objects.filter(user=request.user).latest('date')
     except ObjectDoesNotExist:
         return redirect('groceries:makeGroceryList')
 
@@ -258,6 +264,6 @@ def cooking(request):
 
 @login_required
 def extraItems(request):
-    extra_items = m.Items.objects.filter(user=request.USER).filter(status=0).filter(recipe=None)
+    extra_items = m.Items.objects.filter(user=request.user).filter(status=False).filter(recipe=None)
     context = {"extra_items": extra_items }
     return render(request, "groceries/extra-items.html", context)
