@@ -184,7 +184,15 @@ def makeGroceryList(request):
     else:
         extra_items = m.Items.objects.filter(user=request.user).filter(recipe=None).filter(status=0)
         preselected_recipes = m.Recipes.objects.filter(user=request.user).order_by('dateLastUsed')[:2]
-        all_recipes = m.Recipes.objects.filter(user=request.user).exclude(id__in=[preselected_recipes[0].id, preselected_recipes[1].id])
+        try:
+            # try 2 preselected_recipes
+            all_recipes = m.Recipes.objects.filter(user=request.user).exclude(id__in=[preselected_recipes[0].id, preselected_recipes[1].id])
+        except IndexError:
+            try:
+                # try 1 preselected_recipes
+                all_recipes = m.Recipes.objects.filter(user=request.user).exclude(id=preselected_recipes[0].id)
+            except IndexError:
+                all_recipes = m.Recipes.objects.filter(user=request.user)
         added_form = f.ItemForm()
         context = {
             "extra_items": extra_items,

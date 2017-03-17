@@ -25,6 +25,8 @@
     {% endfor %}
   </ul>
 
+  <a class="add-recipe" href="{% url 'groceries:recipeNew' %}">Add recipe</a>
+
   <form action="{% url 'groceries:importRecipes' %}" id="importForm" class="import-form hidden" method="POST" enctype="multipart/form-data">{% csrf_token %}
     <h2>Import XML file</h2><span class="close-button" onclick=toggleImportForm()>[x]</span>
     <input type="file" name="xml">
