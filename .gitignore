@@ -54,3 +54,6 @@ docs/_build/
 
 # Database
 db.sqlite3
+
+# venv
+venv/
