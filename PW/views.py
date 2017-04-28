@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.template.loader import render_to_string
+from datetime import datetime
 from .forms import *
 from .models import *
 from .encryption import *
@@ -37,7 +38,7 @@ def memory(request):
         return redirect('PW:memory')
     else:
         form = MemoryScoreForm()
-        top_scores = memoryScore.objects.order_by('-score')[:30]
+        top_scores = memoryScore.objects.filter(date__gte=datetime(2017,2,1)).order_by('-score')[:30]
         return render(request, "PW/memory.html", {'form': form, 'top_scores': top_scores})
 
 def encryption(request):
