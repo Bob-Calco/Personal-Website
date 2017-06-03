@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 from django.core import serializers
+from datetime import date
 
 @user_passes_test(lambda u: u.is_superuser)
 def home(request):
@@ -12,14 +13,23 @@ def home(request):
     return render(request, "finances/home.html", context)
 
 @user_passes_test(lambda u: u.is_superuser)
-def transactions(request):
+def transactions(request, year=date.today().year, month=date.today().month):
+    year = int(year)
+    month = int(month)
     if request.method =="GET":
-        transactions = m.Transactions.objects.order_by('date')
+        if month == 12:
+            end = date(year+1, 1,1)
+        else:
+            end = date(year, month+1,1)
+        transactions = m.Transactions.objects.filter(date__gte=date(year,month,1)).filter(date__lt=end).order_by('date')
         context = {
             "transactions": transactions,
+            "year": year,
+            "month": month,
         }
         return render(request, "finances/transactions.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
 def transaction(request, number=None):
     errors = False
     if request.method == "POST":
@@ -59,6 +69,10 @@ def transaction(request, number=None):
     }
     return render(request, "finances/transaction.html", context)
 
+@user_passes_test(lambda u: u.is_superuser)
+def delete_transaction(request, number):
+    m.Transactions.objects.get(id=number).delete()
+    return redirect('finances:transactions')
 
 @user_passes_test(lambda u: u.is_superuser)
 def categories(request):

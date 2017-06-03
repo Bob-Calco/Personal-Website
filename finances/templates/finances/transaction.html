@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block header %}
-<a class="prev" href="{% url 'finances:transactions' %}">&#10094;</a> {{ block.super }}
+<a class="prev" href="{% url 'finances:default_transactions' %}">&#10094;</a> {{ block.super }}
 {% endblock %}
 
 {% block head %}
@@ -53,7 +53,7 @@
         <td></td>
         <td><input class='transaction-save-button' type="submit" name="save" value="Save transaction"></td>
         {% if add == False %}
-        <td><input class='transaction-delete-button' type="submit" name="delete" value="Delete transaction"></td>
+        <td><a class='transaction-delete-button' href="{% url 'finances:delete_transaction' form.instance.id %}">Delete transaction</a></td>
         {% endif %}
       </tr>
     </tbody>

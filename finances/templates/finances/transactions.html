@@ -17,25 +17,25 @@
 {% block content %}
 
 <ul class='years'>
-  <li>2017</li>
-  <li>2018</li>
-  <li>2019</li>
-  <li>2020</li>
+  <li><a href="{% url 'finances:transactions' 2017 1 %}">2017</a></li>
+  <li><a href="{% url 'finances:transactions' 2018 1 %}">2018</a></li>
+  <li><a href="{% url 'finances:transactions' 2019 1 %}">2019</a></li>
+  <li><a href="{% url 'finances:transactions' 2020 1 %}">2020</a></li>
 </ul>
 
 <ul class='months'>
-  <li>Jan</li>
-  <li>Feb</li>
-  <li>Mar</li>
-  <li>Apr</li>
-  <li>May</li>
-  <li>June</li>
-  <li>July</li>
-  <li>Aug</li>
-  <li>Sep</li>
-  <li>Oct</li>
-  <li>Nov</li>
-  <li>Dec</li>
+  <li><a href="{% url 'finances:transactions' year 1 %}">Jan</a></li>
+  <li><a href="{% url 'finances:transactions' year 2 %}">Feb</a></li>
+  <li><a href="{% url 'finances:transactions' year 3 %}">Mar</a></li>
+  <li><a href="{% url 'finances:transactions' year 4 %}">Apr</a></li>
+  <li><a href="{% url 'finances:transactions' year 5 %}">May</a></li>
+  <li><a href="{% url 'finances:transactions' year 6 %}">June</a></li>
+  <li><a href="{% url 'finances:transactions' year 7 %}">July</a></li>
+  <li><a href="{% url 'finances:transactions' year 8 %}">Aug</a></li>
+  <li><a href="{% url 'finances:transactions' year 9 %}">Sep</a></li>
+  <li><a href="{% url 'finances:transactions' year 10 %}">Oct</a></li>
+  <li><a href="{% url 'finances:transactions' year 11 %}">Nov</a></li>
+  <li><a href="{% url 'finances:transactions' year 12 %}">Dec</a></li>
 </ul>
 
 <table class='transaction-table'>
@@ -57,7 +57,7 @@
       <td>{{ transaction.category }}</td>
       <td>{{ transaction.specification }}</td>
       <td><a href="{% url 'finances:edit_transaction' transaction.id %}">Edit</a></td>
-      <td><a href='#'>Delete</a></td>
+      <td><a href="{% url 'finances:delete_transaction' transaction.id %}">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>
