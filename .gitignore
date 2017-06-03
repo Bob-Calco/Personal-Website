@@ -48,6 +48,7 @@ coverage.xml
 settings.py
 mysite\settings.py
 migrations/
+migrations\
 
 # Sphinx documentation
 docs/_build/

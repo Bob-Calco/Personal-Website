@@ -1,0 +1,63 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:transactions' %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/transaction.css' %}">
+<script src="{% static 'finances/js/transaction.js' %}"></script>
+<script>var category_data = JSON.parse('{{ category_data | escapejs }}');</script>
+{% endblock %}
+
+{% block content %}
+
+{{ form.non_field_errors }}
+<form class='transaction-form' id="transaction-form" method="POST">{% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th colspan=3>
+          {% if add %}
+          <h1>Add new transaction</h1>
+          {% else %}
+          <h1>Edit transaction</h1>
+          {% endif %}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ form.date.label_tag }}</td>
+        <td>{{ form.date }}</td>
+        <td>{{ form.date.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.amount.label_tag }}</td>
+        <td>{{ form.amount }}</td>
+        <td>{{ form.amount.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.category.label_tag }}</td>
+        <td>{{ form.category }}</td>
+        <td>{{ form.category.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.specification.label_tag }}</td>
+        <td>{{ form.specification }}</td>
+        <td>{{ form.specification.errors }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class='transaction-save-button' type="submit" name="save" value="Save transaction"></td>
+        {% if add == False %}
+        <td><input class='transaction-delete-button' type="submit" name="delete" value="Delete transaction"></td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+{% endblock content %}

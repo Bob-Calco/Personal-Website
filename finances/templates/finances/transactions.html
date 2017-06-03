@@ -1,0 +1,66 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/transactions.css' %}">
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block dropdown-menu %}
+<a href="{% url 'finances:add_transaction' %}">Add transaction</a>
+{% endblock %}
+
+{% block content %}
+
+<ul class='years'>
+  <li>2017</li>
+  <li>2018</li>
+  <li>2019</li>
+  <li>2020</li>
+</ul>
+
+<ul class='months'>
+  <li>Jan</li>
+  <li>Feb</li>
+  <li>Mar</li>
+  <li>Apr</li>
+  <li>May</li>
+  <li>June</li>
+  <li>July</li>
+  <li>Aug</li>
+  <li>Sep</li>
+  <li>Oct</li>
+  <li>Nov</li>
+  <li>Dec</li>
+</ul>
+
+<table class='transaction-table'>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Specification</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+    <tr>
+      <td>{{ transaction.date }}</td>
+      <td>{{ transaction.amount }}</td>
+      <td>{{ transaction.category }}</td>
+      <td>{{ transaction.specification }}</td>
+      <td><a href="{% url 'finances:edit_transaction' transaction.id %}">Edit</a></td>
+      <td><a href='#'>Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}

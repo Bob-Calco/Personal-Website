@@ -1,0 +1,33 @@
+{% load static %}
+
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{% static 'finances/js/base.js' %}"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'finances/css/base.css' %}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}{% endblock head %}
+    <title>{% block title %}Finances{% endblock title%}</title>
+	</head>
+
+	<body id="body">
+
+		<header>
+			<h1>{% block header %}Finances{% endblock header %}</h1>
+			<div id="dropdown-button" class="dropdown" onclick=dropdown()>&#8285{% if message_notification %}<sup class="notification-sign">&#8226</sup>{% endif %}</div>
+			<nav id="dropdown-menu" class="dd-content" style="display: none">
+				{% block dropdown-menu %}{% endblock dropdown-menu %}
+				{% if request.user.is_superuser %}<a href="{% url 'support:user_overview' %}">Support</a>
+				{% else %}<a href="{% url 'support:inbox' %}">Support {% if message_notification %} <span class="notification-sign">&#8226</span>{% endif %}</a>
+				{% endif %}
+				<a href="{% url 'logout' %}">Logout</a>
+			</nav>
+		</header>
+
+		<div class="container">
+      {% block content %}
+			{% endblock content %}
+    </div>
+
+  </body>
+</html>

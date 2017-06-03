@@ -1,0 +1,44 @@
+th {
+  text-align: left;
+}
+
+td:nth-child(1) {
+  text-align: right;
+}
+label {
+  padding: 10px 5px;
+  font-size: 1.2em;
+}
+
+td:nth-child(2) > * {
+  width: 150px;
+  font-size: 1em;
+  padding: 10px;
+}
+
+.transaction-save-button {
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  font-size: 1em;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+}
+
+.transaction-delete-button {
+  background-color: white;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.errorlist {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.errorlist > li {
+  color: red;
+  padding: 10px 5px;
+}

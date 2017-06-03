@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'', include('PW.urls')),
     url(r'^groceries/', include('groceries.urls')),
     url(r'^scrum/', include('scrum.urls')),
+    url(r'^finances/', include('finances.urls')),
     url(r'^support/', include('support.urls')),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls'))
 ]

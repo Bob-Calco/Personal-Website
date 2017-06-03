@@ -1,0 +1,38 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-container">
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:transactions' %}">Transactions</a>
+  </div>
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:categories' %}">Categories</a>
+  </div>
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:balance' %}">Balance</a>
+  </div>
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:search_terms' %}">Search Terms</a>
+  </div>
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:add_transaction' %}">Add transaction</a>
+  </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  margin: 10px;
+}
+
+header {
+  background-color: blue;
+}
+
+header > h1 {
+  color: white;
+  padding: 15px;
+  display: inline-block;
+  margin: 0;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+}
+
+.dropdown {
+  color: white;
+  display: inline-block;
+  margin: 0;
+  font-size: 2em;
+  float: right;
+  padding: 15px;
+  font-weight: 600;
+  width: 30px;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+}
+
+.notification-sign {
+  color: darkred;
+}
+
+.dd-content {
+  background-color: white;
+  display: inline-block;
+  position: absolute;
+  right: 15px;
+  top: 40px;
+  padding: 15px;
+  box-shadow: 0 5px 25px 0 black;
+  z-index: 1;
+}
+
+.dd-content > a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  margin-bottom: 15px;
+}
