@@ -1,0 +1,57 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/basic_form.css' %}">
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:categories' %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block content %}
+{{ form.non_field_errors }}
+<form class='category-form' id='category-form' method="POST">{% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th colspan=3>
+          {% if add %}
+          <h1>Add new category</h1>
+          {% else %}
+          <h1>Edit category</h1>
+          {% endif %}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ form.name.label_tag }}</td>
+        <td>{{ form.name }}</td>
+        <td>{{ form.name.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.description.label_tag }}</td>
+        <td>{{ form.description }}</td>
+        <td>{{ form.description.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.budget.label_tag }}</td>
+        <td>{{ form.budget }}</td>
+        <td>{{ form.budget.errors }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class='save-button' type="submit" name="save" value="Save category"></td>
+        {% if add == False %}
+        <td><a class='delete-button' href="{% url 'finances:delete_category' form.instance.id %}">Delete category</a></td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+  <div class='hidden'>{{ form.is_income }}</div>
+  <div class='hidden'>{{ form.specification_of}}</div>
+</form>
+{{ form.errors }}
+{% endblock %}

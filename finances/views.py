@@ -12,6 +12,8 @@ def home(request):
     context = None
     return render(request, "finances/home.html", context)
 
+### TRANSACTION VIEWS ###
+
 @user_passes_test(lambda u: u.is_superuser)
 def transactions(request, year=date.today().year, month=date.today().month):
     year = int(year)
@@ -74,15 +76,69 @@ def delete_transaction(request, number):
     m.Transactions.objects.get(id=number).delete()
     return redirect('finances:transactions')
 
-@user_passes_test(lambda u: u.is_superuser)
-def categories(request):
-    context = None
-    return render(request, "finances/home.html", context)
+### CATEGORIES VIEWS ###
 
 @user_passes_test(lambda u: u.is_superuser)
-def balance(request):
-    context = None
-    return render(request, "finances/home.html", context)
+def categories(request):
+    categories = m.Categories.objects.filter(specification_of__isnull=True)
+    context = {
+        'categories': categories,
+    }
+    return render(request, "finances/categories.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def category(request, number):
+    errors = False
+    if request.method == 'POST':
+        form = f.CategoryForm(request.POST, instance=m.Categories.objects.get(id=number))
+        if form.is_valid():
+            form.save()
+            return redirect('finances:categories')
+        else:
+            errors = True
+    if errors == False:
+        form = f.CategoryForm(instance=m.Categories.objects.get(id=number))
+    context = {
+        'form': form,
+        'add': False
+    }
+    return render(request, "finances/category.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def add_category(request, is_income, specification_of=None):
+    errors = False
+    if request.method == 'POST':
+        form = f.CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('finances:categories')
+        else:
+            errors = True
+    is_income = True if is_income == '1' else False
+    if errors == False:
+        form = f.CategoryForm(initial={'is_income': is_income, 'specification_of': specification_of})
+    context = {
+        'form': form,
+        'add': True
+    }
+    return render(request, "finances/category.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def delete_category(request, number):
+    m.Categories.objects.get(id=number).delete()
+    return redirect('finances:categories')
+
+### BALANCE VIEWS ###
+
+@user_passes_test(lambda u: u.is_superuser)
+def balance(request, year=date.today().year):
+    balances = m.Balances.objects.filter(date)
+    context = {
+        'balances': balances
+    }
+    return render(request, "finances/balance.html", context)
+
+### SEARCh TERMS VIEWS ###
 
 @user_passes_test(lambda u: u.is_superuser)
 def search_terms(request):

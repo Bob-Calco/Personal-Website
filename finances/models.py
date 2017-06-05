@@ -17,13 +17,19 @@ class Transactions(models.Model):
     specification = models.ForeignKey('Categories', related_name='transaction_specification')
 
 class Balances(models.Model):
-    date = models.DateTimeField()
-    assets = models.DecimalField(max_digits=9, decimal_places=2)
-    liabilities = models.DecimalField(max_digits=9, decimal_places=2)
-    details = models.TextField()
+    item = models.ForeignKey('BalanceItems', related_name='balances_balance_items')
+    date = models.DateField()
+    amount = models.DecimalField(max_digits=9, decimal_places=2)
 
     def __str__(self):
-        return str(self.date)
+        return str(self.date) + " " + str(self.item.name)
+
+class BalanceItems(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    asset = models.BooleanField()
+
+    def __str__(self):
+        return self.name
 
 class SearchTerms(models.Model):
     search_term = models.CharField(max_length=200)
@@ -32,7 +38,7 @@ class SearchTerms(models.Model):
     specification = models.ForeignKey('Categories', related_name='search_term_specification')
 
     def __str__(self):
-        return search_term
+        return self.search_term
 
 class UnprocessedTransactions(models.Model):
     payload = models.TextField()

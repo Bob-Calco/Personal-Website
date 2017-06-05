@@ -1,0 +1,30 @@
+.category-table {
+  margin: 15px;
+  max-width: 1000;
+  border-collapse: collapse;
+}
+.category-table > thead th {
+  text-align: left;
+  color: white;
+  background-color: blue;
+  padding: 15px 10px;
+}
+.category-table > tbody > tr > td:nth-child(1) {
+  width: 100px;
+  vertical-align: top;
+  padding: 10px 10px;
+  background-color: lightblue;
+}
+.category-table > tbody > tr > td:nth-child(2) {
+  width: 150px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.specification-table, .specification-table > tbody, .specification-table tr {
+  display: block;
+}
+.specification-table td {
+  padding: 5px 10px;
+}

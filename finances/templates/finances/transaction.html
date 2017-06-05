@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/transaction.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/basic_form.css' %}">
 <script src="{% static 'finances/js/transaction.js' %}"></script>
 <script>var category_data = JSON.parse('{{ category_data | escapejs }}');</script>
 {% endblock %}
@@ -51,9 +51,9 @@
       </tr>
       <tr>
         <td></td>
-        <td><input class='transaction-save-button' type="submit" name="save" value="Save transaction"></td>
+        <td><input class='save-button' type="submit" name="save" value="Save transaction"></td>
         {% if add == False %}
-        <td><a class='transaction-delete-button' href="{% url 'finances:delete_transaction' form.instance.id %}">Delete transaction</a></td>
+        <td><a class='delete-button' href="{% url 'finances:delete_transaction' form.instance.id %}">Delete transaction</a></td>
         {% endif %}
       </tr>
     </tbody>
