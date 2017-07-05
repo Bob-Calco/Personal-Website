@@ -13,7 +13,38 @@
 {% block content %}
 
 <table class='balance-table'>
-
+  <thead>
+    <tr>
+      <th></th>
+      <th>Assets</th>
+      <th class="spec"></th>
+      <th class="spec"></th>
+      <th class="spec"></th>
+      <th>Liabilities</th>
+      <th class="spec"></th>
+    </tr>
+    <tr>
+      <th>{{ year }}</th>
+      <th>Total</th>
+      <th class="spec">Cash</th>
+      <th class="spec">Checking</th>
+      <th class="spec">Saving</th>
+      <th>Total</th>
+      <th class="spec">Study debt</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in data %}
+    <tr>
+      {% for b in i %}
+      <td>
+        <a href="{% url 'finances:balance_edit' year forloop.parentloop.counter %}">{{ b }}</a>
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+
 
   {% endblock %}

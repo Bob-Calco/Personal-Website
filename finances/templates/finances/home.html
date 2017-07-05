@@ -21,7 +21,7 @@
 
   <div class="home-button">
     <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:balance' %}">Balance</a>
+    <a href="{% url 'finances:default_balance' %}">Balance</a>
   </div>
 
   <div class="home-button">
@@ -32,6 +32,11 @@
   <div class="home-button">
     <canvas height=100px width=100px></canvas>
     <a href="{% url 'finances:add_transaction' %}">Add transaction</a>
+  </div>
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:default_year_table' %}">Year table</a>
   </div>
 
 </div>

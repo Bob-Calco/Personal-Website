@@ -1,0 +1,62 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/balance-edit.css' %}">
+<script src="{% static 'finances/js/balance-edit.js' %}"></script>
+<script>var year = "{{ year }}"; var month = "{{ monthnumber }}"</script>
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:balance' year %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<h2>Edit balance of {{ month }} {{ year }}</h2>
+
+{{ forms.non_form_errors }}
+{% for dict in forms.errors %}
+    {% for error in dict.values %}
+        {{ error }}
+    {% endfor %}
+{% endfor %}
+{% for form in forms %}
+    {{ form.non_field_errors }}
+{% endfor %}
+<form id="balance-form" method="post" onsubmit=presubmitCheck()>{% csrf_token %}
+  {{ forms.management_form }}
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Amount</th>
+      <tr>
+    </thead>
+    <tbody>
+      {% for form in forms %}
+      <tr class='marker'>
+        <td>{{ form.item }}</td>
+        <td>{{ form.amount }}</td>
+        <td class='hidden'>{{ form.id }}</td>
+        <td class='hidden'>{{ form.DELETE }}</td>
+        <td class='hidden'>{{ form.date }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <input type='submit' value='Save balance'>
+</form>
+
+<table class="empty-form">
+  <tr id='empty_balanceform'>
+    <td>{{ forms.empty_form.item }}</td>
+    <td>{{ forms.empty_form.amount }}</td>
+    <td class='hidden'>{{ forms.empty_form.id }}</td>
+    <td class='hidden'>{{ forms.empty_form.DELETE }}</td>
+    <td class='hidden'>{{ forms.empty_form.date }}</td>
+  </tr>
+</table>
+
+{% endblock %}

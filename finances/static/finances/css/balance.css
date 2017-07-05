@@ -1,0 +1,31 @@
+table {
+	margin: 30px;
+	border-collapse: collapse;
+}
+tr:nth-child(1) > th {
+	background-color: blue;
+	color: white;
+	padding: 10px;
+}
+tr:nth-child(2) > th {
+	background-color: lightblue;
+	padding: 10px;
+}
+th.spec {
+	font-weight: normal;
+	padding: 5px;
+	font-size:0.8em;
+}
+td.spec {
+	padding: 5px;
+	font-size: 0.8em;
+}
+tbody > tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+tbody td {
+	padding: 10px;
+}
+td:not(:first-child) {
+	text-align: right;
+}

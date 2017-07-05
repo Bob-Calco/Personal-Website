@@ -1,0 +1,39 @@
+.year-list {
+	list-style-type: none;
+}
+.year-list > li {
+	display: inline;
+	padding: 10px;
+	border: 2px solid blue;
+	border-radius: 5px 5px 0 0;
+}
+
+table {
+	margin: 20px 25px;
+	border-collapse: collapse;
+}
+
+th {
+	padding: 10px 15px;
+	width: 80px;
+}
+td {
+	text-align: right;
+	padding: 10px 15px;
+}
+
+thead > tr {
+	background-color: blue;
+	color: white;
+}
+td:nth-child(1){
+	font-style: italic;
+	background-color: lightblue;
+	padding: 10px 15px;
+}
+td:last-child {
+	background-color: #f2f2f2;
+}
+tfoot td {
+	background-color: lightblue;
+}
