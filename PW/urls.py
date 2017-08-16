@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^projects/', views.projects, name='projects'),
     url(r'^memory/', views.memory, name='memory'),
     url(r'^encryption/', views.encryption, name='encryption'),
+    url(r'^ws_nn/', views.ws_nn, name='ws_nn'),
 ]

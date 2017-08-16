@@ -1,0 +1,29 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'projectsunset/css/home.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>Project SunSet</title>
+  </head>
+  <body>
+    <div class="title">
+      <h1>Project SunSet</h1>
+      <h2>Automating life away<span>by Bob Luursema</span></h2>
+    </div>
+    <div class="apps">
+      <a class="app" href="{% url 'groceries:home' %}">
+        <div>
+          <h3>Groceries</h3>
+          <p>Tired of choosing what to eat?</p>
+        </div>
+      </a>
+      <a class="app" href="{% url 'finances:home' %}">
+        <div>
+          <h3>Finances</h3>
+          <p>In control of money</p>
+        </div>
+      </a>
+    </div>
+  </body>
+</html>

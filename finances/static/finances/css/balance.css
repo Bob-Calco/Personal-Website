@@ -6,6 +6,7 @@ tr:nth-child(1) > th {
 	background-color: blue;
 	color: white;
 	padding: 10px;
+	text-align: left;
 }
 tr:nth-child(2) > th {
 	background-color: lightblue;
@@ -16,9 +17,22 @@ th.spec {
 	padding: 5px;
 	font-size:0.8em;
 }
+td > a {
+	color: black;
+	text-decoration: none;
+}
+td:first-child {
+	background-color: lightblue;
+}
 td.spec {
 	padding: 5px;
 	font-size: 0.8em;
+}
+tbody > tr {
+	transition: background-color 0.5s;
+}
+tbody > tr:hover {
+	background-color: lightblue !important;
 }
 tbody > tr:nth-child(even) {
 	background-color: #f2f2f2;

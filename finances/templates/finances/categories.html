@@ -34,14 +34,14 @@
             {% for specification in category.category_specification.all %}
             <tr><td><a href="{% url 'finances:category' specification.id %}">{{ specification.name }}</a></td></tr>
             {% endfor %}
-            <tr><td><a href="{% url 'finances:add_specification' 1 category.id %}">Add specification</a></td></tr>
+            <tr><td><a href="{% url 'finances:add_specification' 1 category.id %}">&#8853;</a></td></tr>
           </tbody>
         </table>
       </td>
     </tr>
     {% endif %}
     {% endfor %}
-    <tr><td><a href="{% url 'finances:add_category' 1 %}">Add category</a></td></tr>
+    <tr><td><a href="{% url 'finances:add_category' 1 %}">&#8853;</a></td></tr>
   </tbody>
 </table>
 
@@ -63,14 +63,14 @@
             {% for specification in category.category_specification.all %}
             <tr><td><a href="{% url 'finances:category' specification.id %}">{{ specification.name }}</a></td></tr>
             {% endfor %}
-            <tr><td><a href="{% url 'finances:add_specification' 0 category.id %}">Add specification</a></td></tr>
+            <tr><td><a href="{% url 'finances:add_specification' 0 category.id %}">&#8853;</a></td></tr>
           </tbody>
         </table>
       </td>
     </tr>
     {% endif %}
     {% endfor %}
-    <tr><td><a href="{% url 'finances:add_category' 0 %}">Add category</a></td></tr>
+    <tr><td><a href="{% url 'finances:add_category' 0 %}">&#8853;</a></td></tr>
   </tbody>
 </table>
 

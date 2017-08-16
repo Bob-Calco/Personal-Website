@@ -32,13 +32,22 @@ class BalanceItems(models.Model):
         return self.name
 
 class SearchTerms(models.Model):
-    search_term = models.CharField(max_length=200)
-    search_field = models.CharField(max_length=50)
+    dataset = models.ForeignKey('Dataset', related_name='search_term_dataset')
+    term = models.CharField(max_length=200)
+    field = models.CharField(max_length=50)
     category = models.ForeignKey('Categories', related_name='search_term_category')
     specification = models.ForeignKey('Categories', related_name='search_term_specification')
 
     def __str__(self):
         return self.search_term
+
+class Dataset(models.Model):
+    name = models.CharField(max_length=20)
+    date_field = models.CharField(max_length=20)
+    amount_field = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
 
 class UnprocessedTransactions(models.Model):
     payload = models.TextField()

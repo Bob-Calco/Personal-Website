@@ -16,21 +16,18 @@
   <thead>
     <tr>
       <th></th>
-      <th>Assets</th>
-      <th class="spec"></th>
-      <th class="spec"></th>
-      <th class="spec"></th>
-      <th>Liabilities</th>
-      <th class="spec"></th>
+      <th colspan="{{ a_len }}">Assets</th>
+      <th colspan="{{ l_len }}">Liabilities</th>
     </tr>
     <tr>
       <th>{{ year }}</th>
-      <th>Total</th>
-      <th class="spec">Cash</th>
-      <th class="spec">Checking</th>
-      <th class="spec">Saving</th>
-      <th>Total</th>
-      <th class="spec">Study debt</th>
+      {% for item in items %}
+        {% if item.1 == False %}
+          <th>{{ item.0 }}</th>
+        {% else %}
+          <th class="spec">{{ item.0 }}</th>
+        {% endif %}
+      {% endfor %}
     </tr>
   </thead>
   <tbody>

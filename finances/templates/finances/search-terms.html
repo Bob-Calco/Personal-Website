@@ -1,0 +1,43 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/search-terms.css' %}">
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block dropdown-menu %}
+<a href="{% url 'finances:add_search_term' %}">Add search term</a>
+{% endblock %}
+
+{% block content %}
+
+<table>
+  <thead>
+    <tr>
+      <th>Dataset</th>
+      <th>Term</th>
+      <th>Field</th>
+      <th>Category</th>
+      <th>Specification</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in data %}
+    <tr>
+      <td>{{ d.dataset }}</td>
+      <td><a href="{% url 'finances:search_term' d.id %}">{{ d.term }}</a></td>
+      <td>{{ d.field }}</td>
+      <td>{{ d.category }}</td>
+      <td>{{ d.specification }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

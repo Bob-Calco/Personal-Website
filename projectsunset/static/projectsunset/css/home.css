@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  background-color: #000019;
+  color: white;
+}
+
+.title {
+  position: absolute;
+  left: 150px;
+  top: 30%;
+}
+.apps {
+  position: absolute;
+  left: 150px;
+  top: 60%;
+}
+
+.title > h1 {
+  font-family: 'Titillium Web', sans-serif;
+  letter-spacing: 4px;
+  font-size: 3em;
+  margin: 0;
+}
+.title > h2 {
+  font-family: 'Titillium Web', sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.8em;
+  margin: 0;
+}
+.title > h2 > span {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 2px;
+  margin-left: 10px;
+}
+
+.app {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  transition: background-color 1.2s, color 1.2s;
+  display: block;
+  color: white;
+}
+.app h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  letter-spacing: 1px;
+  margin: 0;
+  padding-bottom: 10px;
+}
+.app p {
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.app:hover {
+  background-color: white;
+  color: #000019;
+}

@@ -6,6 +6,8 @@ from .models import *
 from .encryption import *
 
 # Create your views here.
+def ws_nn(request):
+    return render(request, "PW/WS_NN.html", {})
 
 def home(request):
     context = {

@@ -22,3 +22,8 @@ class BalanceForm(forms.ModelForm):
         fields = ['date', 'item', 'amount']
 
 BalanceFormSet = modelformset_factory(m.Balances, can_delete=True, fields=('date', 'item', 'amount'), extra=1)
+
+class SearchTermForm(forms.ModelForm):
+    class Meta:
+        model = m.SearchTerms
+        fields = ['dataset', 'term', 'field', 'category', 'specification']

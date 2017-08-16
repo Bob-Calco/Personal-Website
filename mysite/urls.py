@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^scrum/', include('scrum.urls')),
     url(r'^finances/', include('finances.urls')),
     url(r'^support/', include('support.urls')),
-    url(r'^accounts/', include('django.contrib.auth.urls'))
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^pss/', include('projectsunset.urls')),
 ]

@@ -23,6 +23,9 @@ urlpatterns = [
   url(r'^balance/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.balance_edit, name='balance_edit'),
 
   url(r'^searchterms/$', views.search_terms, name="search_terms"),
+  url(r'^searchterms/(?P<pk>[0-9]+)/$', views.search_term, name='search_term'),
+  url(r'^searchterms/add/$', views.search_term, name='add_search_term'),
+  url(r'^searchterms/(?P<pk>[0-9]+)/delete/$', views.delete_search_term, name='delete_search_term'),
 
   url(r'^year-table/$', views.year_table, name="default_year_table"),
   url(r'^year-table/(?P<year>[0-9]{4})/$', views.year_table, name="year_table"),

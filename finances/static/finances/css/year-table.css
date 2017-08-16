@@ -11,11 +11,13 @@
 table {
 	margin: 20px 25px;
 	border-collapse: collapse;
+	table-layout: fixed;
+	width: 90%;
+	max-width: 1300px;
 }
 
 th {
 	padding: 10px 15px;
-	width: 80px;
 }
 td {
 	text-align: right;
