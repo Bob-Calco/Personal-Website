@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  // When the document is ready, make two global elements containing the selects
   document.getElementById('id_category').onchange = change_specifications;
   var options = document.getElementById('id_category').children;
   for(var i = options.length-1; i > 0; i--){

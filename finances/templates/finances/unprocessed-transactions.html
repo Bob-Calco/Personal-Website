@@ -1,0 +1,89 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/unprocessed-transactions.css' %}">
+<script>var category_data = JSON.parse('{{ category_data | escapejs }}');</script>
+<script src="{% static 'finances/js/unprocessed-transactions.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+{% for d in data %}
+<table class="to_process">
+  {% for item in d %}
+    {% if forloop.first %}
+    <thead>
+      <tr>
+        {% for i in item.payload %}
+        <th onclick="hideColumn()">{{ i }}</th>
+        {% endfor %}
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% endif %}
+      <tr id="{{ item.id }}">
+      {% for i, value  in item.payload.items %}
+        {% if forloop.first %}
+      <td onclick="processTransaction()">{{ value }}</td>
+        {% else %}
+      <td>{{ value }}</td>
+        {% endif %}
+      {% endfor %}
+      <td><button type="button" onclick="deleteItem({{ item.id }})" data-ajax-target>Delete</button></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endfor %}
+
+<div class="add_transaction hidden" id="add_transaction">
+  <span onclick="closeForm()" id="close_form">[x]</span>
+  <form onsubmit="submitTransaction()" class='transaction-form' id="transaction-form" method="POST">{% csrf_token %}
+    <table>
+      <thead>
+        <tr>
+          <th colspan=2>
+            <h1>Add new transaction</h1>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ form.date.label_tag }}</td>
+          <td>{{ form.date }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.amount.label_tag }}</td>
+          <td>{{ form.amount }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.category.label_tag }}</td>
+          <td>{{ form.category }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.specification.label_tag }}</td>
+          <td>{{ form.specification }}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input class='save-button' type="submit" name="save" value="Save transaction"></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<script type="text/javascript">
+var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
+
+
+
+{% endblock %}

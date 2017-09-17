@@ -27,3 +27,12 @@ class SearchTermForm(forms.ModelForm):
     class Meta:
         model = m.SearchTerms
         fields = ['dataset', 'term', 'field', 'category', 'specification']
+
+class DatasetForm(forms.ModelForm):
+    class Meta:
+        model = m.Datasets
+        fields = ['name', 'date_field', 'amount_field']
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()
+    dataset = forms.ModelChoiceField(queryset=m.Datasets.objects.all())

@@ -1,0 +1,20 @@
+{% extends "pj/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'pj/css/directions.css' %}">
+<script src="{% static 'pj/js/directions.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<section>
+  <h2>Routebeschrijving</h2>
+  <div id="map"></div>
+</section>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0FGgxsN9ecyrxQL2SqaYOOEVygphctqY&callback=initMap">
+</script>
+
+{% endblock %}
