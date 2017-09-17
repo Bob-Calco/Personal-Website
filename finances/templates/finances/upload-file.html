@@ -1,0 +1,44 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/basic-form.css' %}">
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+{{ form.non_field_errors }}
+<form method='post' enctype="multipart/form-data">{% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th colspan=3>
+          <h1>Upload File</h1>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ form.file.label_tag }}</td>
+        <td>{{ form.file }}</td>
+        <td>{{ form.file.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.dataset.label_tag }}</td>
+        <td>{{ form.dataset }}</td>
+        <td>{{ form.dataset.errors }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class='save-button' type="submit" name="save" value="Submit"></td>
+        <td></td>
+    </tbody>
+  </table>
+</form>
+
+{% endblock %}

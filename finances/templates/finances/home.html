@@ -39,5 +39,20 @@
     <a href="{% url 'finances:default_year_table' %}">Year table</a>
   </div>
 
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:datasets' %}">Datasets</a>
+  </div>
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:upload_file' %}">Upload File</a>
+  </div>
+
+  <div class="home-button">
+    <canvas height=100px width=100px></canvas>
+    <a href="{% url 'finances:unprocessed_transactions' %}">Unprocessed Transactions</a>
+  </div>
+
 </div>
 {% endblock content %}

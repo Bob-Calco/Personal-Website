@@ -3,13 +3,16 @@ import finances.models as m
 import finances.forms as f
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.db import connection
 from django.db.models import Sum
 from datetime import date
+from io import TextIOWrapper
+import ast
 
 import finances.database as db
+import finances.parse_file as parse_file
 
 @user_passes_test(lambda u: u.is_superuser)
 def home(request):
@@ -202,9 +205,107 @@ def delete_search_term(request, pk):
     m.SearchTerms.objects.get(id=pk).delete()
     return redirect('finances:search_terms')
 
+### SEARCH TERM DATASET VIEWS ###
+
+@user_passes_test(lambda u: u.is_superuser)
+def datasets(request):
+    data = m.Datasets.objects.all()
+    context = {
+        'data': data
+    }
+    return render(request, "finances/datasets.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def dataset(request, pk=None):
+    errors = False
+    if request.method == "POST":
+        if pk != None:
+            form = f.DatasetForm(request.POST, instance=m.Datasets.objects.get(id=pk))
+        else:
+            form = f.DatasetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('finances:datasets')
+        else:
+            errors = True
+
+    add = False if pk != None else True
+    if errors == True:
+        pass
+    elif pk == None:
+        form = f.DatasetForm()
+    else:
+        form = f.DatasetForm(instance=m.Datasets.objects.get(id=pk))
+
+    context = {
+        'form': form,
+        'add': add,
+    }
+    return render(request, "finances/dataset.html", context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def delete_dataset(request, pk):
+    m.Datasets.objects.get(id=pk).delete()
+    return redirect('finances:datasets')
+
 ### YEAR TABLE VIEWS ###
 
 @user_passes_test(lambda u: u.is_superuser)
 def year_table(request, year=date.today().year):
     context = db.simple_year_table(year)
     return render(request, "finances/year-table.html", context)
+
+### PROCESS UPLOADED FILE ###
+
+@user_passes_test(lambda u:u.is_superuser)
+def upload_file(request):
+    if request.method == 'POST':
+        form = f.UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = TextIOWrapper(request.FILES['file'].file, encoding='utf-8', errors='replace')
+            parse_file.parse(file, form.cleaned_data['dataset'])
+            return redirect('finances:home')
+    else:
+        form = f.UploadFileForm()
+    return render(request, 'finances/upload-file.html', {'form': form})
+
+@user_passes_test(lambda u:u.is_superuser)
+def process_unprocessed_transactions(request):
+    datasets = m.UnprocessedTransactions.objects.values('dataset').distinct()
+    data = []
+    for dataset in datasets:
+        dataset = dataset['dataset']
+        raw_data = m.UnprocessedTransactions.objects.filter(dataset=dataset)
+        da = []
+        for d in raw_data:
+            da.append({'id': d.id, 'payload': ast.literal_eval(d.payload)})
+        data.append(da)
+    form = f.TransactionForm()
+
+    category_data = json.dumps(db.categories())
+
+    context = {
+        'data': data,
+        'form': form,
+        'category_data': category_data
+    }
+
+    return render(request, 'finances/unprocessed-transactions.html', context)
+
+@user_passes_test(lambda u:u.is_superuser)
+def delete_unprocessed_transaction(request, pk):
+    m.UnprocessedTransactions.objects.get(id=pk).delete()
+    data = {
+        'deleted': True
+    }
+    return JsonResponse(data)
+
+@user_passes_test(lambda u:u.is_superuser)
+def process_transaction(request):
+    if request.method == "POST":
+        form = f.TransactionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'saved': True})
+        else:
+            return JsonResponse({'saved': False})

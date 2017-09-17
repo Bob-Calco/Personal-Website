@@ -1,0 +1,80 @@
+{% extends "pj/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'pj/css/signup.css' %}">
+<script src="{% static 'pj/js/signup.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<section>
+  <h2>Aanmelden voor de reunie</h2>
+  <p>Gezellig dat je ook wil komen!</p>
+
+  <form id="signup-form" onsubmit="button.disabled = true;" method="POST">{% csrf_token %}
+    <table>
+      <tbody>
+        <tr>
+          <td>Voornaam</td>
+          <td>{{ form.first_name }} </td>
+          <td>{{ form.first_name.errors }}</td>
+        </tr>
+        <tr>
+          <td>Achternaam</td>
+          <td>{{ form.last_name }}</td>
+          <td>{{ form.last_name.errors }}</td>
+        </tr>
+        <tr>
+          <td>Meisjesnaam</td>
+          <td>{{ form.maiden_name }}</td>
+          <td>{{ form.maiden_name.errors }}</td>
+        </tr>
+        <tr>
+          <td>Geboortedatum</td>
+          <td>{{ form.date_of_birth }}</td>
+          <td>{{ form.date_of_birth.errors }}</td>
+        </tr>
+        <tr>
+          <td>Emailadres</td>
+          <td>{{ form.email }}</td>
+          <td>{{ form.email.errors }}</td>
+        </tr>
+        <tr>
+          <td>Rol</td>
+          <td>{{ form.role }}</td>
+          <td>{{ form.role.errors }}</td>
+        </tr>
+        <tr>
+          <td>Je eerste jaar op de PJ</td>
+          <td>{{ form.start_date }}</td>
+          <td>{{ form.start_date.errors }}</td>
+        </tr>
+        <tr>
+          <td>Je laatste jaar op de PJ</td>
+          <td>{{ form.end_date }}</td>
+          <td>{{ form.end_date.errors }}</td>
+        </tr>
+        <tr id="last_class">
+          <td>Laatste klas waar je in zat</td>
+          <td>{{ form.last_class }}</td>
+          <td>{{ form.last_class.errors }}</td>
+        </tr>
+        <tr id="class_change">
+          <td>Heb je een klas overgeslagen<br>of ben je blijven zitten?</td>
+          <td>{{ form.class_change }}</td>
+          <td>{{ form.class_change.errors }}</td>
+        </tr>
+        <tr id="class_change_year">
+          <td>Welke klas?</td>
+          <td>{{ form.class_change_year }}</td>
+          <td>{{ form.class_change_year.errors }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <input class='submit-button' type="submit" name="button" value="Aanmelden">
+  </form>
+</section>
+
+{% endblock %}

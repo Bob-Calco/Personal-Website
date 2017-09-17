@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <title>PJubeljaar</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'pj/css/base.css' %}">
+  <script src="{% static 'pj/js/base.js' %}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+
+  <header>
+    <h1>PJubeljaar</h1>
+    <nav>
+      <ul>
+        <li><a href="{% url 'pj:home' %}">Home</a></li>
+        <li><a href="{% url 'pj:schedule' %}">Programma</a></li>
+        <li><a href="{% url 'pj:signup' %}">Aanmelden</a></li>
+        <li><a href="{% url 'pj:view_turnout' %}">Opkomst</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  {% block content %}
+  {% endblock %}
+
+  <footer>
+    <p>Made by <a href="http://www.bob-luursema.nl/">Bob Luursema</a><p>
+  </footer>
+
+</body>
+
+</html>

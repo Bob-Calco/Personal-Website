@@ -1,0 +1,37 @@
+section h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+section p {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+#signup-form {
+  margin-bottom: 100px;
+}
+#signup-form table {
+  margin:auto;
+}
+#signup-form td {
+  padding-bottom: 10px;
+}
+#signup-form td:first-child {
+  text-align: right;
+  padding-right: 10px;
+  width: 50%
+}
+#signup-form td:nth-child(2) > * {
+  width: 150px;
+}
+#signup-form td:nth-child(3) {
+  color: red;
+}
+.submit-button {
+  margin: auto;
+  display: block;
+  width: 200px;
+  height: 50px;
+  margin-top: 50px
+}

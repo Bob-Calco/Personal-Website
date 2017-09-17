@@ -1,0 +1,39 @@
+{% extends "finances/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'finances/css/datasets.css' %}">
+{% endblock %}
+
+{% block header %}
+<a class="prev" href="{% url 'finances:search_terms' %}">&#10094;</a> {{ block.super }}
+{% endblock %}
+
+{% block dropdown-menu %}
+<a href="{% url 'finances:add_dataset' %}">Add dataset</a>
+{% endblock %}
+
+{% block content %}
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date Field</th>
+      <th>Amount Field</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in data %}
+    <tr>
+      <td><a href="{% url 'finances:dataset' d.id %}">{{ d.name }}</a></td>
+      <td>{{ d.date_field }}</td>
+      <td>{{ d.amount_field }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

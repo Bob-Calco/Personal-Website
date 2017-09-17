@@ -1,0 +1,29 @@
+h2 {
+  text-align: center;
+}
+table {
+  margin: auto;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+thead tr:nth-child(2) th {
+  font-weight: normal;
+}
+th {
+  background-color: lightgreen;
+  text-align: left;
+  padding: 15px;
+}
+th:first-child {
+  font-size: 1.5em;
+}
+tr:nth-child(even){
+  background-color: #f2f2f2
+}
+td {
+  padding: 10px;
+}
+td:first-child {
+  padding-right: 20px;
+  background-color: lightgreen;
+}

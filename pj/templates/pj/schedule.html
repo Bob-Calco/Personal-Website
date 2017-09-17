@@ -1,0 +1,21 @@
+{% extends "pj/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'pj/css/schedule.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+  <h2>Het programma van het jaar</h2>
+  <ul>
+    <li>Dingen gebeuren enzo</li>
+    <li>Reunie ding op 2 juni</li>
+    <li><a href="{% url 'pj:directions' %}">Routebeschrijving</a></li>
+  </ul>
+
+</section>
+
+{% endblock %}
