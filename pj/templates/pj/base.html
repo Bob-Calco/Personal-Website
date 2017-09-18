@@ -16,7 +16,8 @@
   <header>
     <h1>PJubeljaar</h1>
     <nav>
-      <ul>
+      <button onclick="toggleMenu()" type="button" class="menu-button">&#9776</button><br>
+      <ul id="nav-links">
         <li><a href="{% url 'pj:home' %}">Home</a></li>
         <li><a href="{% url 'pj:schedule' %}">Programma</a></li>
         <li><a href="{% url 'pj:signup' %}">Aanmelden</a></li>
