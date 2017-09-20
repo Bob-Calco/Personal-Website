@@ -9,4 +9,6 @@ urlpatterns = [
  url(r'^aanmelden/$', views.signup, name='signup'),
  url(r'^opkomst/$', views.view_turnout, name='view_turnout'),
  url(r'^routebeschrijving/$', TemplateView.as_view(template_name='pj/directions.html'), name='directions'),
+ url(r'^aanmeldingen/$', views.list_of_attendees, name="list_of_attendees"),
+ url(r'^aanmeldingen/download/$', views.export_attendees, name="download_attendees"),
 ]

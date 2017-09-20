@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.db import connection
 import pj.forms as f
 import pj.models as m
+import csv
 
 def signup(request):
     if request.method == "POST":
@@ -30,7 +32,7 @@ def view_turnout(request):
                 for row in result:
                     if row[0] == 'ST':
                         d[1] = row[1]
-                    elif tup[0] == 'TE':
+                    elif row[0] == 'TE':
                         d[2] = row[1]
                     else:
                         ov += row[1]
@@ -40,3 +42,25 @@ def view_turnout(request):
         'data': data,
     }
     return render(request, "pj/view_turnout.html", context)
+
+@login_required
+def export_attendees(request):
+    attendees = m.Attendee.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="pjubeljaar_aanmeldingen.csv"'
+
+    writer = csv.writer(response, delimiter=';')
+    writer.writerow(['Voornaam', 'Achternaam', 'Meisjesnaam', 'Geboortedatum', 'Email', 'Rol', 'Startdatum', 'Einddatum', 'Laatste klas', 'Klas veranderd', 'Jaar veranderd', 'Aanmelddatum'])
+    for a in attendees:
+        writer.writerow([a.first_name, a.last_name, a.maiden_name, a.date_of_birth, a.email, a.role, a.start_date, a.end_date, a.last_class, a.class_change, a.class_change_year, a.created_timestamp])
+    return response
+
+@login_required
+def list_of_attendees(request):
+    attendees = m.Attendee.objects.all()
+    context = {
+        'total': len(attendees),
+        'attendees': attendees,
+    }
+    return render(request, "pj/list_of_attendees.html", context)

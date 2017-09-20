@@ -1,0 +1,50 @@
+{% extends "pj/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'pj/css/list_of_attendees.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h2>Aanmeldingen</h2>
+<h3>Totaal aanmeldingen: {{ total }}</h3>
+<div class="predownload">
+  <a href="{% url 'pj:download_attendees' %}" class="download">Download aanmeldingen</a>
+</div>
+<table class="attendees">
+  <thead>
+    <tr>
+      <th>Aanmelddatum</th>
+      <th>Naam</th>
+      <th>Geboortedatum</th>
+      <th>Email</th>
+      <th>Rol</th>
+      <th>Startjaar</th>
+      <th>Eindjaar</th>
+      <th>Laatste klas</th>
+      <th colspan="2">Klas veranderd</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for attendee in attendees %}
+    <tr>
+      <td>{{ attendee.created_timestamp }}</td>
+      <td>{{ attendee.first_name }} {{ attendee.last_name }}{% if attendee.maiden_name %}-{{ attendee.maiden_name }}{% endif %}</td>
+      <td>{{ attendee.date_of_birth }}</td>
+      <td>{{ attendee.email }}</td>
+      <td>{{ attendee.role }}</td>
+      <td>{{ attendee.start_date }}</td>
+      <td>{{ attendee.end_date }}</td>
+      {% if attendee.role == "ST" %}
+      <td>{{ attendee.last_class }}</td>
+      <td>{{ attendee.class_change }}</td>
+      <td>{{ attendee.class_change_year }}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

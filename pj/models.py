@@ -38,9 +38,9 @@ class Attendee(models.Model):
         ('K6', 'Klas 6'),
     )
 
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    maiden_name = models.CharField(max_length=5, null=True, blank=True)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=30)
+    maiden_name = models.CharField(max_length=30, null=True, blank=True)
     date_of_birth = models.DateField()
     email = models.EmailField()
     role = models.CharField(max_length=2, choices=ROLE_CHOICES)
