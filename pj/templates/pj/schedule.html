@@ -4,11 +4,19 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'pj/css/schedule.css' %}">
+<style>
+body {
+  background-image: linear-gradient(rgba(0,46,255,0.5), rgba(25,150,150,0.5)), url("{% static 'pj/img/pjubelgala.jpg' %}");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+</style>
 {% endblock %}
 
 {% block content %}
 
-<section>
+<section id="content">
   <h2>Het programma van het jaar</h2>
   <ul>
     <li>Dingen gebeuren enzo</li>

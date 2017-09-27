@@ -4,12 +4,19 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'pj/css/directions.css' %}">
-<script src="{% static 'pj/js/directions.js' %}"></script>
+<script src="{% static 'pj/js/directions.js' %}"></script><style>
+body {
+  background-image: linear-gradient(rgba(0,46,255,0.5), rgba(25,150,150,0.5)), url("{% static 'pj/img/gebouw_2.jpg' %}");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+</style>
 {% endblock %}
 
 {% block content %}
 
-<section>
+<section id="content">
   <h2>Routebeschrijving</h2>
   <div id="map"></div>
 </section>

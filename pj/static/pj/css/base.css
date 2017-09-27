@@ -13,8 +13,9 @@ body {
   display: none;
 }
 header {
-  background-color: lightgreen;
+  background-color: rbga(0,0,0,1);
   padding: 15px 30px;
+  text-align: center;
 }
 header > h1 {
   text-align: center;
@@ -23,16 +24,17 @@ header > h1 {
   font-size: 3em;
 }
 
-
 nav {
   text-align: center;
 }
 .menu-button {
   background: none;
-  border: 3px solid black;
+  border: 3px solid white;
   border-radius: 5px;
+  color: white;
   font-size: 1.5em;
   font-weight: bold;
+  margin-top: 20px;
 }
 nav > ul {
   text-align: center;
@@ -45,9 +47,8 @@ nav a {
   font-weight: bold;
   font-size: 1.2em;
   padding: 10px;
-  border: 4px solid black;
   border-radius: 20px;
-  color: black;
+  color: white;
   text-decoration: none;
 }
 @media only screen and (max-width: 549px){
@@ -75,17 +76,19 @@ nav a {
 
 
 footer {
-  background-color: lightgreen;
+  background-color: rbga(0,0,0,1);
   padding: 20px 20px;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 60px;
+  text-align: right;
 }
 footer p {
   padding: 0;
+  color: white;
 }
 footer a {
-  color: blue;
+  color: white;
 }

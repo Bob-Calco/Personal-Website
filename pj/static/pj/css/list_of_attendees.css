@@ -28,7 +28,7 @@ h3 {
   padding: 10px;
 }
 .attendees thead tr {
-  background-color: lightgreen;
+  background-color: #94C11F;
 }
 .attendees tbody tr:nth-child(even) {
   background-color: #f2f2f2;

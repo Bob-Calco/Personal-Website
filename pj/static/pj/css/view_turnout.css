@@ -1,9 +1,6 @@
 h2 {
   text-align: center;
-}
-div {
-  width: 90%;
-  max-width: 340px;
+  color: white;
 }
 table {
   margin: auto;
@@ -14,7 +11,7 @@ thead tr:nth-child(2) th {
   font-weight: normal;
 }
 th {
-  background-color: lightgreen;
+  background-color: #94C11F;
   text-align: left;
   padding: 10px;
 }
@@ -22,12 +19,24 @@ th:first-child {
   font-size: 1.5em;
 }
 tr:nth-child(even){
-  background-color: #f2f2f2
+  background-color: #e0e0e0
+}
+tr:nth-child(odd){
+  background-color: #ffffff
 }
 td {
   padding: 5px;
 }
 td:first-child {
   padding-right: 10px;
-  background-color: lightgreen;
+  background-color: #94C11F;
+}
+#table-wrapper {
+  position:relative;
+  text-align: center;
+}
+#table-scroll {
+  height: 500px;
+  overflow:auto;
+  display: inline-block;
 }

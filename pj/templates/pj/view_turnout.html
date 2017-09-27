@@ -4,35 +4,47 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'pj/css/view_turnout.css' %}">
+<style>
+body {
+  background-image: linear-gradient(rgba(0,46,255,0.5), rgba(25,150,150,0.5)), url("{% static 'pj/img/gebouw_2.jpg' %}");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+</style>
 {% endblock %}
 
 {% block content %}
 
-<section>
+<section id="content">
   <h2>Huidige aanmeldingen</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Jaar</th>
-        <th colspan="3">Aanmeldingen</th>
-      </tr>
-      <tr>
-        <th></th>
-        <th>Leerlingen</th>
-        <th>Leraren</th>
-        <th>Overig</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for d in data %}
-        <tr>
-          {% for x in d %}
-          <td>{{ x }}</td>
+  <div id="table-wrapper">
+    <div id="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Jaar</th>
+            <th colspan="3">Aanmeldingen</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Leerlingen</th>
+            <th>Leraren</th>
+            <th>Overig</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in data %}
+            <tr>
+              {% for x in d %}
+              <td>{{ x }}</td>
+              {% endfor %}
+            </tr>
           {% endfor %}
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 
 {% endblock %}
