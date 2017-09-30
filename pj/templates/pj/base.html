@@ -8,6 +8,31 @@
   <link rel="stylesheet" type="text/css" href="{% static 'pj/css/base.css' %}">
   <script src="{% static 'pj/js/base.js' %}"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#000"
+      },
+      "button": {
+        "background": "#f1d600"
+      }
+    },
+    "theme": "edgeless",
+    "position": "top",
+    "static": true,
+    "content": {
+      "message": "Deze website gebruikt cookies om te functioneren",
+      "dismiss": "Okay!",
+      "link": "Meer informatie"
+    }
+  })});
+  </script>
+
   {% block head %}{% endblock %}
 </head>
 
@@ -16,7 +41,7 @@
   <header>
     <img src="{% static 'pj/img/logo.png' %}" height="100px"/>
     <nav>
-      <button onclick="toggleMenu()" type="button" class="menu-button">&#9776</button><br>
+      <button id="mobileMenu" onclick="toggleMenu()" type="button" class="menu-button">&#9776</button><br>
       <ul id="nav-links">
         <li><a href="{% url 'pj:home' %}">Home</a></li>
         <li><a href="{% url 'pj:schedule' %}">Programma</a></li>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db import connection
+from django.contrib import messages
 import pj.forms as f
 import pj.models as m
 import csv
@@ -10,6 +11,7 @@ def signup(request):
         form = f.AttendeeForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Je bent aangemeld!')
             return redirect('pj:view_turnout')
     else:
         form = f.AttendeeForm()
@@ -38,8 +40,10 @@ def view_turnout(request):
                         ov += row[1]
                 d[3] = ov
             data.append(d)
+    total_signups = m.Attendee.objects.count()
     context = {
         'data': data,
+        'total_signups': total_signups
     }
     return render(request, "pj/view_turnout.html", context)
 

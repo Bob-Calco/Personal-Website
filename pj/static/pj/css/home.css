@@ -19,11 +19,11 @@ section p {
 }
 section a {
   color: black;
-  background-color: #94C11F;
+  background-color: rgba(148, 193, 31, 0.5);
   border: 4px solid black;
 }
 section a:hover {
-  background-color: darkgreen;
+  background-color: rgba(0, 100, 0, 0.5);
   color: white;
 }
 

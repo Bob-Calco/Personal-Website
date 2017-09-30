@@ -28,9 +28,7 @@ section p {
   padding-right: 10px;
   width: 50%
 }
-#signup-form td:nth-child(2) > * {
-  width: 150px;
-}
+
 #signup-form td:nth-child(3) {
   color: red;
 }
@@ -40,4 +38,24 @@ section p {
   width: 200px;
   height: 50px;
   margin-top: 50px
+}
+.left-align > * {
+  text-align: left;
+  width: auto !important;
+}
+.inline-block > * {
+  display: inline-block;
+  word-wrap:break-word;
+  max-width: 190px;
+}
+
+@media only screen and (max-width: 399px){
+  #signup-form td:nth-child(2) > * {
+    width: 100px;
+  }
+}
+@media only screen and (min-width: 400px){
+  #signup-form td:nth-child(2) > * {
+    width: 150px;
+  }
 }

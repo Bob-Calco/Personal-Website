@@ -4,6 +4,15 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'pj/css/list_of_attendees.css' %}">
+<style>
+body {
+  background-image: linear-gradient(rgba(0,46,255,0.5), rgba(25,150,150,0.5));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -41,11 +50,15 @@
         <td>{{ attendee.last_class }}</td>
         <td>{{ attendee.class_change }}</td>
         <td>{{ attendee.class_change_year }}</td>
+        {% else %}
+        <td></td>
+        <td></td>
+        <td></td>
         {% endif %}
       </tr>
       {% endfor %}
     </tbody>
   </table>
-</section
+</section>
 
 {% endblock %}

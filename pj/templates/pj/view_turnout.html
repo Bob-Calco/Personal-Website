@@ -18,7 +18,14 @@ body {
 {% block content %}
 
 <section id="content">
-  <h2>Huidige aanmeldingen</h2>
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <h2>Huidige aanmeldingen: {{ total_signups }}</h2>
   <div id="table-wrapper">
     <div id="table-scroll">
       <table>

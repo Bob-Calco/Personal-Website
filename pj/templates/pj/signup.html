@@ -80,6 +80,11 @@ body {
           <td>{{ form.class_change_year }}</td>
           <td>{{ form.class_change_year.errors }}</td>
         </tr>
+        <tr>
+          <td class='inline-block'>{{ form.terms.label_tag }}</td>
+          <td class='left-align'>{{ form.terms }}</td>
+          <td>{{ forms.terms.errors }}</td>
+        </tr>
       </tbody>
     </table>
     <input class='submit-button' type="submit" name="button" value="Aanmelden">
