@@ -1,0 +1,384 @@
+/* Setup CSS */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+.hidden {
+  display: none;
+}
+
+/* main grid layout */
+.right-side-bar {
+  height: 100vh;
+  position: fixed;
+  background-color: #222;
+  color: #bbb;
+  width: 11em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media only screen and (max-width: 1000px){
+    width: 3em;
+  }
+  .main-nav, .bottom-nav {
+    h1 {
+      font-size: 1.7em;
+      padding: 0.5em;
+      margin: 0;
+      text-align: center;
+      @media only screen and (max-width: 1000px){
+        display: none;
+      }
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: 1.2em;
+      color: #bbb;
+      padding: 0.5em;
+      transition: background-color 0.5s;
+    }
+    a:hover {
+      background-color: #444;
+    }
+    img {
+      height: 1.4em;
+      width: 1.4em;
+    }
+    span {
+      margin-left: 0.5em;
+    }
+  }
+  .main-nav {
+    li:first-child{
+      border-top: 2px solid #191919;
+    }
+    li {
+      border-bottom: 2px solid #191919;
+    }
+  }
+  .bottom-nav {
+    margin-bottom: 1em;
+  }
+}
+
+.main {
+  margin-left: 11em;
+  @media only screen and (max-width: 1000px){
+    margin-left: 3em;
+  }
+}
+.notification-sign {
+  color: darkred;
+}
+
+.desktop-only {
+  @media only screen and (max-width: 1000px){
+    display: none;
+  }
+}
+.tablet-up {
+  @media only screen and (max-width: 767px){
+    display: none;
+  }
+}
+
+/* standard thingies */
+.basic-form {
+  table {
+    background-color: white;
+    padding: 1em;
+    background-color: white;
+  }
+  table th {
+    text-align: left;
+  }
+  table h1 {
+    margin: 0;
+    vertical-align: middle;
+    @media only screen and (max-width: 500px){
+      font-size: 1.4em;
+    }
+  }
+  #form-close {
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: right;
+    padding-right: 1em;
+  }
+  table td:nth-child(1) {
+    text-align: right;
+  }
+  table label {
+    padding: 10px 5px;
+    font-size: 1.2em;
+    @media only screen and (max-width: 500px){
+      font-size: 0.9em;
+    }
+  }
+  table td:nth-child(2) > * {
+    width: 150px;
+    font-size: 1em;
+    padding: 10px;
+    @media only screen and (max-width: 500px){
+      width: 120px;
+      font-size: 0.7em;
+    }
+  }
+  .save-button {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    font-size: 1em;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+  }
+  .delete-button {
+    background-color: white;
+    border: none;
+    color: red;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  .errorlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      color: red;
+      padding: 10px 5px;
+    }
+  }
+}
+
+.basic-table {
+  margin: 20px 20px;
+  border-collapse: collapse;
+  thead > tr {
+    background-color: blue;
+    color: white;
+  }
+  th {
+    text-align: left;
+    padding: 8px 12px;
+  }
+  td {
+    padding: 5px 12px;
+    text-align: right;
+    &:first-child {
+      background-color: lightblue;
+      text-align: left;
+    }
+  }
+  tbody > tr:nth-child(even){
+    background: #f2f2f2;
+  }
+  tbody > tr:nth-child(odd){
+    background: #ffffff;
+  }
+  a {
+    color: black;
+  }
+}
+
+.page-header {
+  margin:0;
+  padding-top: 0.6em;
+  padding-left: 1em;
+}
+hr {
+  width: 95%;
+  margin: auto;
+}
+
+/* specific thingies */
+.empty-form {
+  display: none;
+}
+
+.transaction-tabs {
+  display:flex;
+  flex-direction: column;
+  .tabs {
+    display: flex;
+    list-style-type: none;
+    margin: 1em 1em;
+    display: inline-block;
+    padding: 0;
+    li {
+      display: inline-block;
+      margin-right: 0.4em;
+      margin-bottom: 0.4em;
+    }
+    a {
+      border: 4px solid blue;
+      border-radius: 10px 10px 0 0;
+      padding: 10px;
+      display: block;
+      background-color: white;
+      transition: background-color 0.5s;
+      text-decoration: none;
+      color: blue;
+      font-weight: bold;
+    }
+    .active {
+      background-color: lightblue;
+    }
+    a:hover {
+      background-color: lightblue;
+    }
+  }
+}
+.one-em-margin{
+  padding: 1em;
+}
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    color: white;
+    background-color: blue;
+    padding: 1em 0.5em;
+    text-align: left;
+  }
+  td {
+    padding: 0.2em 0.5em;
+    transition: background-color 0.5s;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  td:nth-child(2) {
+    text-align: right;
+    padding-right: 1em;
+  }
+}
+#popup-form {
+  right: 0;
+  left: 0;
+  margin: auto;
+  position: fixed;
+  top: 10%;
+  text-align: center;
+  form {
+    display: inline-block;
+    box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.8);
+  }
+}
+
+.category-table {
+  margin: 1em;
+  border-collapse: collapse;
+  display: inline-block;
+  vertical-align: top;
+  thead th {
+    text-align: left;
+    color: white;
+    background-color: blue;
+    padding: 1em 1em;
+  }
+  > tbody > tr > td:nth-child(1) {
+    width: 100px;
+    vertical-align: top;
+    padding: 1em 1em;
+    background-color: lightblue;
+  }
+  tbody > tr > td a {
+    color: black;
+    text-decoration: none;
+  }
+  tbody > tr > td:nth-child(2) {
+    width: 150px;
+  }
+  tr:last-child > td {
+    text-align: right;
+  }
+}
+
+.specification-table, .specification-table > tbody, .specification-table tr {
+  display: block;
+}
+.specification-table {
+  td {
+    padding: 0.5em 1em;
+  }
+  tr:last-child td {
+    display: block;
+    text-align: right;
+  }
+}
+
+.to_process {
+  margin: 15px;
+  border-collapse: collapse;
+
+  th {
+    color: white;
+    background-color: blue;
+    padding: 15px 10px;
+    text-align: left;
+  }
+  td {
+    padding: 5px 10px;
+  }
+  tr:nth-child(even){
+    background-color: #f2f2f2;
+  }
+}
+
+.special_add_transaction {
+  background: white;
+  padding: 0 25px 25px 25px;
+  position:fixed;
+  top: 50px;
+  left: 25%;
+  border: 3px solid black;
+  width: 380px;
+  span {
+    float: right;
+    padding: 5px;
+    margin-top: 30px;
+  }
+}
+
+.special_transaction-form {
+  display: inline-block;
+
+  th {
+    text-align: left;
+  }
+  td:nth-child(1) {
+    text-align: right;
+  }
+  label {
+    padding: 10px 5px;
+    font-size: 1.2em;
+  }
+  td:nth-child(2) > * {
+    width: 150px;
+    font-size: 1em;
+    padding: 10px;
+  }
+  .save-button {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    font-size: 1em;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+  }
+}

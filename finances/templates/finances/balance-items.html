@@ -1,0 +1,23 @@
+{% extends 'finances/base.html' %}
+{% load static %}
+
+{% block content %}
+<table class='basic-table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Asset</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in data %}
+    <tr>
+      <td><a href="{% url 'finances:edit_balance_item' i.id %}">{{ i.name }}</a></td>
+      <td>{{ i.asset }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<br>
+<a href="{% url 'finances:add_balance_item' %}">Add Balance Item</a>
+{% endblock %}

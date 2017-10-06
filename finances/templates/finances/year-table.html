@@ -7,10 +7,6 @@
 <script src="{% static 'finances/js/year-table.js' %}"></script>
 {% endblock %}
 
-{% block header %}
-<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
-{% endblock %}
-
 {% block content %}
 <ul class="year-list">
 	<li><a href="{% url 'finances:year_table' 2017 %}">2017</a></li>

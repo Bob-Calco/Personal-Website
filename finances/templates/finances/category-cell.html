@@ -1,0 +1,15 @@
+<td data-id="{{ category.id }}"
+    data-url="{% url 'finances:category' category.id %}">
+    {{ category.name }}
+</td>
+{% if category.specification_of == None %}
+<td>
+  <table class="specification-table">
+    <tbody>
+      <tr>
+        <td data-url="{% url 'finances:add_specification' is_income category.id %}">+</td>
+      </tr>
+    </tbody>
+  </table>
+</td>
+{% endif %}

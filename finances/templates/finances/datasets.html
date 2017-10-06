@@ -3,11 +3,6 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/datasets.css' %}">
-{% endblock %}
-
-{% block header %}
-<a class="prev" href="{% url 'finances:search_terms' %}">&#10094;</a> {{ block.super }}
 {% endblock %}
 
 {% block dropdown-menu %}
@@ -16,7 +11,7 @@
 
 {% block content %}
 
-<table>
+<table class='basic-table'>
   <thead>
     <tr>
       <th>Name</th>

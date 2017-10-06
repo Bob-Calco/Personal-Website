@@ -7,52 +7,36 @@
 {% endblock %}
 
 {% block content %}
-<div class="home-container">
 
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:default_transactions' %}">Transactions</a>
+<div class="home-report home-div">
+  <div>
+    <h2>Income Statement</h1>
+      <div class="home-income-statement">
+    <table class="basic-table">
+      <thead>
+        <tr>
+          {% for h in headers %}
+          <th>{{ h }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in data %}
+        <tr>
+          {% for c in d %}
+          <td>{{ c }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
   </div>
 
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:categories' %}">Categories</a>
+  <div>
+    <h2>Current balance</h2>
+    <span class='assets'>€ {{ assets }}</span>
   </div>
-
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:default_balance' %}">Balance</a>
-  </div>
-
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:search_terms' %}">Search Terms</a>
-  </div>
-
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:add_transaction' %}">Add transaction</a>
-  </div>
-
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:default_year_table' %}">Year table</a>
-  </div>
-
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:datasets' %}">Datasets</a>
-  </div>
-
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:upload_file' %}">Upload File</a>
-  </div>
-
-  <div class="home-button">
-    <canvas height=100px width=100px></canvas>
-    <a href="{% url 'finances:unprocessed_transactions' %}">Unprocessed Transactions</a>
-  </div>
-
 </div>
+
 {% endblock content %}

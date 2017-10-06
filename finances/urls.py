@@ -18,9 +18,16 @@ urlpatterns = [
   url(r'^category/add/(?P<is_income>[0-1])/(?P<specification_of>[0-9]+)/$', views.add_category, name='add_specification'),
   url(r'^category/(?P<number>[0-9]+)/delete/$', views.delete_category, name='delete_category'),
 
+  # CURRENT PROGRESS #
+
   url(r'^balance/$', views.balance, name="default_balance"),
   url(r'^balance/(?P<year>[0-9]{4})/$', views.balance, name='balance'),
   url(r'^balance/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.balance_edit, name='balance_edit'),
+
+  url(r'^balance/items/$', views.balance_items, name='balance_items'),
+  url(r'^balance/items/add/$', views.upsert_balance_item, name='add_balance_item'),
+  url(r'^balance/items/(?P<pk>[0-9]+)/$', views.upsert_balance_item, name='edit_balance_item'),
+  url(r'^balance/items/(?P<pk>[0-9]+)/delete/$', views.delete_balance_item, name='delete_balance_item'),
 
   url(r'^searchterms/$', views.search_terms, name="search_terms"),
   url(r'^searchterms/(?P<pk>[0-9]+)/$', views.search_term, name='search_term'),

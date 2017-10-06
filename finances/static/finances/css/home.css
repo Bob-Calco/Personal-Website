@@ -1,18 +1,53 @@
-.home-container {
-  
-}
-
-.home-button {
-  border: 3px solid blue;
-  padding: 10px;
-  margin: 10px;
+.home-div {
+  background-color: #999;
   display: inline-block;
+  padding: 20px 50px;
+  border-radius: 10px;
+  margin: 20px;
+  border: 2px solid #222222;
 }
-.home-button > canvas {
-  display: block;
+@media only screen and (max-width: 550px){
+  .home-div {
+    padding: 10px 30px;
+    width: 74%;
+  }
 }
-.home-button > a {
-  text-decoration: none;
+.home-div h2 {
   color: black;
+  margin: 0;
+  font-family: "Cambria"
+}
+.home-div ul {
+  padding: 0;
+  clear:both;
+}
+.home-div li {
+  list-style: none;
+  margin: 10px 0;
+}
+.home-div a {
+  background-color: blue;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: block;
+  text-decoration: none;
   font-weight: bold;
+  transition: background-color 0.5s, color 0.5s;
+}
+.home-div a:hover {
+  background-color: white;
+  color: blue;
+}
+.assets {
+  color: black;
+  font-size: 1.5em;
+}
+.home-report .basic-table {
+  margin-left: 0;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.home-income-statement {
+  overflow: auto;
 }

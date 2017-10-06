@@ -3,13 +3,8 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/unprocessed-transactions.css' %}">
 <script>var category_data = JSON.parse('{{ category_data | escapejs }}');</script>
 <script src="{% static 'finances/js/unprocessed-transactions.js' %}"></script>
-{% endblock %}
-
-{% block header %}
-<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
 {% endblock %}
 
 {% block content %}
@@ -43,9 +38,9 @@
 </table>
 {% endfor %}
 
-<div class="add_transaction hidden" id="add_transaction">
+<div class="special_add_transaction hidden" id="add_transaction">
   <span onclick="closeForm()" id="close_form">[x]</span>
-  <form onsubmit="submitTransaction()" class='transaction-form' id="transaction-form" method="POST">{% csrf_token %}
+  <form onsubmit="submitTransaction()" class='special_transaction-form' id="transaction-form" method="POST">{% csrf_token %}
     <table>
       <thead>
         <tr>

@@ -3,13 +3,8 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/balance-edit.css' %}">
 <script src="{% static 'finances/js/balance-edit.js' %}"></script>
 <script>var year = "{{ year }}"; var month = "{{ monthnumber }}"</script>
-{% endblock %}
-
-{% block header %}
-<a class="prev" href="{% url 'finances:balance' year %}">&#10094;</a> {{ block.super }}
 {% endblock %}
 
 {% block content %}

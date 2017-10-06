@@ -11,7 +11,6 @@ def parse(f, dataset):
         searches[field['field']] = m.SearchTerms.objects.filter(dataset=dataset).filter(field=field['field'])
 
     # open the file
-    print(searches)
     r = csv.DictReader(f)
     for row in r:
         for field in searches:
@@ -19,7 +18,7 @@ def parse(f, dataset):
             for term in searches[field]:
                 found = re.search(term.term, row[field])
                 if found is not None:
-                    ins = m.Transactions(date=datetime.strptime(row['Datum'], '%Y%m%d').date(), amount=row['Bedrag (EUR)'].replace(',', '.'), category=term.category, specification=term.specification)
+                    ins = m.Transactions(date=datetime.strptime(row['Datum'], '%Y%m%d').date(), amount=row['Bedrag (EUR)'].replace(',', '.'), category=term.category, specification=term.specification, payload=str(row))
                     ins.save()
                     check = True
                     break

@@ -3,17 +3,12 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/basic-form.css' %}">
-{% endblock %}
-
-{% block header %}
-<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
 {% endblock %}
 
 {% block content %}
 
 {{ form.non_field_errors }}
-<form method='post' enctype="multipart/form-data">{% csrf_token %}
+<form class='basic-form' method='post' enctype="multipart/form-data">{% csrf_token %}
   <table>
     <thead>
       <tr>

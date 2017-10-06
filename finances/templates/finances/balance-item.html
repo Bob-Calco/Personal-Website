@@ -1,0 +1,39 @@
+{% extends 'finances/base.html' %}
+{% load static %}
+
+{% block content %}
+{{ form.none_field_errors }}
+<form class='basic-form' method='POST'>{% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th colspan=3>
+          {% if add %}
+          <h1>Add Balance Item</h1>
+          {% else %}
+          <h1>Update Balance Item</h1>
+          {% endif %}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ form.name.label_tag }}</td>
+        <td>{{ form.name }}</td>
+        <td>{{ form.name.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.asset.label_tag }}</td>
+        <td>{{ form.asset }}</td>
+        <td>{{ form.asset.errors }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class='save-button' type="submit" name="save" value="Save"></td>
+        {% if add == False %}
+        <td><a class='delete-button' href="{% url 'finances:delete_balance_item' form.instance.id %}">Delete</a></td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

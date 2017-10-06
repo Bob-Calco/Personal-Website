@@ -3,19 +3,14 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/basic-form.css' %}">
 <script src="{% static 'finances/js/search-term.js' %}"></script>
 <script>var category_data = JSON.parse('{{ category_data | escapejs }}');</script>
-{% endblock %}
-
-{% block header %}
-<a class="prev" href="{% url 'finances:search_terms' %}">&#10094;</a> {{ block.super }}
 {% endblock %}
 
 {% block content %}
 
 {{ form.non_field_errors }}
-<form method='post'>{% csrf_token %}
+<form class='basic-form' method='post'>{% csrf_token %}
   <table>
     <thead>
       <tr>

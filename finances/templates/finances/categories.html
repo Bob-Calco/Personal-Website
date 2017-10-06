@@ -3,20 +3,15 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/categories.css' %}">
-{% endblock %}
-
-{% block header %}
-<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
-{% endblock %}
-
-{% block dropdown-menu %}
-<a href="#">Add category</a>
+<script src="{% static 'finances/js/categories.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<table class='category-table'>
+<h1 class="page-header">Categories</h1>
+<hr>
+
+<table id="income-table" class='category-table'>
   <thead>
     <tr>
       <th>Income</th>
@@ -25,27 +20,33 @@
   </thead>
   <tbody>
     {% for category in categories %}
-    {% if category.is_income == True %}
+      {% if category.is_income == True %}
     <tr>
-      <td><a href="{% url 'finances:category' category.id %}">{{ category.name }}</a></td>
+      <td data-id="{{ category.id }}" data-url="{% url 'finances:category' category.id %}">{{ category.name }}</td>
       <td>
         <table class="specification-table">
           <tbody>
             {% for specification in category.category_specification.all %}
-            <tr><td><a href="{% url 'finances:category' specification.id %}">{{ specification.name }}</a></td></tr>
+            <tr>
+              <td data-id="{{ specification.id }}" data-url="{% url 'finances:category' specification.id %}">{{ specification.name }}</td>
+            </tr>
             {% endfor %}
-            <tr><td><a href="{% url 'finances:add_specification' 1 category.id %}">&#8853;</a></td></tr>
+            <tr>
+              <td data-url="{% url 'finances:add_specification' 1 category.id %}">+</td>
+            </tr>
           </tbody>
         </table>
       </td>
     </tr>
-    {% endif %}
+      {% endif %}
     {% endfor %}
-    <tr><td><a href="{% url 'finances:add_category' 1 %}">&#8853;</a></td></tr>
+    <tr>
+      <td data-url="{% url 'finances:add_category' 1 %}">+</td>
+    </tr>
   </tbody>
 </table>
 
-<table class='category-table'>
+<table id="expense-table" class='category-table'>
   <thead>
     <tr>
       <th>Expense</th>
@@ -54,24 +55,32 @@
   </thead>
   <tbody>
     {% for category in categories %}
-    {% if category.is_income == False %}
+      {% if category.is_income == False %}
     <tr>
-      <td><a href="{% url 'finances:category' category.id %}">{{ category.name }}</a></td>
+      <td data-id="{{ category.id }}" data-url="{% url 'finances:category' category.id %}">{{ category.name }}</td>
       <td>
         <table class="specification-table">
           <tbody>
             {% for specification in category.category_specification.all %}
-            <tr><td><a href="{% url 'finances:category' specification.id %}">{{ specification.name }}</a></td></tr>
+            <tr>
+              <td data-id="{{ specication.id }}" data-url="{% url 'finances:category' specification.id %}">{{ specification.name }}</td>
+            </tr>
             {% endfor %}
-            <tr><td><a href="{% url 'finances:add_specification' 0 category.id %}">&#8853;</a></td></tr>
+            <tr>
+              <td data-url="{% url 'finances:add_specification' 0 category.id %}">+</td>
+            </tr>
           </tbody>
         </table>
       </td>
     </tr>
-    {% endif %}
+      {% endif %}
     {% endfor %}
-    <tr><td><a href="{% url 'finances:add_category' 0 %}">&#8853;</a></td></tr>
+    <tr>
+      <td data-url="{% url 'finances:add_category' 0 %}">+</td>
+    </tr>
   </tbody>
 </table>
+
+<div id="popup-form" class="hidden"></div>
 
 {% endblock %}

@@ -18,6 +18,7 @@ class Transactions(models.Model):
     amount = models.DecimalField(max_digits=9, decimal_places=2)
     category = models.ForeignKey('Categories', related_name='transaction_category')
     specification = models.ForeignKey('Categories', related_name='transaction_specification')
+    payload = models.TextField(null=True)
 
 # This class stores the balance of a balanceitem in a particular month
 # In the code elsewhere it is made so that the date is always the first of the month

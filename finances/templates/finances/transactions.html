@@ -3,64 +3,64 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'finances/css/transactions.css' %}">
-{% endblock %}
-
-{% block header %}
-<a class="prev" href="{% url 'finances:home' %}">&#10094;</a> {{ block.super }}
-{% endblock %}
-
-{% block dropdown-menu %}
-<a href="{% url 'finances:add_transaction' %}">Add transaction</a>
+<script src="{% static 'finances/js/transactions.js' %}"></script>
+<script>var category_data = JSON.parse('{{ category_data | escapejs }}'); var year = "{{ year }}"; var month = "{{ month }}"</script>
 {% endblock %}
 
 {% block content %}
 
-<ul class='years'>
-  <li><a href="{% url 'finances:transactions' 2017 1 %}">2017</a></li>
-  <li><a href="{% url 'finances:transactions' 2018 1 %}">2018</a></li>
-  <li><a href="{% url 'finances:transactions' 2019 1 %}">2019</a></li>
-  <li><a href="{% url 'finances:transactions' 2020 1 %}">2020</a></li>
-</ul>
+<h1 class="page-header">Transactions</h1>
+<hr>
 
-<ul class='months'>
-  <li><a href="{% url 'finances:transactions' year 1 %}">Jan</a></li>
-  <li><a href="{% url 'finances:transactions' year 2 %}">Feb</a></li>
-  <li><a href="{% url 'finances:transactions' year 3 %}">Mar</a></li>
-  <li><a href="{% url 'finances:transactions' year 4 %}">Apr</a></li>
-  <li><a href="{% url 'finances:transactions' year 5 %}">May</a></li>
-  <li><a href="{% url 'finances:transactions' year 6 %}">June</a></li>
-  <li><a href="{% url 'finances:transactions' year 7 %}">July</a></li>
-  <li><a href="{% url 'finances:transactions' year 8 %}">Aug</a></li>
-  <li><a href="{% url 'finances:transactions' year 9 %}">Sep</a></li>
-  <li><a href="{% url 'finances:transactions' year 10 %}">Oct</a></li>
-  <li><a href="{% url 'finances:transactions' year 11 %}">Nov</a></li>
-  <li><a href="{% url 'finances:transactions' year 12 %}">Dec</a></li>
-</ul>
+<div class="transaction-tabs">
+  <ul id="years" class='tabs'>
+    <li><a href="{% url 'finances:transactions' 2017 1 %}">2017</a></li>
+    <li><a href="{% url 'finances:transactions' 2018 1 %}">2018</a></li>
+    <li><a href="{% url 'finances:transactions' 2019 1 %}">2019</a></li>
+    <li><a href="{% url 'finances:transactions' 2020 1 %}">2020</a></li>
+  </ul>
+  <ul id="months" class='tabs'>
+    <li><a href="{% url 'finances:transactions' year 1 %}">Jan</a></li>
+    <li><a href="{% url 'finances:transactions' year 2 %}">Feb</a></li>
+    <li><a href="{% url 'finances:transactions' year 3 %}">Mar</a></li>
+    <li><a href="{% url 'finances:transactions' year 4 %}">Apr</a></li>
+    <li><a href="{% url 'finances:transactions' year 5 %}">May</a></li>
+    <li><a href="{% url 'finances:transactions' year 6 %}">June</a></li>
+    <li><a href="{% url 'finances:transactions' year 7 %}">July</a></li>
+    <li><a href="{% url 'finances:transactions' year 8 %}">Aug</a></li>
+    <li><a href="{% url 'finances:transactions' year 9 %}">Sep</a></li>
+    <li><a href="{% url 'finances:transactions' year 10 %}">Oct</a></li>
+    <li><a href="{% url 'finances:transactions' year 11 %}">Nov</a></li>
+    <li><a href="{% url 'finances:transactions' year 12 %}">Dec</a></li>
+  </ul>
+</div>
 
-<table class='transaction-table'>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Amount</th>
-      <th>Category</th>
-      <th>Specification</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for transaction in transactions %}
-    <tr>
-      <td>{{ transaction.date }}</td>
-      <td>{{ transaction.amount }}</td>
-      <td>{{ transaction.category }}</td>
-      <td>{{ transaction.specification }}</td>
-      <td><a href="{% url 'finances:edit_transaction' transaction.id %}">Edit</a></td>
-      <td><a href="{% url 'finances:delete_transaction' transaction.id %}">Delete</a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="one-em-margin">
+  <table class='transaction-table'>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th class="tablet-up">Specification</th>
+      </tr>
+    </thead>
+    <tbody id="transaction-table-body">
+      <tr>
+        <td colspan="3"><button id="add-transaction" type="button">Add Transaction</button></td>
+      </tr>
+      {% for transaction in transactions %}
+      <tr class='transactions' data-id="{{ transaction.id }}">
+        <td>{{ transaction.date }}</td>
+        <td>{{ transaction.amount }}</td>
+        <td>{{ transaction.category }}</td>
+        <td class="tablet-up">{{ transaction.specification }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="popup-form" class="hidden"></div>
 
 {% endblock content %}

@@ -1,6 +1,7 @@
 from datetime import date
 import finances.models as m
 from django.db.models import Sum
+from django.db import connection
 
 
 def next_month(input_date=date.today()):
@@ -9,6 +10,40 @@ def next_month(input_date=date.today()):
     else:
         output_date = date(input_date.year, input_date.month+1,1)
     return output_date
+
+def income_statement(start, end):
+    query = ("select strftime('%m', t.date) as 'month', c.is_income, round(sum(t.amount), 2) "
+                    "from finances_transactions t "
+                         "join finances_categories c "
+                             "on t.category_id = c.id "
+                    "where t.date >= '"+start.strftime('%Y-%m-%d')+"' and t.date < '"+end.strftime('%Y-%m-%d')+"' "
+                    "group by strftime('%m', t.date), c.is_income "
+                    "order by month, is_income")
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        raw_data = cursor.fetchall()
+
+    headers, data = [''], [['Expense'],['Income']]
+    # put the distinct months in the first row
+    for row in raw_data:
+        if row[0] not in headers:
+            headers.append(row[0])
+    # add expenses to the second row and income to the third row
+    for row in raw_data:
+        if row[1] == False:
+            i = headers.index(row[0])
+            while i > len(data[0]):
+                data[1].append('')
+            data[0].append(row[2])
+        else:
+            i = headers.index(row[0])
+            while i > len(data[1]):
+                data[2].append('')
+            data[1].append(row[2])
+    # turn the month numbers to names
+    for i, month in enumerate(headers[1:]):
+        headers[i+1] = date(2000, int(month), 1).strftime('%B')
+    return headers, data
 
 def transactions(year=date.today().year, month=date.today().month):
     year = int(year)
@@ -87,6 +122,17 @@ def balance(year):
     return (items, data, len(a_items), len(l_items))
 
 def simple_year_table(year=date.today().year):
+    # queries as to improve performance
+    # query_sum_by_category_by_month = (
+    #     "select strftime('%m', t.date) as 'month', c.name, c.id, round(sum(amount), 2) "
+    #     "from finances_transactions t "
+    #         "join finances_categories c "
+    #             "on t.category_id = c.id "
+    #     "where t.date >= '"+start.strftime('%Y-%m-%d')+"' and t.date < '"+end.strftime('%Y-%m-%d')+"' "
+    #     "group by strftime('%m', t.date), c.id "
+    #     "order by month, name"
+    # )
+
     year = int(year)
     income = {}
     expense = {}
