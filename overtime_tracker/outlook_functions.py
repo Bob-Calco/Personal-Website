@@ -1,4 +1,7 @@
-from urllib.parse import quote, urlencode
+try:
+    from urllib.parse import quote, urlencode
+except ImportError:
+    from urlparse import quote, urlencode
 from django.conf import settings
 import base64
 import json
