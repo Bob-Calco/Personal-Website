@@ -1,0 +1,31 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="header">
+  <h1>Config</h1>
+  <a class="add-button" href="{% url 'overtime_tracker:insert_config' %}">Add config</a>
+</div>
+<hr>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Break Time</th>
+      <th>Working time until break</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for config in configs %}
+    <tr>
+      <td><a href="{{ config.get_absolute_url }}">{{ config.date|date:"j F Y" }}</a></td>
+      <td>{{ config.break_time }}</td>
+      <td>{{ config.working_time_until_break }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

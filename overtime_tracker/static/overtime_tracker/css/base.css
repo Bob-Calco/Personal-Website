@@ -1,0 +1,210 @@
+/* BASE CSS */
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+header {
+  background-color: darkred;
+}
+@media only screen and (max-width: 549px){
+  header {
+  }
+}
+header h1 {
+  margin: 0;
+  padding: 1em 0 0 1em;
+  display: inline-block;
+}
+header h1 a {
+  color: white;
+  text-decoration: none;
+}
+nav {
+  display: inline-block;
+}
+.menu-button {
+  background-color: darkred;
+  border: 2px solid firebrick;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 2em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+nav ul {
+  list-style: none;
+  padding-bottom: 1em;
+}
+@media only screen and (max-width: 549px){
+  nav ul {
+    display: none;
+  }
+  nav ul li {
+    display: list-item;
+    margin-bottom: 1em;
+  }
+  .nav-active {
+    display: inline-block;
+  }
+  .menu-button {
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 550px){
+  .menu-button {
+    display: none;
+  }
+  nav > ul > li {
+    display: inline;
+  }
+}
+nav ul li {
+  display: inline-block;
+  margin-right: 2em;
+}
+nav ul li a {
+  display: block;
+  color: white;
+  padding: 1em;
+  text-decoration: none;
+  border: 2px solid firebrick;
+  background-color: darkred;
+  transition: background-color 0.5s;
+}
+nav ul li a:hover {
+  background-color: firebrick;
+}
+.container {
+  max-width: 95%;
+  flex-grow: 5;
+  margin: auto;
+  display: inline-block;
+}
+footer {
+  background-color: darkred;
+  text-align: right;
+}
+footer p {
+  color: white;
+  padding: 2em;
+}
+
+/* STANDARD CSS */
+@media only screen and (max-width: 549px){
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+.header {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header h1 {
+  display: inline-block;
+  margin-right: 1em;
+}
+.add-button {
+  background-color: darkred;
+  color: white;
+  padding: 1em;
+  text-decoration: none;
+  transition: background-color 0.5s;
+}
+.add-button:hover {
+  background-color: firebrick;
+}
+
+.table {
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+.table thead tr {
+  background-color: darkred;
+}
+.table th {
+  color: white;
+  padding: 1em;
+}
+.table > tbody > tr:nth-child(even){
+  background-color: #e2e2e2;
+}
+.table td:first-child {
+  background-color: #ff6b6b;
+  transition: background-color 0.5s;
+}
+.table a {
+  color: black;
+  text-decoration: none;
+}
+.table td:first-child:hover {
+  background-color: firebrick;
+}
+.table td {
+  padding: 0.5em;
+  text-align: right;
+}
+
+.basic-form td {
+  padding: 0.2em;
+  font-size: 1.2em;
+}
+.basic-form td:first-child {
+  text-align: right;
+}
+.basic-form input {
+  font-size: 1em;
+}
+.basic-form .save-button {
+  background-color: darkred;
+  color: white;
+  padding: 0.7em;
+  border: none;
+  border-radius: 0.5em;
+  transition: background-color 0.5s;
+}
+.basic-form .save-button:hover {
+  background-color: firebrick;
+}
+.basic-form .delete-button {
+  color: red;
+  text-decoration: none;
+  border: 1px solid red;
+  border-radius: 0.5em;
+  padding: 0.5em;
+}
+
+/* Specific */
+
+#running-overtime {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.pagination {
+  text-align: center;
+  margin: 2em 0;
+}
+.step-links a {
+  text-decoration: none;
+  padding: 0.5em;
+  background-color: darkred;
+  transition: background-color 0.5s;
+  color: white;
+}
+.step-links a:hover {
+  background-color: firebrick;
+}
+.current {
+  margin: 0 1em;
+  padding: 0.5em;
+}

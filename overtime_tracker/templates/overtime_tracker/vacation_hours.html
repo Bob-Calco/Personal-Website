@@ -1,0 +1,29 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="header">
+  <h1>Vacation Hours</h1>
+  <a class="add-button" href="{% url 'overtime_tracker:insert_vacation_hours' %}">Add year</a>
+</div>
+<hr>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for v in vacation_hours %}
+    <tr>
+      <td><a href="{{ v.get_absolute_url }}">{{ v.year|date:"Y" }}</a></td>
+      <td>{{ v.amount }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

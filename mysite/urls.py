@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^pss/', include('projectsunset.urls')),
     url(r'^pj/', include('pj.urls')),
+    url(r'^overtime/', include('overtime_tracker.urls')),
 ]

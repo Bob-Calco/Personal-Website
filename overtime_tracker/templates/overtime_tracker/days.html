@@ -1,0 +1,53 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="header">
+  <h1>Days</h1>
+  <a class="add-button" href="{% url 'overtime_tracker:insert_day' %}">Add day</a>
+</div>
+<hr>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Overtime</th>
+      <th>Worked</th>
+      <th class='hide-on-mobile'>Vacation</th>
+      <th class='hide-on-mobile'>Holiday</th>
+      <th class='hide-on-mobile'>Standby</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for day in days %}
+    <tr>
+      <td><a href="{{ day.get_absolute_url }}">{{ day.date|date:"D j N" }}</a></td>
+      <td>{{ day.hours_overtime|floatformat:2 }}</td>
+      <td>{{ day.hours_worked|floatformat:2 }}</td>
+      <td class='hide-on-mobile'>{% if day.hours_vacation %}{{ day.hours_vacation }}{% endif %}</td>
+      <td class='hide-on-mobile'>{% if day.holiday %}{{ day.holiday }}{% endif %}</td>
+      <td class='hide-on-mobile'>{% if day.hours_standby %}{{ day.hours_standby|floatformat:2 }}{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="pagination">
+  <span class="step-links">
+    {% if days.has_previous %}
+    <a href="?page={{ days.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ days.number }} of {{ days.paginator.num_pages }}
+    </span>
+
+    {% if days.has_next %}
+    <a href="?page={{ days.next_page_number }}">Next</a>
+    {% endif %}
+  </span>
+</div>
+
+{% endblock %}

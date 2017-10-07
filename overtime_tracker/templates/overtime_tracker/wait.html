@@ -1,0 +1,18 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block head %}
+<script src="{% static 'overtime_tracker/js/process-data.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class='header'>
+  <h1>Processing data</h1>
+  <hr>
+</div>
+
+<p id="wait-message" data-url="{% url 'overtime_tracker:process_data' %}">Starting processing</p>
+
+
+{% endblock %}

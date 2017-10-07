@@ -1,0 +1,40 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<form class="basic-form" method="POST">{% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th colspan=3>
+          {% if add %}
+          <h1>Add new vacation hours</h1>
+          {% else %}
+          <h1>Edit vacation hours</h1>
+          {% endif %}
+        </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ form.year.label_tag }}</td>
+        <td>{{ form.year }}</td>
+        <td>{{ form.year.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.amount.label_tag }}</td>
+        <td>{{ form.amount }}</td>
+        <td>{{ form.amount.errors }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class='save-button' type="submit" name="save" value="Save Config"></td>
+        {% if add == False %}
+        <td><a class='delete-button' href="{% url 'overtime_tracker:delete_vacation_hours' form.instance.id %}">Delete</a></td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+{% endblock %}

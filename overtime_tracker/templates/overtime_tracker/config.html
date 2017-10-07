@@ -1,0 +1,45 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<form method="POST" class="basic-form">{% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th colspan=3>
+          {% if add %}
+          <h1>Add new config</h1>
+          {% else %}
+          <h1>Edit config</h1>
+          {% endif %}
+        </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ form.date.label_tag }}</td>
+        <td>{{ form.date }}</td>
+        <td>{{ form.date.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.break_time.label_tag }}</td>
+        <td>{{ form.break_time }}</td>
+        <td>{{ form.break_time.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.working_time_until_break.label_tag }}</td>
+        <td>{{ form.working_time_until_break }}</td>
+        <td>{{ form.working_time_until_break.errors }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class='save-button' type="submit" name="save" value="Save Config"></td>
+        {% if add == False %}
+        <td><a class='delete-button' href="{% url 'overtime_tracker:delete_config' form.instance.id %}">Delete</a></td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+{% endblock %}

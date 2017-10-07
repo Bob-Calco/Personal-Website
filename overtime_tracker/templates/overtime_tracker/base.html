@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'overtime_tracker/css/base.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    function toggleMenu(){
+      var nav = document.getElementById('nav-links');
+      var mobileButton = document.getElementById('mobileMenu');
+      if (nav.classList.contains('nav-active')){
+        nav.classList.remove('nav-active');
+        mobileButton.innerHTML = "&#9776";
+      }
+      else {
+        nav.classList.add('nav-active');
+        mobileButton.innerHTML = "X";
+      }
+    }
+  </script>
+  {% block head %}{% endblock %}
+  <title>{% block title %}Overtime Tracker{% endblock %}</title>
+</head>
+
+<body>
+  <header>
+    <h1><a href="{% url 'overtime_tracker:home' %}">Overtime Tracker</a></h1>
+    <button id="mobileMenu" onclick="toggleMenu()" type="button" class="menu-button">&#9776</button>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="{% url 'overtime_tracker:read_days' %}">Days</a></li>
+        <li><a href="{% url 'overtime_tracker:read_configs' %}">Config</a></li>
+        <li><a href="{% url 'overtime_tracker:read_vacation_hours' %}">Vacation</a></li>
+        <li><a href="{{ sign_in_url }}">Process</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+  {% block body %}
+  {% endblock %}
+  </div>
+
+  <footer>
+    <p>Made by Bob Luursema</p>
+  </footer>
+</body>
+</html>

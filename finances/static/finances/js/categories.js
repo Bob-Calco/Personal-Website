@@ -1,24 +1,5 @@
 $(document).ready(function(){
-
   $('td:first-child').click(function(){get_form(this)});
-
-  /*$('#add-transaction').click(function(){
-    if (document.getElementById("popup-form").classList.contains('hidden')){
-      $.ajax({
-        url : "/finances/transaction/add/",
-        type : "GET",
-        success : function(data){
-          var form = document.getElementById('popup-form')
-          form.innerHTML = data.html;
-          form.classList.remove("hidden");
-          setup_form(form);
-        },
-        error: function(xhr,errmsg,err){
-          console.log(xhr.status + ": " + xhr.responseText);
-        },
-      })
-    }
-  })*/
 });
 
 function get_form(tr){

@@ -1,0 +1,65 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script>
+  $(document).ready(function(){
+    var d = JSON.parse('{{ data | escapejs }}');
+    var l = JSON.parse('{{ labels | escapejs }}');
+    console.log(d);
+    console.log(l)
+    var ctx = document.getElementById('running-overtime');
+    var chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: l,
+          datasets: [{
+              label: "Running overtime",
+              cubicInterpolationMode: 'monotone',
+              borderColor: 'darkred',
+              data: d,
+              pointRadius: 0,
+          }]
+      },
+    });
+  });
+</script>
+{% endblock %}
+
+{% block body %}
+
+
+<h2>Current overtime: {{ current_overtime }}</h2>
+<h2>{{ year }} vacation left: {{ vacation_left }}</h2>
+
+<canvas id="running-overtime"></canvas>
+
+<table class="table home-table">
+  <thead>
+    <tr>
+      <th colspan="2">Totals</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Worked hours</td>
+      <td>{{ total_worktime }}</td>
+    </tr>
+    <tr>
+      <td>Standby hours</td>
+      <td>{{ total_standby }}</td>
+    </tr>
+    <tr>
+      <td>Vacation hours</td>
+      <td>{{ total_vacation }}</td>
+    </tr>
+    <tr>
+      <td>Holidays</td>
+      <td>{{ total_holidays }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "overtime_tracker/base.html" %}
+{% load static %}
+
+{% block body %}
+
+<form method="POST" class="basic-form">{% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th colspan=3>
+          {% if add %}
+          <h1>Add new day</h1>
+          {% else %}
+          <h1>Edit day</h1>
+          {% endif %}
+        </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ form.date.label_tag }}</td>
+        <td>{{ form.date }}</td>
+        <td>{{ form.date.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.hours_worked.label_tag }}</td>
+        <td>{{ form.hours_worked }}</td>
+        <td>{{ form.hours_worked.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.hours_vacation.label_tag }}</td>
+        <td>{{ form.hours_vacation }}</td>
+        <td>{{ form.hours_vacation.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.holiday.label_tag }}</td>
+        <td>{{ form.holiday }}</td>
+        <td>{{ form.holiday.errors }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.hours_standby.label_tag }}</td>
+        <td>{{ form.hours_standby }}</td>
+        <td>{{ form.hours_standby.errors }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input class='save-button' type="submit" name="save" value="Save day"></td>
+        {% if add == False %}
+        <td><a class='delete-button' href="{% url 'overtime_tracker:delete_day' form.instance.id %}">Delete</a></td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+
+{% endblock %}
