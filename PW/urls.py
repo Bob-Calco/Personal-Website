@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^memory/', views.memory, name='memory'),
     url(r'^encryption/', views.encryption, name='encryption'),
     url(r'^ws_nn/', views.ws_nn, name='ws_nn'),
+    url(r'^drinks/', views.drinks_rememberer, name="drinks_rememberer")
 ]

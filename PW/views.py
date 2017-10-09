@@ -9,6 +9,9 @@ from .encryption import *
 def ws_nn(request):
     return render(request, "PW/WS_NN.html", {})
 
+def drinks_rememberer(request):
+    return render(request, "PW/drinks.html", {})
+
 def home(request):
     context = {
         "title": "Home"
