@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    function addOne(element){
+      document.getElementById(element.dataset.drink+'-value').innerHTML = parseInt(document.getElementById(element.dataset.drink+'-value').innerHTML) + 1
+    }
+    function subtractOne(element){
+      document.getElementById(element.dataset.drink+'-value').innerHTML = parseInt(document.getElementById(element.dataset.drink+'-value').innerHTML) - 1
+    }
+  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: orange;
+    }
+    h1 {
+      font-size: 1.5em;
+    }
+    h2 {
+      font-size: 1em;
+      margin: 5px 0;
+    }
+    .container {
+      width: 250px;
+      margin:auto;
+    }
+    .drink {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      padding: 10px;
+      width: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Drinks Rememberer</h1>
+    <hr>
+    <h2>Koffie</h2>
+    <div class="drink">
+      <button onclick="addOne(this)" class="drink" data-drink="coffee">+</button>
+      <span id="coffee-value">0</span>
+      <button onclick="subtractOne(this)" class="drink" data-drink="coffee">-</button>
+    </div>
+    <hr>
+    <h2>Heet water</h2>
+    <div class="drink">
+      <button onclick="addOne(this)" class="drink" data-drink="hot-water">+</button>
+      <span id="hot-water-value">0</span>
+      <button onclick="subtractOne(this)" class="drink" data-drink="hot-water">-</button>
+    </div>
+    <hr>
+    <h2>Koud water</h2>
+    <div class="drink">
+      <button onclick="addOne(this)" class="drink" data-drink="cold-water">+</button>
+      <span id="cold-water-value">0</span>
+      <button onclick="subtractOne(this)" class="drink" data-drink="cold-water">-</button>
+    </div>
+    <hr>
+    <h2>Cappuccino</h2>
+    <div class="drink">
+      <button onclick="addOne(this)" class="drink" data-drink="cappuccino">+</button>
+      <span id="cappuccino-value">0</span>
+      <button onclick="subtractOne(this)" class="drink" data-drink="cappuccino">-</button>
+    </div>
+    <hr>
+    <h2>Dubbele espresso</h2>
+    <div class="drink">
+      <button onclick="addOne(this)" class="drink" data-drink="double-espresso">+</button>
+      <span id="double-espresso-value">0</span>
+      <button onclick="subtractOne(this)" class="drink" data-drink="double-espresso">-</button>
+    </div>
+    <hr>
+    <h2>Espresso</h2>
+    <div class="drink">
+      <button onclick="addOne(this)" class="drink" data-drink="espresso">+</button>
+      <span id="espresso-value">0</span>
+      <button onclick="subtractOne(this)" class="drink" data-drink="espresso">-</button>
+    </div>
+    <hr>
+  </div>
+</body>
+</html>
