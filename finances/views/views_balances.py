@@ -1,8 +1,10 @@
 import finances.models as m
 import finances.forms as f
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.http import JsonResponse
 from django.contrib.auth.decorators import user_passes_test
 from datetime import date
+from django.template.loader import render_to_string
 
 import finances.database as db
 
@@ -23,16 +25,11 @@ def balance(request, year=date.today().year):
 
 @user_passes_test(lambda u: u.is_superuser)
 def balance_edit(request, year, month):
-    errors = False
     if request.method == 'POST':
         forms = f.BalanceFormSet(request.POST, queryset=m.Balances.objects.filter(date=date(int(year), int(month), 1)))
         if forms.is_valid():
             forms.save()
-            return redirect('finances:balance', year=year)
-        else:
-            errors = True
-    if errors == True:
-        pass
+            return JsonResponse({'saved': True})
     else:
         forms = f.BalanceFormSet(queryset=m.Balances.objects.filter(date=date(int(year), int(month), 1)))
     context = {
@@ -41,4 +38,5 @@ def balance_edit(request, year, month):
         'month': date(1900, int(month), 1).strftime('%B'),
         'monthnumber': month
     }
-    return render(request, 'finances/balance-edit.html', context)
+    html = render_to_string("finances/balance-edit.html", context, request=request)
+    return JsonResponse({'saved': False, 'html': html})

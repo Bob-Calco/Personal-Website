@@ -69,57 +69,93 @@ def balance(year):
     # prepare data, we will append all values of a month to that list, this makes it easy to use in the template
     data = [['Jan'],['Feb'],['Mar'],['Apr'],['May'],['Jun'],['Jul'],['Aug'],['Sep'],['Okt'],['Nov'],['Dec']]
 
-    # get the distinct balance items that were used during this year (returns list of pks)
-    a_items = m.Balances.objects.filter(date__gte=date(year, 1, 1)).filter(date__lt=date(year+1, 1, 1)).filter(item__asset=True).values('item').distinct()
-    l_items = m.Balances.objects.filter(date__gte=date(year, 1, 1)).filter(date__lt=date(year+1, 1, 1)).filter(item__asset=False).values('item').distinct()
+    totals_query = (
+        "select asset.date, asset.a, round(sum, 2) "
+        "from "
+            "((select 0 as 'a' union select 1) join "
+            "(select distinct date "
+            "from finances_balances as b "
+            "where date >= '{0}-01-01' and date < '{1}-01-01')) asset "
+            "left join "
+            "(select date, asset, sum(amount) as sum "
+            "from finances_balances as b "
+                "join finances_balanceitems as bi "
+                    "on b.item_id = bi.id "
+            "where date >= '{0}-01-01' and date < '{1}-01-01' "
+            "group by date, asset) balance "
+            "on asset.date = balance.date and asset.a = balance.asset "
+        "order by asset.date, asset.a "
+    )
+    balance_query = (
+        "select dates.date, items.name, items.asset, amounts.amount "
+        "from "
+            "(select distinct bi.name, bi.asset "
+            "from finances_balances as b "
+                "join finances_balanceitems as bi "
+                    "on b.item_id = bi.id "
+            "where date >= '{0}-01-01' and date < '{1}-01-01') items "
+            "join "
+            "(select distinct date "
+            "from finances_balances "
+            "where date >= '{0}-01-01' and date < '{1}-01-01') dates "
+            "left join "
+            "(select b.amount, bi.name, b.date "
+            "from finances_balances as b "
+                "join finances_balanceitems as bi "
+                    "on b.item_id = bi.id "
+            "where date >= '{0}-01-01' and date < '{1}-01-01') amounts "
+        "on amounts.name = items.name and dates.date = amounts.date "
+        "order by dates.date, items.asset desc, items.name "
+    )
+    with connection.cursor() as cursor:
+        cursor.execute(totals_query.format(year, year+1))
+        totals_raw_data = cursor.fetchall()
+        cursor.execute(balance_query.format(year, year+1))
+        balance_raw_data = cursor.fetchall()
 
-    # turn list of pks to list of names to use in the template
-    # the False and True variables are used in the template to determine whether it is a total column or not
-    items = [['Total', False]]
-    for item in a_items:
-        items.append([m.BalanceItems.objects.get(id=item['item']).name, True])
-    items.append(['Total', False])
-    for item in l_items:
-        items.append([m.BalanceItems.objects.get(id=item['item']).name, True])
+    # the loose True and False variables say whether this item is a total or not
 
-    # append asset totals to each month (then append empty strings to empty months)
-    a_totals = m.Balances.objects.filter(date__gte=date(year, 1, 1)).filter(date__lt=date(year+1, 1, 1)).filter(item__asset=True).values('date').annotate(Sum('amount')).order_by('date')
-    for a in a_totals:
-        mo = a['date'].month - 1
-        data[mo].append(a['amount__sum'])
-    for m_list in data:
-        if len(m_list) == 1:
-            m_list.append('')
+    # balance items in scope
+    asset_count = 0
+    liabilities_count = 0
+    items = [['Total', True]]
 
-    # append total per asset item to every month
-    for item in a_items:
-        for n in range(1,13):
-            # .first() because there should only be one
-            amount = m.Balances.objects.filter(item=m.BalanceItems.objects.get(id=item['item'])).filter(date=date(year, n, 1)).first()
-            if amount is not None:
-                data[n-1].append(amount.amount)
-            else:
-                data[n-1].append("")
+    month = balance_raw_data[0][0]
+    in_assets = True
+    for row in balance_raw_data:
+        if row[0] != month:
+            break
+        if in_assets:
+            if row[2] == False:
+                in_assets = False
+                items.append(['Total', True])
+        if in_assets:
+            asset_count += 1
+        else:
+            liabilities_count += 1
+        items.append([row[1], False])
 
-    # append liabilities totals to each month (then append empty strings to empty months)
-    l_totals = m.Balances.objects.filter(date__gte=date(year, 1, 1)).filter(date__lt=date(year+1, 1, 1)).filter(item__asset=False).values('date').annotate(Sum('amount')).order_by('date')
-    for l in l_totals:
-        mo = l['date'].month - 1
-        data[mo].append(l['amount__sum'])
-    for m_list in data:
-        if len(m_list) == 2+len(a_items):
-            m_list.append('')
+    # first data column is the total of the assets that month
+    for row in totals_raw_data:
+        if row[1] == True:
+            data[row[0].month-1].append([row[2], True])
 
-    # append total per liability item to every month
-    for item in l_items:
-        for n in range(1,13):
-            amount = m.Balances.objects.filter(item=m.BalanceItems.objects.get(id=item['item'])).filter(date=date(year, n, 1)).first()
-            if amount is not None:
-                data[n-1].append(amount.amount)
-            else:
-                data[n-1].append("")
+    # next come all the different asset balance items
+    for row in balance_raw_data:
+        if row[2] == True:
+            data[row[0].month-1].append([row[3], False])
 
-    return (items, data, len(a_items), len(l_items))
+    # then the total of the liabilities that month
+    for row in totals_raw_data:
+        if row[1] == False:
+            data[row[0].month-1].append([row[2], True])
+
+    # finally add all the different liabilities balance items
+    for row in balance_raw_data:
+        if row[2] == False:
+            data[row[0].month-1].append([row[3], False])
+
+    return (items, data, asset_count, liabilities_count)
 
 def simple_year_table(year=date.today().year):
     # queries as to improve performance

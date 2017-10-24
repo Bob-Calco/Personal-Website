@@ -4,40 +4,59 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'finances/css/balance.css' %}">
+<script src="{% static 'finances/js/balance.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<table class='balance-table'>
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="{{ a_len }}">Assets</th>
-      <th colspan="{{ l_len }}">Liabilities</th>
-    </tr>
-    <tr>
-      <th>{{ year }}</th>
-      {% for item in items %}
-        {% if item.1 == False %}
-          <th>{{ item.0 }}</th>
-        {% else %}
-          <th class="spec">{{ item.0 }}</th>
-        {% endif %}
-      {% endfor %}
-    </tr>
-  </thead>
-  <tbody>
-    {% for i in data %}
-    <tr>
-      {% for b in i %}
-      <td>
-        <a href="{% url 'finances:balance_edit' year forloop.parentloop.counter %}">{{ b }}</a>
-      </td>
-      {% endfor %}
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<h1 class="page-header">Balance</h1>
+<hr>
 
+<div class="balance-container">
+  <table class='balance-table'>
+    <thead>
+      <tr>
+        <th></th>
+        <th colspan="{{ a_len }}">Assets</th>
+        <th colspan="{{ l_len }}">Liabilities</th>
+      </tr>
+      <tr>
+        <th>{{ year }}</th>
+        {% for item in items %}
+          {% if item.1 == True %}
+            <th>{{ item.0 }}</th>
+          {% else %}
+            <th class="spec desktop-only">{{ item.0 }}</th>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in data %}
+      <tr>
+        {% for b in i %}
+          {% if forloop.first %}
+        <td data-url="{% url 'finances:balance_edit' year forloop.parentloop.counter %}">
+          {{ b }}
+        </td>
+          {% else %}
+            {% if b.1 == True %}
+        <td>
+            {{ b.0|default_if_none:"" }}
+        </td>
+            {% else %}
+        <td class="desktop-only">
+            {{ b.0|default_if_none:"" }}
+        </td>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
-  {% endblock %}
+<div id="popup-form" class="hidden"></div>
+
+{% endblock %}

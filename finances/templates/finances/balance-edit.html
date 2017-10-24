@@ -1,33 +1,28 @@
-{% extends "finances/base.html" %}
-
 {% load static %}
 
-{% block head %}
-<script src="{% static 'finances/js/balance-edit.js' %}"></script>
-<script>var year = "{{ year }}"; var month = "{{ monthnumber }}"</script>
-{% endblock %}
-
-{% block content %}
-
-<h2>Edit balance of {{ month }} {{ year }}</h2>
-
-{{ forms.non_form_errors }}
-{% for dict in forms.errors %}
-    {% for error in dict.values %}
-        {{ error }}
-    {% endfor %}
-{% endfor %}
-{% for form in forms %}
-    {{ form.non_field_errors }}
-{% endfor %}
-<form id="balance-form" method="post" onsubmit=presubmitCheck()>{% csrf_token %}
+<form class="basic-form" id="balance-form" method="post" data-url="{% url 'finances:balance_edit' year monthnumber %}">{% csrf_token %}
+  {{ forms.non_form_errors }}
+  {% for dict in forms.errors %}
+      {% for error in dict.values %}
+          {{ error }}
+      {% endfor %}
+  {% endfor %}
+  {% for form in forms %}
+      {{ form.non_field_errors }}
+  {% endfor %}
   {{ forms.management_form }}
   <table>
     <thead>
       <tr>
+        <th colspan=3>
+          <h1>Edit balance of {{ month }} {{ year }}</h1>
+        </th>
+        <th id="form-close">[x]</th>
+      </tr>
+      <tr>
         <th>Item</th>
         <th>Amount</th>
-      <tr>
+      </tr>
     </thead>
     <tbody>
       {% for form in forms %}
@@ -39,9 +34,11 @@
         <td class='hidden'>{{ form.date }}</td>
       </tr>
       {% endfor %}
+      <tr>
+        <td></td>
+        <td><input id='save-button' class='save-button' type='submit' value='Save balance'></td>
     </tbody>
   </table>
-  <input type='submit' value='Save balance'>
 </form>
 
 <table class="empty-form">
@@ -54,4 +51,4 @@
   </tr>
 </table>
 
-{% endblock %}
+<script>var year = "{{ year }}"; var month = "{{ monthnumber }}"</script>
